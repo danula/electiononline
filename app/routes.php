@@ -21,3 +21,15 @@ Route::get('test', function()
     $dist = District::all();
     return View::make('test')->with('districts',$dist);
 });
+
+
+//set the route for the login
+Route::get('login','UserController@viewlogin');
+Route::post('login','UserController@login');
+//set the route for the register
+Route::get('register','UserController@viewregister');
+Route::post('register','UserController@register');
+
+Route::get('map',function(){
+    return View::make('map');
+});
