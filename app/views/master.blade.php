@@ -11,30 +11,17 @@
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- styles -->
+    {{HTML::style("css/bootstrap.min.css");}}
+    {{HTML::style("css/plugins/metisMenu/metisMenu.min.css");}}
+    {{HTML::style("css/plugins/timeline.css");}}
+    {{HTML::style("css/sb-admin-2.css");}}
+    {{HTML::style("css/plugins/morris.css");}}
+    {{HTML::style("font-awesome-4.1.0/css/font-awesome.min.css");}}
 
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Timeline CSS -->
-    <link href="css/plugins/timeline.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- scripts -->
+    {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
+    {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 </head>
 
 <body>
@@ -42,9 +29,6 @@
 <div id="wrapper">
 
 <!-- Navigation -->
-
-
-
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -70,7 +54,6 @@
             <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
             </li>
         </ul>
-        <!-- /.dropdown-user -->
     </li>
     </ul>
     <div class="navbar-default sidebar" role="navigation">
@@ -115,22 +98,21 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+{{HTML::script("js/jquery.js");}}
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+{{HTML::script("js/bootstrap.min.js");}}
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+{{HTML::script("js/plugins/metisMenu/metisMenu.min.js");}}
 
 <!-- Morris Charts JavaScript -->
-<script src="js/plugins/morris/raphael.min.js"></script>
-<script src="js/plugins/morris/morris.min.js"></script>
-<script src="js/plugins/morris/morris-data.js"></script>
+{{HTML::script("js/plugins/morris/raphael.min.js");}}
+{{HTML::script("js/plugins/morris/morris.min.js");}}
+{{HTML::script("js/plugins/morris/morris-data.js");}}
 
-<!-- Custom Theme JavaScript -->
-<script src="js/sb-admin-2.js"></script>
 
+{{HTML::script("js/sb-admin-2.js");}}
 </body>
 
 </html>
