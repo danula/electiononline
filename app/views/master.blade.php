@@ -22,6 +22,8 @@
     <!-- scripts -->
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
+
+    @yield('scripts')
 </head>
 
 <body>
@@ -90,7 +92,12 @@
 
 @yield('content')
 
-
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 </div>
 <!-- /#page-wrapper -->
 
@@ -113,6 +120,27 @@
 
 
 {{HTML::script("js/sb-admin-2.js");}}
+
+<!-- facebook -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '358727977621649',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
 </body>
 
 </html>
