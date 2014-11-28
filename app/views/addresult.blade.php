@@ -29,12 +29,19 @@ function reload()
 
 @section('content')
 <div>
-{{ Form::open(array('action' => array('ResultController@addSeatResult', $candidates),'name'=>'addresultform')) }}
-
-
+{{ Form::open(array('action'=>array('ResultController@addSeatResult',$candidates),'name'=>'addresultform')) }}
+{{Form::hidden('year',$year)}}
+{{Form::hidden('numberofcandidates',sizeof($candidates))}}
+{{Form::hidden('candidates',$candidates)}}
+<br>
+<div class="row">
+<div class="col-lg-4">
+<div class="well well-sm">
 District {{Form::select('district_id',$districts,$districts[1],array('class'=>'form-control','onchange'=>"reload()"))}}
+<br>
 Seat {{Form::select('seat_id',$seats1,$seats1[1],array('class'=>'form-control'))}}
 <br>
+</div></div></div>
 <div class="table-responsive">
 <table class="table table-striped table-bordered table-hover">
 <thead>
@@ -74,11 +81,11 @@ Seat {{Form::select('seat_id',$seats1,$seats1[1],array('class'=>'form-control'))
 
 </table></div>
 &nbsp;
-{{Form::button('Submit',array('class'=>'btn btn-success'))}}
+{{Form::submit('Submit',array('class'=>'btn btn-success'))}}
 {{ Form::close() }}
 
 
 
 </div>
-
+<br>
 @endsection
