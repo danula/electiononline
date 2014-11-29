@@ -73,5 +73,5 @@ Route::get('plotbyyear/{year}',function($year){
         'distresults'=>$distresults,
         'resultsd'=>$resultsd
     );
-    return View::make('plot',$data);
+    return View::make('plotbyyear',$data);
 });
