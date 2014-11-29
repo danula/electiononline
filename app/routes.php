@@ -75,3 +75,12 @@ Route::get('plotbyyear/{year}',function($year){
     );
     return View::make('plotbyyear',$data);
 });
+
+Route::get('plotbylocation/{name}',function($name){
+    $district = District::where('name','=',$name)->get();
+
+    $data = array(
+        'district'=>$district
+    );
+    return View::make('plotbylocation',$data);
+});
