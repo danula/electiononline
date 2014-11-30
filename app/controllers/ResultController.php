@@ -39,4 +39,40 @@ class ResultController extends BaseController {
 
     }
 
+    public function showSeatResult($seatname,$year){
+        $candidates = Candidate::where('year','=',$year)->get();
+        $seat = Seat::where('name','=',$seatname)->first() ;
+        $seatresult = SeatResult::where('seat_id','=',$seat->id)->where('year','=',$year)->first();
+        foreach($candidates as $c){
+            $results[$c->id] = Result::where('candidate_id','=',$c->id)->where('seat_id','=',$seat->id)->first();
+        }
+
+        //data for drop down select
+        $seats = Seat::all();
+        $districts1 = District::all();
+        foreach ($districts1 as $d) {
+            $districts[$d->id]=$d->name;
+        }
+        foreach($seats as $s){
+            $seats1[$s->id]=$s->name;
+        }
+
+        $data = array(
+            'seatresult'=>$seatresult,
+            'seats'=>$seats,
+            'seats1'=>$seats1,
+            'districts'=>$districts,
+            'candidates' => $candidates,
+            'year'=>$year,
+            'seat'=> $seat,
+            'results'=> $results
+        );
+        return View::make('seatresult',$data);
+}
+
+    public function changeSeatResult(){
+        $data = Input::all();
+        $seatname = Seat::find($data['seat_id'])->name;
+        return $this->showSeatResult($seatname,$data['year']);
+    }
 }

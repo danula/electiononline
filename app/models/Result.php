@@ -7,5 +7,10 @@
  */
 
 class Result extends Eloquent {
-
+    public function candidate(){
+        $this->belongsTo('Candidate');
+    }
+    public function seat(){
+        $this->belongsTo('Seat');
+    }
 } 
