@@ -8,9 +8,9 @@
 
 class Candidate extends Eloquent {
     public function results(){
-        $this->hasMany('Result');
+        return $this->hasMany('Result');
     }
     public function resultsd(){
-        $this->hasMany('ResultD');
+        return $this->hasMany('ResultD');
     }
 } 

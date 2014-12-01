@@ -54,6 +54,18 @@
     </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="progress">
+      @foreach($candidates as $c)
+
+      <div class="progress-bar progress-bar-success" style="width: 10%" >
+            {{$c->name}}
+      </div>
+      @endforeach
+
+    </div>
+</div>
 <div class="row">
  <h4>{{{$seat->district->name}}} District - {{{$seat->name}}} Seat - {{{$year}}}</h4><br>
 <table class="table table-striped table-bordered table-hover">
@@ -68,7 +80,7 @@
     @foreach($candidates as $c)
     <tr>
         <td>{{{$c->name}}}</td>
-        <td>{{{$results[$c->id]->number_of_votes}}}</td>
+        <td>{{{$c->results[0]->number_of_votes}}}</td>
         <td></td>
     </tr>
     @endforeach

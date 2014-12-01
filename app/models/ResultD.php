@@ -9,9 +9,9 @@
 class ResultD extends Eloquent{
     protected $table = 'results_d';
     public function candidate(){
-        $this->belongsTo('Candidate');
+        return $this->belongsTo('Candidate');
     }
     public function district(){
-        $this->belongsTo('District');
+        return $this->belongsTo('District');
     }
 } 

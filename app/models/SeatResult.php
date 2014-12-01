@@ -9,6 +9,6 @@
 class SeatResult extends Eloquent{
     protected $table = 'seat_results';
     public function seat(){
-        $this->belongsTo('Seat');
+        return $this->belongsTo('Seat');
     }
 } 
