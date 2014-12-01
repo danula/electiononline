@@ -41,33 +41,5 @@
                     @endforeach
                 @endforeach
             </table>
-               </div>
-    	<div>
-    		    <h1>Candidates</h1>
-                @foreach($candidates as $d)
-                <p>{{$d->id}}:
-                {{$d->name}}
-
-                </p>
-                @endforeach
-            </div>
-
-    		<div>
-    		    <h2>Districts</h2>
-    			@foreach($districts as $d)
-    			<h3>{{$d->id}}: {{$d->name}}</h3>
-    			    @foreach($seats as $s)
-    			        @if($d->id == $s->district_id)
-    			            <p>{{$s->name}}</p>
-    			        @endif
-    			    @endforeach
-    			@endforeach
-    		</div>
-
-            <div>
-                <h2>Results</h2>
-                @foreach($results as $d)
-                    <p>{{$d->number_of_votes}}</p>
-                @endforeach
-            </div>
+           </div>
 @stop
