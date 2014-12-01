@@ -37,7 +37,7 @@
 
                 @foreach($years as $year)
                 <div class="panel-group" id="accordion_{{$year}}" role="tablist" aria-multiselectable="true">
-
+                <h4>{{$year}} Statistics</h4>
                 @foreach($seats as $seat)
 
                   <div class="panel panel-default">
@@ -75,7 +75,21 @@
                     </div>
                     <div id="collapseOne_{{$seat->id}}_{{$year}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}_{{$year}}">
                       <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div class="col-md-6" id="piechart_{{$seat->id}}_{{$year}}"></div>
+                        <div class="col-md-6">
+                            <div class="panel panel-primary panel-body">
+                                @foreach($seatresults as $sr)
+                                    @foreach($sr as $x)
+                                        @if($x->year == $year && $x->seat_id == $seat->id)
+                                        <p>Registered Votes : {{$x->registered_votes}}</p>
+                                        <p>Valid Votes : {{$x->valid_votes}}</p>
+                                        <p>Total Polled: {{$x->polled_votes}}</p>
+                                        <p>Rejected Votes: {{$x->rejected_votes}}</p>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -99,7 +113,7 @@
 
     array_multisort($sort['year'], SORT_ASC, $sort['number_of_votes'], SORT_DESC,$resultsArr);
 
-    //var_dump($results);
+    //var_dump($seatresults);
 ?>
 
 @endsection
@@ -127,5 +141,27 @@
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
 
         chart.draw(data, options);
+
+        var data2 = google.visualization.arrayToDataTable([
+                  ['Task', 'Hours per Day'],
+                  ['Work',     11],
+                  ['Eat',      2],
+                  ['Commute',  2],
+                  ['Watch TV', 2],
+                  ['Sleep',    7]
+                ]);
+
+                var options = {
+                  title: 'My Daily Activities'
+                };
+
+            @foreach($years as $year)
+                @foreach($seats as $seat)
+                    var chart2 = new google.visualization.PieChart(document.getElementById('piechart_{{$seat->id}}_{{$year}}'));
+
+                chart2.draw(data2, options);
+
+                @endforeach
+            @endforeach
       }
 </script>

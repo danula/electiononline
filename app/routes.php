@@ -81,6 +81,7 @@ Route::get('plotbylocation/{name}',function($name){
     $districtId = $district[0]->id;
     $result_d = ResultD::where('district_id','=',$districtId)->get();
     $seats = Seat::where('district_id','=',$districtId)->get();
+    $seatresults = array();
     $years = array();
     $results = array();
 
@@ -89,15 +90,28 @@ Route::get('plotbylocation/{name}',function($name){
     }
     $years = array_unique($years);
     arsort($years);
-    foreach($years as $year)
-    foreach($seats as $seat){
-        $temp = DB::table('results')
-            ->join('seats','seats.id', '=', 'results.seat_id')
-            ->where('seats.district_id', '=', $districtId)
-            ->where('results.seat_id', '=', $seat->id)
-            ->where('results.year', '=', $year)
-            ->get();
-        array_push($results,$temp);
+    foreach($years as $year) {
+        foreach ($seats as $seat) {
+            $temp = DB::table('results')
+                ->join('seats', 'seats.id', '=', 'results.seat_id')
+                ->where('seats.district_id', '=', $districtId)
+                ->where('results.seat_id', '=', $seat->id)
+                ->where('results.year', '=', $year)
+                ->get();
+            array_push($results, $temp);
+        }
+    }
+
+    foreach($years as $year) {
+        foreach ($seats as $seat) {
+            $temp = DB::table('seats')
+                ->join('seat_results', 'seat_results.seat_id', '=', 'seats.id')
+                ->where('seats.district_id', '=', $districtId)
+                ->where('seat_results.seat_id', '=', $seat->id)
+                ->where('seat_results.year', '=', $year)
+                ->get();
+            array_push($seatresults, $temp);
+        }
     }
 
     $data = array(
@@ -105,7 +119,8 @@ Route::get('plotbylocation/{name}',function($name){
         'result_d'=>$result_d,
         'seats'=>$seats,
         'results'=>$results,
-        'years'=>$years
+        'years'=>$years,
+        'seatresults'=>$seatresults
     );
     return View::make('plotbylocation',$data);
 });
