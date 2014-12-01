@@ -10,4 +10,7 @@ class Candidate extends Eloquent {
     public function results(){
         $this->hasMany('Result');
     }
+    public function resultsd(){
+        $this->hasMany('ResultD');
+    }
 } 

@@ -8,4 +8,10 @@
 
 class ResultD extends Eloquent{
     protected $table = 'results_d';
+    public function candidate(){
+        $this->belongsTo('Candidate');
+    }
+    public function district(){
+        $this->belongsTo('District');
+    }
 } 
