@@ -82,6 +82,7 @@ class ResultController extends BaseController {
             'candidates' => $candidates,
             'year'=>$year,
             'seat'=> $seat,
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010')
         );
         return View::make('seatresult',$data);
 }
@@ -89,6 +90,6 @@ class ResultController extends BaseController {
     public function changeSeatResult(){
         $data = Input::all();
         $seatname = Seat::find($data['seat_id'])->name;
-        return $this->showSeatResult($seatname,$data['year']);
+        return $this->showSeatResult($seatname,$data['year_select']);
     }
 }
