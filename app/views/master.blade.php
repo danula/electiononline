@@ -23,6 +23,9 @@
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 
+
+<!-- jQuery -->
+{{HTML::script("js/jquery.js");}}
     @yield('scripts')
 </head>
 
@@ -103,9 +106,6 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!-- jQuery -->
-{{HTML::script("js/jquery.js");}}
 
 <!-- Bootstrap Core JavaScript -->
 {{HTML::script("js/bootstrap.min.js");}}
