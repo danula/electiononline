@@ -52,7 +52,7 @@
 
 </div></nav>
 </div>
-
+@if(!$error)
 <div class="row">
     <h4>{{{$seat->district->name}}} District - {{{$seat->name}}} Seat - {{{$year}}}</h4><br>
     <div class="progress">
@@ -89,7 +89,7 @@
     <tr class="info">
         <td>Polled Votes</td>
         <td>{{{$seatresult->polled_votes}}}</td>
-        <td></td>
+        <td>{{number_format($seatresult->polled_votes/$seatresult->registered_votes*100,2)}}%</td>
     </tr>
     <tr class="info">
         <td>Rejected Votes</td>
@@ -112,4 +112,11 @@
 
 </table>
 </div>
+@else
+<div class="row">
+    <div class="alert alert-danger" role="alert">
+      Seat not applicable for {{$year}} election.
+    </div>
+</div>
+@endif
 @endsection
