@@ -1,3 +1,4 @@
+{{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 @section('content')
 <script type="text/javascript">
@@ -9,6 +10,8 @@ jQuery(document).ready(function($) {
 });
 </script>
         <h1>Summary Results for year: {{$year}}</h1>
+        <input class="hidden" id="yearHidden" value="{{$year}}" />
+       <div id="piechart" class="panel-default panel-body" style="width: 100%; height: 55%"></div>
 
        <div class="container">
 
@@ -18,12 +21,12 @@ jQuery(document).ready(function($) {
                     <th>District</th>
                      @foreach($candidates as $d)
 
-                       <th>{{substr(strtok($d->name, " "), 0, 9)}}</th>
+                       <th>{{substr($d->name, 0, 18)}}</th>
                      @endforeach
                 </tr>
                 @foreach($districts as $d)
 
-                    <tr href='{{url("/districtresult/".$d->name."/".$year,"")}}'> <th scope="row" >{{$d->name}}</th><td></td>
+                    <tr href='{{url("/districtresult/".$d->name."/".$year,"")}}'> <th scope="row" >{{$d->name}}</th>
                     @foreach($candidates as $cd)
                         @foreach($resultsd as $rd)
                             @if($rd->district_id == $d->id)
@@ -39,4 +42,84 @@ jQuery(document).ready(function($) {
                 @endforeach
             </table>
            </div>
+
+        <script type="text/javascript">
+             google.load("visualization", "1", {packages:["corechart"]});
+             google.setOnLoadCallback(drawChart);
+             function drawChart() {
+                var _year = document.getElementById("yearHidden");
+                var year = _year.value;
+                var data = google.visualization.arrayToDataTable([]);
+
+                switch (year.toString()){
+                    case "2005":
+                        data = google.visualization.arrayToDataTable([
+                         ['Party', 'Votes'],
+                         ['Mahinda Rajapaksha',     50.29],
+                         ['Ranil Wickramasinghe',      48.43],
+                         ['Other',  1.28],
+                         ]);
+                        break;
+
+                    case "2010" :
+                        data = google.visualization.arrayToDataTable([
+                                                 ['Party', 'Votes'],
+                                                 ['MahindaRajapaksha',     57.88],
+                                                 ['SarathFonseka',      40.15],
+                                                 ['Other',  1.97],
+                                                 ]);
+                        break;
+
+                    case "1999" :
+                        data = google.visualization.arrayToDataTable([
+                                                 ['Party', 'Votes'],
+                                                 ['Chandrika Bandaranaike Kumarathunga',     4312157],
+                                                 ['Ranil Wickremasinghe',      3602748],
+                                                 ['Other',  520849],
+                                                 ]);
+                        break;
+
+                    case "1994" :
+                        data = google.visualization.arrayToDataTable([
+                                                 ['Party', 'Votes'],
+                                                 ['Chandrika Bandaranaike Kumarathunga ',     4709205],
+                                                 ['Vajira Srimathi Dissanayake',      2715285],
+                                                 ['Other',  137036],
+                                                 ]);
+                        break;
+
+                    case "1988" :
+                        data = google.visualization.arrayToDataTable([
+                                                 ['Party', 'Votes'],
+                                                 ['Sirimavo Bandaranaike',      2289960],
+                                                 ['Ranasinghe Premadasa ',     2569199],
+                                                 ['Osvin Abeygunasekara',  235719],
+                                                 ]);
+                        break;
+
+                    case "1982" :
+                        data = google.visualization.arrayToDataTable([
+                                                 ['Party', 'Votes'],
+                                                 [' H.S.R.B. Kobbekaduwa',     2548438],
+                                                 ['J.R. Jayawardene',      3450811],
+                                                 ['Other',  522898],
+                                                 ]);
+                        break;
+
+                    default :
+                        break;
+
+                }
+
+               var options = {
+                is3D: true,
+                colors: ['blue', 'green', 'orange', '#f3b49f', '#f6c7b6']
+               };
+
+               var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+               chart.draw(data, options);
+             }
+           </script>
+
 @stop
