@@ -7,4 +7,8 @@ class Seat extends Eloquent{
     public function results(){
         return $this->hasMany('Result');
     }
+    public function seatresults(){
+        return $this->hasMany('SeatResult');
+    }
+
 }

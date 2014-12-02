@@ -8,9 +8,9 @@
 
 class Result extends Eloquent {
     public function candidate(){
-        $this->belongsTo('Candidate');
+        return $this->belongsTo('Candidate');
     }
     public function seat(){
-        $this->belongsTo('Seat');
+        return $this->belongsTo('Seat');
     }
 } 

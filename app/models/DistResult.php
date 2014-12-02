@@ -8,4 +8,7 @@
 
 class DistResult extends Eloquent{
     protected $table = 'district_results';
+    public function district(){
+        return $this->belongsTo('District');
+    }
 }
