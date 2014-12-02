@@ -14,7 +14,8 @@ jQuery(document).ready(function($) {
        <div id="piechart" class="panel-default panel-body" style="width: 100%; height: 55%"></div>
 
        <div class="container">
-
+        <p>Select district for detailed summary</p>
+        <br>
             <table class="table table-hover">
 
                 <tr>
