@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
 
 Route::get('test', function()
@@ -74,3 +74,4 @@ Route::get('seatresult/{seatname}/{year}','ResultController@showSeatResult');
 Route::post('seatresult','ResultController@changeSeatResult');
 Route::get('candidate/{candidatename}','ResultController@showCandidateSummary');
 Route::get('districtresult/{districtname}/{year}','ResultController@showDistrictResult');
+Route::post('districtresult','ResultController@changeDistrictResult');

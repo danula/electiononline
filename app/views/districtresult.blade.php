@@ -1,15 +1,24 @@
 @extends('master')
 
 @section('content')
-<div class="row"><h3></h3></div>
-
+<br>
 <div class="row">
-    <div id="piechart" class="panel-default panel-body" style="width: 100%; height: 62%;">
-    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+    {{ Form::open(array('url'=>'districtresult','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
+
+            Year&nbsp;
+            {{Form::select('year_select',$years,$year,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+            &nbsp;&nbsp; &nbsp;&nbsp;District&nbsp;
+
+             {{Form::select('district_id',$districts,$district->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+
+
+</div></nav>
 </div>
 
 <div class="row">
-    <h4>{{$district->name}} District : Year {{$year}}</h4><br>
+    <h4>{{$district->name}} District - {{$year}}</h4><br>
     <div class="progress">
       @foreach($candidates as $c)
       @if($c->resultsd[0]->number_of_votes/$districtresult->valid_votes>0.1)
