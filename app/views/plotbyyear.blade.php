@@ -11,11 +11,11 @@ jQuery(document).ready(function($) {
       $("tr").css({"cursor":"pointer"});
 });
 </script>
-        <h1>Summary Results:  {{$year}}</h1><br>
+        <div class="row"><h1>Summary Results:  {{$year}}</h1><br></div>
         <img src="" id="candidate_1" class="img-thumbnail" style="width: 140px; float: right; ">
         <img src="" id="candidate_2"  class="img-thumbnail" style="width: 140px; float: left; ">
         <input class="hidden" id="yearHidden" value="{{$year}}" />
-       <div id="piechart" class="panel-default panel-body" style="width: 100%; height: 62%;"></div>
+       <div clas="row"><div id="piechart" class="panel-default panel-body" style="width: 100%; height: 62%;"></div></div>
 
 
        <div class="container">

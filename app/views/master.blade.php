@@ -23,9 +23,6 @@
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 
-
-<!-- jQuery -->
-{{HTML::script("js/jquery.js");}}
     @yield('scripts')
 </head>
 
@@ -101,11 +98,17 @@
   data-width="450"
   data-show-faces="true">
 </div>
+<div class="col-md-12" align="center"><div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div></div>
 </div>
+
+
 <!-- /#page-wrapper -->
 
 </div>
 <!-- /#wrapper -->
+
+<!-- jQuery -->
+{{HTML::script("js/jquery.js");}}
 
 <!-- Bootstrap Core JavaScript -->
 {{HTML::script("js/bootstrap.min.js");}}
