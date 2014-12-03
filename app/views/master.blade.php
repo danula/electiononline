@@ -98,7 +98,7 @@
   data-width="450"
   data-show-faces="true">
 </div>
-<div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://128.199.201.222/electiononline/public/$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
+<div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
 </div>
 
 
