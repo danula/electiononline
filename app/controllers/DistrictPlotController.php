@@ -6,7 +6,7 @@
  * Time: 9:13 AM
  */
 
-class DistrictResultController extends BaseController {
+class DistrictPlotController extends BaseController {
 
     public function showDistrictResult($name){
 
@@ -14,6 +14,8 @@ class DistrictResultController extends BaseController {
         $districtId = $district[0]->id;
         $result_d = ResultD::where('district_id','=',$districtId)->get();
         $seats = Seat::where('district_id','=',$districtId)->get();
+        $seatresults = array();
+        $results = array();
 
         $years = array();
 
@@ -44,14 +46,41 @@ class DistrictResultController extends BaseController {
             return $y;
         });
 
+        foreach($years as $year) {
+            foreach ($seats as $seat) {
+                $temp = DB::table('seats')
+                    ->join('seat_results', 'seat_results.seat_id', '=', 'seats.id')
+                    ->where('seats.district_id', '=', $districtId)
+                    ->where('seat_results.seat_id', '=', $seat->id)
+                    ->where('seat_results.year', '=', $year)
+                    ->get();
+                array_push($seatresults, $temp);
+            }
+        }
+
+        foreach($years as $year) {
+            foreach ($seats as $seat) {
+                $temp = DB::table('results')
+                    ->join('seats', 'seats.id', '=', 'results.seat_id')
+                    ->where('seats.district_id', '=', $districtId)
+                    ->where('results.seat_id', '=', $seat->id)
+                    ->where('results.year', '=', $year)
+                    ->get();
+                array_push($results, $temp);
+            }
+        }
+
+
         $data = array(
             'district'=>$district,
             'result_d'=>$result_d,
             'seats'=>$seats,
             'winners'=>$winners,
-            'years'=>$years
+            'years'=>$years,
+            'seatresults'=>$seatresults,
+            'results'=>$results
         );
-        return View::make('districtresult',$data);
+        return View::make('districtplot',$data);
     }
 
 
