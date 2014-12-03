@@ -94,4 +94,21 @@ class ResultController extends BaseController {
         $seatname = Seat::find($data['seat_id'])->name;
         return Redirect::to("seatresult/".$seatname."/".$data['year_select']);
     }
+
+    public function showCandidateSummary($candidatename){
+        $candidate = Candidate::where('name','=',$candidatename)->get();
+        $seatresults = SeatResult::where('year','=',$candidate[0]->year)->get();
+        $districtresults = DistResult::where('year','=',$candidate[0]->year)->get();
+
+        $results = Result::where('candidate_id','=',$candidate[0]->id)->get();
+
+        $data = array(
+            'results'=>$results,
+            'candidate'=>$candidate,
+            'seatresults'=> $seatresults,
+            'distresults'=>$districtresults
+        );
+        return View::make('candidatesummary',$data);
+
+    }
 }

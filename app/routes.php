@@ -112,3 +112,4 @@ Route::get('plotbylocation/{name}',function($name){
 
 Route::get('seatresult/{seatname}/{year}','ResultController@showSeatResult');
 Route::post('seatresult','ResultController@changeSeatResult');
+Route::get('candidate/{candidatename}','ResultController@showCandidateSummary');
