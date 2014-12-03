@@ -2,6 +2,7 @@
 @extends('master')
 @section('content')
 
+<?php echo (json_encode($seatChartData[0])) ?>
     <div class="page-header">
         <h2> {{$district[0]->name}} District</h2>
     </div>
@@ -65,8 +66,8 @@
         var options = {
           pointSize: 5,
           colors:['green', 'blue', 'orange'],
-           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
-           legend:'none'
+          annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
+          legend:'none'
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
@@ -75,19 +76,34 @@
       }
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
 
-        var options = {
-          title: 'Company Performance'
-        };
+      var options = {
+        pointSize: 5,
+        colors:['green', 'blue', 'orange'],
+        annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
+        legend:'none'
+      };
 
-        @foreach($seats as $seat)
+      @foreach($seats as $seat)
+            var data = google.visualization.DataTable();
+
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Votes');
+            data.addColumn({type: 'string', role: 'annotation'});
+            data.addColumn('number', 'Votes');
+            data.addColumn({type: 'string', role: 'annotation'});
+            data.addColumn('number', 'Votes');
+            data.addColumn({type: 'string', role: 'annotation'});
+
+
+            @foreach($seatChartData as $data)
+
+            @if($data['seat'] == $seat->id)
+                data.addRows(<?php echo(json_encode($data['arr'])); ?>);
+            @endif
+
+            @endforeach
+
             var chart = new google.visualization.LineChart(document.getElementById('linechart_{{$seat->id}}'));
 
             chart.draw(data, options);

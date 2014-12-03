@@ -37,11 +37,12 @@ class DistrictPlotController extends BaseController {
 
         $distChartData = $this->generateDistrictChartData($years, $result_d);
         $seatresults = $this->getSeatResults($seats, $years, $districtId);
+        $seatChartData = $this->generateSeatChartData($years,$seatresults,$seats);
         $data = array(
             'district'=>$district,
             'seats'=>$seats,
             'distChartData'=>$distChartData,
-            'seatresults'=>$seatresults
+            'seatChartData'=>$seatChartData
         );
         return View::make('districtplot',$data);
     }
@@ -117,8 +118,54 @@ class DistrictPlotController extends BaseController {
         return $data;
     }
 
-    private function generateSeatChartData($years, $seatresults){
+    private function generateSeatChartData($years, $seatresults, $seats){
 
+        $data = array();
+        $rows = array();
+        foreach($years as $year){
+            $others=0;
+            $f = false;$s = false;
+            foreach($seats as $seat){
+                foreach($seatresults as $r){
+                    foreach($r as $result) {
+                        if ($result->year == $year) {
+                            if ($result->seat_id == $seat->id) {
+                                if ($result->candidate_id == $this->winUNP[$year]) {
+                                    $first = $result->number_of_votes;
+                                    $firstParty = $this->nameUNP[$year];
+                                    $f = true;
+                                } else if ($result->candidate_id == $this->winSLFP[$year]) {
+                                    $second = $result->number_of_votes;
+                                    $secondParty = $this->nameSLFP[$year];
+                                    $s = true;
+                                } else {
+                                    if ($result->year == $year)
+                                        $others += intval($result->number_of_votes);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if($f && $s){
+                    array_push($data,array('seat'=>$seat->id, 'arr'=>array($year,intval($first), $firstParty, intval($second), $secondParty, intval($others), 'Others')));
+                    continue;
+                }
+            }
+        }
+
+        foreach($seats as $seat){
+            $t = array();
+            foreach($data as $d){
+                if($d['seat'] == $seat->id){
+                    array_push($t,$d['arr']);
+                }
+            }
+
+            array_push($rows, array('seat'=>$seat->id, 'arr'=>$t));
+        }
+
+        return $rows;
     }
 
 }
