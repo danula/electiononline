@@ -25,9 +25,8 @@
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne_{{$seat->id}}">
                       <h4 class="panel-title">
-                        {{$seat->name}}
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
-                          <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                        <a style="display: block; width: 100%" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
+                          {{$seat->name}} <i class="fa fa-bar-chart-o fa-fw pull-right"></i>
                         </a>
                       </h4>
                     </div>
