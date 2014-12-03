@@ -68,7 +68,7 @@
                     <a class="active" href="{{URL::to('')}}"><i class="fa fa-dashboard fa-fw"></i> Overall Summary</a>
                 </li>
                 <li>
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Location
+                    <a><i class="fa fa-table fa-fw"></i> Results by Location</a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="{{URL::to('districtresult/Colombo/2010')}}">District</a>
@@ -79,7 +79,7 @@
                     </ul>
                 </li>
                 <li>
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Year
+                    <a><i class="fa fa-bar-chart-o fa-fw"></i> Summary of Elections</a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="{{URL::to('plotbyyear/1982')}}">1982</a>

@@ -95,29 +95,58 @@ class ResultController extends BaseController {
         return Redirect::to("seatresult/".$seatname."/".$data['year_select']);
     }
 
-    public function showCandidateSummary($candidatename)
+    public function showCandidateSummary($year,$candidatename)
     {
-        $candidate = Candidate::where('name', '=', $candidatename)->get();
+        $candidate = Candidate::where('name', '=', $candidatename)->where('year','=',$year)->get();
         $seatresults = SeatResult::where('year', '=', $candidate[0]->year)->get();
         $districtresults = DistResult::where('year', '=', $candidate[0]->year)->get();
 
         $results = Result::where('candidate_id', '=', $candidate[0]->id)->with('seat')->get();
-
+        $resultsd = ResultD::where('candidate_id', '=', $candidate[0]->id)->with('district')->get();
         foreach ($results as $r){
             $percentages[$r->seat->id] = $r->number_of_votes / $r->seat->seatresults[0]->polled_votes * 100;
             $seatnames[$r->seat->id] = $r->seat->name;
             }
+        foreach ($resultsd as $r){
+            $percentagesd[$r->district->id] = $r->number_of_votes / $r->district->districtresults[0]->polled_votes * 100;
+            $districtnames[$r->district->id] = $r->district->name;
+        }
         arsort($percentages);
+        arsort($percentagesd);
+
+        //data for dropdown
+        $candidates1 = Candidate::where('year','=',$year)->get();
+        foreach($candidates1 as $c){
+            $candidates[$c->id] = $c->name;
+        }
         $data = array(
+            'year'=>$year,
             'results'=>$results,
             'candidate'=>$candidate,
+            'candidates'=>$candidates,
             'seatresults'=> $seatresults,
             'distresults'=>$districtresults,
             'percentages'=>$percentages,
             'seatnames'=>$seatnames,
+            'percentagesd'=>$percentagesd,
+            'districtnames'=>$districtnames,
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010')
         );
         return View::make('candidatesummary',$data);
 
+    }
+
+    public function changeCandidateSummary(){
+        $data = Input::all();
+        $candidatename = Candidate::find($data['candidate_id'])->name;
+        $candidate = Candidate::where('year','=',$data['year_select'])->where('name','=',$candidatename)->first();
+        if($candidate==null){
+            $candidate = Candidate::where('year','=',$data['year_select'])->first();
+            return Redirect::to("candidate/" . $data['year_select'] . "/" . $candidate->name);
+        }else {
+
+            return Redirect::to("candidate/" . $data['year_select'] . "/" . $candidatename);
+        }
     }
 
     public function showDistrictResult($districtname,$year){
