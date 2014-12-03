@@ -23,10 +23,10 @@
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 
-<!-- jQuery -->
-{{HTML::script("js/jquery.js");}}
-    <meta property="fb:app_id" content="358727977621649"/>
+
     @yield('scripts')
+    <!-- jQuery -->
+    {{HTML::script("js/jquery.js");}}
 </head>
 
 <body>
@@ -65,7 +65,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Overall Summary</a>
+                    <a class="active" href="{{URL::to('')}}"><i class="fa fa-dashboard fa-fw"></i> Overall Summary</a>
                 </li>
                 <li>
                     <i class="fa fa-bar-chart-o fa-fw"></i> Location
@@ -121,7 +121,7 @@
   data-width="450"
   data-show-faces="true">
 </div>
-<div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://128.199.201.222/$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
+
 </div>
 
 
