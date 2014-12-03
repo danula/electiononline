@@ -95,6 +95,12 @@
 
 @yield('content')
 <div id="fb-root"></div>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 <div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://128.199.201.222/$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
 </div>
 
@@ -120,7 +126,13 @@
 
 <!-- facebook -->
 <script>
-
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '358727977621649',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+  };
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
