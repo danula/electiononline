@@ -25,7 +25,7 @@
 
 <!-- jQuery -->
 {{HTML::script("js/jquery.js");}}
-
+    <meta property="fb:app_id" content="358727977621649"/>
     @yield('scripts')
 </head>
 
