@@ -94,4 +94,63 @@ class ResultController extends BaseController {
         $seatname = Seat::find($data['seat_id'])->name;
         return Redirect::to("seatresult/".$seatname."/".$data['year_select']);
     }
+
+    public function showCandidateSummary($candidatename)
+    {
+        $candidate = Candidate::where('name', '=', $candidatename)->get();
+        $seatresults = SeatResult::where('year', '=', $candidate[0]->year)->get();
+        $districtresults = DistResult::where('year', '=', $candidate[0]->year)->get();
+
+        $results = Result::where('candidate_id', '=', $candidate[0]->id)->with('seat')->get();
+
+        foreach ($results as $r){
+            $percentages[$r->seat->id] = $r->number_of_votes / $r->seat->seatresults[0]->polled_votes * 100;
+            $seatnames[$r->seat->id] = $r->seat->name;
+            }
+        arsort($percentages);
+        $data = array(
+            'results'=>$results,
+            'candidate'=>$candidate,
+            'seatresults'=> $seatresults,
+            'distresults'=>$districtresults,
+            'percentages'=>$percentages,
+            'seatnames'=>$seatnames
+        );
+        return View::make('candidatesummary',$data);
+
+    }
+
+    public function showDistrictResult($districtname,$year){
+        $district = District::where('name','=',$districtname)->first();
+
+        $candidates = Candidate::where('year','=',$year)->with(array('resultsd' => function($query) use(&$district)
+        {
+            $query->where('district_id', '=',$district->id);
+
+        }))->get();
+
+        try {
+            $candidates->sort(function ($a, $b) {
+                $a = $a->resultsd[0]->number_of_votes;
+                $b = $b->resultsd[0]->number_of_votes;
+                if ($a === $b) {
+                    return 0;
+                }
+                return ($a < $b) ? 1 : -1;
+            });
+        }catch(Exception $e){
+            $error = true;
+        }
+
+        $districtresult = DistResult::where('district_id','=',$district->id)->where('year','=',$year)->first();
+
+        $data = array(
+            'district'=>$district,
+            'candidates'=>$candidates,
+            'districtresult'=>$districtresult,
+            'year'=>$year
+        );
+        return View::make('districtresult',$data);
+
+    }
 }

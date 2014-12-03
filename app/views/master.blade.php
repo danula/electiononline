@@ -23,6 +23,9 @@
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 
+<!-- jQuery -->
+{{HTML::script("js/jquery.js");}}
+    <meta property="fb:app_id" content="358727977621649"/>
     @yield('scripts')
 </head>
 
@@ -65,21 +68,41 @@
                     <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Overall Summary</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Location<span class="fa arrow"></span></a>
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Location
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">District</a>
+                            <a href="{{URL::to('districtresult/Colombo/2010')}}">District</a>
                         </li>
                         <li>
-                            <a href="morris.html">Seat</a>
+                            <a href="{{URL::to('seatresult/Colombo%20North/2010')}}">Seat</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Year<span class="fa arrow"></span></a>
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Year
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{URL::to('plotbyyear/1982')}}">1982</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('plotbyyear/1988')}}">1988</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('plotbyyear/1994')}}">1994</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('plotbyyear/1999')}}">1999</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('plotbyyear/2005')}}">2005</a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('plotbyyear/2010')}}">2010</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Party<span class="fa arrow"></span></a>
+                    <a href="{{URL::to('districtplot/Colombo')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Analytics</a>
                 </li>
             </ul>
         </div>
@@ -91,14 +114,14 @@
 <div id="page-wrapper">
 
 @yield('content')
-
+<div id="fb-root"></div>
 <div
   class="fb-like"
   data-share="true"
   data-width="450"
   data-show-faces="true">
 </div>
-<div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
+<div class="col-md-12" align="center"><div class="fb-comments" data-href="<?php echo("http://128.199.201.222/$_SERVER[REQUEST_URI]")?>" data-numposts="5" data-colorscheme="light"></div></div>
 </div>
 
 
@@ -106,9 +129,6 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!-- jQuery -->
-{{HTML::script("js/jquery.js");}}
 
 <!-- Bootstrap Core JavaScript -->
 {{HTML::script("js/bootstrap.min.js");}}

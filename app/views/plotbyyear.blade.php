@@ -1,6 +1,6 @@
 
-@extends('master')
 {{HTML::script("https://www.google.com/jsapi");}}
+@extends('master')
 @section('content')
 
 <script type="text/javascript">

@@ -72,3 +72,5 @@ Route::get('plotbyyear/{year}',function($year){
 Route::get('districtplot/{name}','DistrictPlotController@showDistrictResult');
 Route::get('seatresult/{seatname}/{year}','ResultController@showSeatResult');
 Route::post('seatresult','ResultController@changeSeatResult');
+Route::get('candidate/{candidatename}','ResultController@showCandidateSummary');
+Route::get('districtresult/{districtname}/{year}','ResultController@showDistrictResult');
