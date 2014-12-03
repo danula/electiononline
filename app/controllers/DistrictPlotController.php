@@ -7,6 +7,17 @@
  */
 
 class DistrictPlotController extends BaseController {
+    private $winUNP;
+    private $winSLFP;
+    private $nameUNP;
+    private $nameSLFP;
+
+    public function __construct() {
+        $this->winUNP = array('1982'=>70, '1988'=> 60, '1994'=> 53, '1999'=>88, '2005'=>10, '2010'=>20);
+        $this->winSLFP = array('1982'=>71, '1988'=> 61, '1994'=> 51, '1999'=>85, '2005'=>9, '2010'=>21);
+        $this->nameUNP = array('1982'=>'UNP', '1988'=> 'UNP', '1994'=> 'UNP', '1999'=>'UNP', '2005'=>'UNP', '2010'=>'NDF');
+        $this->nameSLFP = array('1982'=>'SLFP', '1988'=> 'SLFP', '1994'=> 'PA', '1999'=>'PA', '2005'=>'UPFA', '2010'=>'UPFA');
+    }
 
     public function showDistrictResult($name){
 
@@ -14,8 +25,7 @@ class DistrictPlotController extends BaseController {
         $districtId = $district[0]->id;
         $result_d = ResultD::where('district_id','=',$districtId)->get();
         $seats = Seat::where('district_id','=',$districtId)->get();
-        $seatresults = array();
-        $results = array();
+        //$winners = $this->getWinners();
 
         $years = array();
 
@@ -24,17 +34,43 @@ class DistrictPlotController extends BaseController {
         }
         $years = array_unique($years);
         sort($years);
-        /*$candidates = Candidate::select('year','id','number_of_votes')
-                                ->orderBy('year','ASC')
-                                ->orderBy('number_of_votes','DESC')
-                                ->get();
-        */
 
+        $distChartData = $this->generateDistrictChartData($years, $result_d);
+        $seatresults = $this->getSeatResults($seats, $years, $districtId);
+        $data = array(
+            'district'=>$district,
+            'seats'=>$seats,
+            'distChartData'=>$distChartData,
+            'seatresults'=>$seatresults
+        );
+        return View::make('districtplot',$data);
+    }
+
+
+    private function getSeatResults($seats, $years, $districtId){
+        $seatresults = array();
+
+        foreach($years as $year) {
+            foreach ($seats as $seat) {
+                $temp = DB::table('results')
+                    ->join('seats', 'seats.id', '=', 'results.seat_id')
+                    ->where('seats.district_id', '=', $districtId)
+                    ->where('results.seat_id', '=', $seat->id)
+                    ->where('results.year', '=', $year)
+                    ->get();
+                array_push($seatresults, $temp);
+            }
+        }
+
+        return $seatresults;
+    }
+
+    private function getWinners(){
         $winners = DB::select(DB::raw("select * from candidates
-                                where (
-                                    select count(*) from candidates as v
-                                    where v.year = candidates.year and v.number_of_votes >= candidates.number_of_votes
-                                ) <= 2"));
+                            where (
+                                select count(*) from candidates as v
+                                where v.year = candidates.year and v.number_of_votes >= candidates.number_of_votes
+                            ) <= 2"));
 
         usort($winners, function($a, $b){
             $y = strcmp($a->year, $b->year);
@@ -46,42 +82,43 @@ class DistrictPlotController extends BaseController {
             return $y;
         });
 
-        foreach($years as $year) {
-            foreach ($seats as $seat) {
-                $temp = DB::table('seats')
-                    ->join('seat_results', 'seat_results.seat_id', '=', 'seats.id')
-                    ->where('seats.district_id', '=', $districtId)
-                    ->where('seat_results.seat_id', '=', $seat->id)
-                    ->where('seat_results.year', '=', $year)
-                    ->get();
-                array_push($seatresults, $temp);
-            }
-        }
-
-        foreach($years as $year) {
-            foreach ($seats as $seat) {
-                $temp = DB::table('results')
-                    ->join('seats', 'seats.id', '=', 'results.seat_id')
-                    ->where('seats.district_id', '=', $districtId)
-                    ->where('results.seat_id', '=', $seat->id)
-                    ->where('results.year', '=', $year)
-                    ->get();
-                array_push($results, $temp);
-            }
-        }
-
-
-        $data = array(
-            'district'=>$district,
-            'result_d'=>$result_d,
-            'seats'=>$seats,
-            'winners'=>$winners,
-            'years'=>$years,
-            'seatresults'=>$seatresults,
-            'results'=>$results
-        );
-        return View::make('districtplot',$data);
+        return $winners;
     }
 
+    private function generateDistrictChartData($years, $result_d){
+
+        $data = array();
+        foreach($years as $year){
+            $others=0;
+            $f = false;$s = false;
+
+            foreach($result_d as $result){
+                if($result->candidate_id == $this->winUNP[$year]){
+                    $first = $result->number_of_votes;
+                    $firstParty = $this->nameUNP[$year];
+                    $f = true;
+                }else if($result->candidate_id == $this->winSLFP[$year]){
+                    $second = $result->number_of_votes;
+                    $secondParty = $this->nameSLFP[$year];
+                    $s = true;
+                }else{
+                    if($result->year == $year)
+                        $others += intval($result->number_of_votes);
+                }
+            }
+
+            if($f && $s){
+                array_push($data,array($year,intval($first), $firstParty, intval($second), $secondParty, intval($others), 'Others'));
+                continue;
+            }
+
+        }
+
+        return $data;
+    }
+
+    private function generateSeatChartData($years, $seatresults){
+
+    }
 
 }
