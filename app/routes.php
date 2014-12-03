@@ -68,40 +68,8 @@ Route::get('plotbyyear/{year}',function($year){
     return View::make('plotbyyear',$data);
 });
 
-Route::get('plotbylocation/{name}',function($name){
-    $district = District::where('name','=',$name)->get();
-    $districtId = $district[0]->id;
-    $result_d = ResultD::where('district_id','=',$districtId)->get();
-    $seats = Seat::where('district_id','=',$districtId)->get();
-    $years = array();
-    $results = array();
 
-    foreach($result_d as $r){
-        array_push($years,$r->year);
-    }
-    $years = array_unique($years);
-    arsort($years);
-    foreach($years as $year)
-    foreach($seats as $seat){
-        $temp = DB::table('results')
-            ->join('seats','seats.id', '=', 'results.seat_id')
-            ->where('seats.district_id', '=', $districtId)
-            ->where('results.seat_id', '=', $seat->id)
-            ->where('results.year', '=', $year)
-            ->get();
-        array_push($results,$temp);
-    }
-
-    $data = array(
-        'district'=>$district,
-        'result_d'=>$result_d,
-        'seats'=>$seats,
-        'results'=>$results,
-        'years'=>$years
-    );
-    return View::make('plotbylocation',$data);
-});
-
+Route::get('districtplot/{name}','DistrictPlotController@showDistrictResult');
 Route::get('seatresult/{seatname}/{year}','ResultController@showSeatResult');
 Route::post('seatresult','ResultController@changeSeatResult');
 Route::get('candidate/{candidatename}','ResultController@showCandidateSummary');

@@ -11,7 +11,7 @@
                 <!--<img src="http://srilankatravelnotes.com/BADULLA/images/BadullaDistrictMap.JPG">-->
             </div>
             <div class="col-md-10">
-                <div id="district_summary_line" class="panel-default panel-body"></div>
+                <div id="district_summary_line" style="min-height: 400" class="panel-default panel-body"></div>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
 
                 @foreach($years as $year)
                 <div class="panel-group" id="accordion_{{$year}}" role="tablist" aria-multiselectable="true">
-
+                <h4>{{$year}} Statistics</h4>
                 @foreach($seats as $seat)
 
                   <div class="panel panel-default">
@@ -75,7 +75,21 @@
                     </div>
                     <div id="collapseOne_{{$seat->id}}_{{$year}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}_{{$year}}">
                       <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div class="col-md-6" id="piechart_{{$seat->id}}_{{$year}}"></div>
+                        <div class="col-md-6">
+                            <div class="panel panel-primary panel-body">
+                                @foreach($seatresults as $sr)
+                                    @foreach($sr as $x)
+                                        @if($x->year == $year && $x->seat_id == $seat->id)
+                                        <p>Registered Votes : {{$x->registered_votes}}</p>
+                                        <p>Valid Votes : {{$x->valid_votes}}</p>
+                                        <p>Total Polled: {{$x->polled_votes}}</p>
+                                        <p>Rejected Votes: {{$x->rejected_votes}}</p>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -86,42 +100,61 @@
                 @endforeach
             </div>
         </div>
+
     </div>
-<?php
-
-    $resultsArr = json_decode($result_d,true);
-
-    $sort = array();
-    foreach($resultsArr as $k=>$v) {
-        $sort['year'][$k] = $v['year'];
-        $sort['number_of_votes'][$k] = $v['number_of_votes'];
-    }
-
-    array_multisort($sort['year'], SORT_ASC, $sort['number_of_votes'], SORT_DESC,$resultsArr);
-
-    //var_dump($results);
-?>
-
 @endsection
 
+<?php
+    $winUNP = array('1982'=>70, '1988'=> 60, '1994'=> 53, '1999'=>88, '2005'=>10, '2010'=>20);
+    $nameUNP = array('1982'=>'UNP', '1988'=> 'UNP', '1994'=> 'UNP', '1999'=>'UNP', '2005'=>'UNP', '2010'=>'NDF');
+    $winSLFP = array('1982'=>71, '1988'=> 61, '1994'=> 51, '1999'=>85, '2005'=>9, '2010'=>21);
+    $nameSLFP = array('1982'=>'SLFP', '1988'=> 'SLFP', '1994'=> 'PA', '1999'=>'PA', '2005'=>'UPFA', '2010'=>'UPFA');
+    $data = array();
+    foreach($years as $year){
+        $others=0;
+        $f = false;$s = false;
+
+        foreach($result_d as $result){
+            if($result->candidate_id == $winUNP[$year]){
+               $first = $result->number_of_votes;
+               $firstParty = $nameUNP[$year];
+               $f = true;
+            }else if($result->candidate_id == $winSLFP[$year]){
+               $second = $result->number_of_votes;
+               $secondParty = $nameSLFP[$year];
+               $s = true;
+            }else{
+                if($result->year == $year)
+                    $others += intval($result->number_of_votes);
+            }
+        }
+
+        if($f && $s){
+            array_push($data,array($year,intval($first), $firstParty, intval($second), $secondParty, intval($others), 'Others'));
+            continue;
+        }
+
+    }
+?>
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'UNP',    'SLP', 'Other'],
-          ['1982',  436290, 274476, 43265],
-          ['1988',  361337, 339958, 34020],
-          ['1994',  288741, 557708, 13937],
-          ['1999',  425185, 474310, 65039],
-          ['2005',  569627, 534431, 10192],
-          ['2010',  533022, 614740, 12541],
-        ]);
+        var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Year');
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addRows(<?php echo(json_encode($data)); ?>);
 
         var options = {
-          title: 'Election Result Summary',
-          curveType: 'function',
-          colors:['green','blue','black']
+          pointSize: 5,
+          colors:['green', 'blue', 'orange'],
+           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
+           legend:'none'
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
