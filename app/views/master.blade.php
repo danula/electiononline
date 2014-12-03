@@ -94,7 +94,7 @@
 <div id="page-wrapper">
 
 @yield('content')
-
+<div id="fb-root"></div>
 <div
   class="fb-like"
   data-share="true"
