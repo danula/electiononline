@@ -16,6 +16,11 @@ Route::get('/', function()
 	return View::make('home');
 });
 
+Blade::extend(function($value)
+{
+    return preg_replace('/(\s*)@break(\s*)/', '$1<?php break; ?>$2', $value);
+});
+
 Route::get('test', function()
 {
     $dist = District::all();
