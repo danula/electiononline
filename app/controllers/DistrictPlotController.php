@@ -7,6 +7,17 @@
  */
 
 class DistrictPlotController extends BaseController {
+    private $winUNP;
+    private $winSLFP;
+    private $nameUNP;
+    private $nameSLFP;
+
+    public function __construct() {
+        $this->winUNP = array('1982'=>70, '1988'=> 60, '1994'=> 53, '1999'=>88, '2005'=>10, '2010'=>20);
+        $this->winSLFP = array('1982'=>71, '1988'=> 61, '1994'=> 51, '1999'=>85, '2005'=>9, '2010'=>21);
+        $this->nameUNP = array('1982'=>'UNP', '1988'=> 'UNP', '1994'=> 'UNP', '1999'=>'UNP', '2005'=>'UNP', '2010'=>'NDF');
+        $this->nameSLFP = array('1982'=>'SLFP', '1988'=> 'SLFP', '1994'=> 'PA', '1999'=>'PA', '2005'=>'UPFA', '2010'=>'UPFA');
+    }
 
     public function showDistrictResult($name){
 
@@ -14,8 +25,7 @@ class DistrictPlotController extends BaseController {
         $districtId = $district[0]->id;
         $result_d = ResultD::where('district_id','=',$districtId)->get();
         $seats = Seat::where('district_id','=',$districtId)->get();
-        $winners = $this->getWinners();
-
+        //$winners = $this->getWinners();
 
         $years = array();
 
@@ -29,12 +39,9 @@ class DistrictPlotController extends BaseController {
         $seatresults = $this->getSeatResults($seats, $years, $districtId);
         $data = array(
             'district'=>$district,
-            'result_d'=>$result_d,
             'seats'=>$seats,
-            'winners'=>$winners,
-            'years'=>$years,
-            'seatresults'=>$seatresults,
-            'distChartData'=>$distChartData
+            'distChartData'=>$distChartData,
+            'seatresults'=>$seatresults
         );
         return View::make('districtplot',$data);
     }
@@ -51,7 +58,7 @@ class DistrictPlotController extends BaseController {
                     ->where('results.seat_id', '=', $seat->id)
                     ->where('results.year', '=', $year)
                     ->get();
-                array_push($results, $temp);
+                array_push($seatresults, $temp);
             }
         }
 
@@ -79,23 +86,20 @@ class DistrictPlotController extends BaseController {
     }
 
     private function generateDistrictChartData($years, $result_d){
-        $winUNP = array('1982'=>70, '1988'=> 60, '1994'=> 53, '1999'=>88, '2005'=>10, '2010'=>20);
-        $nameUNP = array('1982'=>'UNP', '1988'=> 'UNP', '1994'=> 'UNP', '1999'=>'UNP', '2005'=>'UNP', '2010'=>'NDF');
-        $winSLFP = array('1982'=>71, '1988'=> 61, '1994'=> 51, '1999'=>85, '2005'=>9, '2010'=>21);
-        $nameSLFP = array('1982'=>'SLFP', '1988'=> 'SLFP', '1994'=> 'PA', '1999'=>'PA', '2005'=>'UPFA', '2010'=>'UPFA');
+
         $data = array();
         foreach($years as $year){
             $others=0;
             $f = false;$s = false;
 
             foreach($result_d as $result){
-                if($result->candidate_id == $winUNP[$year]){
+                if($result->candidate_id == $this->winUNP[$year]){
                     $first = $result->number_of_votes;
-                    $firstParty = $nameUNP[$year];
+                    $firstParty = $this->nameUNP[$year];
                     $f = true;
-                }else if($result->candidate_id == $winSLFP[$year]){
+                }else if($result->candidate_id == $this->winSLFP[$year]){
                     $second = $result->number_of_votes;
-                    $secondParty = $nameSLFP[$year];
+                    $secondParty = $this->nameSLFP[$year];
                     $s = true;
                 }else{
                     if($result->year == $year)
@@ -111,6 +115,10 @@ class DistrictPlotController extends BaseController {
         }
 
         return $data;
+    }
+
+    private function generateSeatChartData($years, $seatresults){
+
     }
 
 }
