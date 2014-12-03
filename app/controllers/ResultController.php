@@ -114,7 +114,7 @@ class ResultController extends BaseController {
             'seatresults'=> $seatresults,
             'distresults'=>$districtresults,
             'percentages'=>$percentages,
-            'seatnames'=>$seatnames
+            'seatnames'=>$seatnames,
         );
         return View::make('candidatesummary',$data);
 
@@ -122,6 +122,10 @@ class ResultController extends BaseController {
 
     public function showDistrictResult($districtname,$year){
         $district = District::where('name','=',$districtname)->first();
+        $districts1 = District::all();
+        foreach ($districts1 as $d) {
+            $districts[$d->id]=$d->name;
+        }
 
         $candidates = Candidate::where('year','=',$year)->with(array('resultsd' => function($query) use(&$district)
         {
@@ -146,11 +150,19 @@ class ResultController extends BaseController {
 
         $data = array(
             'district'=>$district,
+            'districts'=>$districts,
             'candidates'=>$candidates,
             'districtresult'=>$districtresult,
-            'year'=>$year
+            'year'=>$year,
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
         );
         return View::make('districtresult',$data);
 
+    }
+
+    public function changeDistrictResult(){
+        $data = Input::all();
+        $districtname = District::find($data['district_id'])->name;
+        return Redirect::to("districtresult/".$districtname."/".$data['year_select']);
     }
 }
