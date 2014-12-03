@@ -40,7 +40,7 @@ class ResultController extends BaseController {
     }
 
     public function showSeatResult($seatname,$year){
-
+        $error = false;
         $seat = Seat::where('name','=',$seatname)->first() ;
         $seatresult = SeatResult::where('seat_id','=',$seat->id)->where('year','=',$year)->first();
 
@@ -53,17 +53,18 @@ class ResultController extends BaseController {
         }))->get();
 
        // $candidates = $candidates->sortByDesc('number_of_votes');
-
-        $candidates->sort(function($a, $b)
-        {
-            $a = $a->results[0]->number_of_votes;
-            $b = $b->results[0]->number_of_votes;
-            if ($a === $b) {
-                return 0;
-            }
-            return ($a < $b) ? 1 : -1;
-        });
-
+        try {
+            $candidates->sort(function ($a, $b) {
+                $a = $a->results[0]->number_of_votes;
+                $b = $b->results[0]->number_of_votes;
+                if ($a === $b) {
+                    return 0;
+                }
+                return ($a < $b) ? 1 : -1;
+            });
+        }catch(Exception $e){
+            $error = true;
+        }
         //data for drop down select
         $seats = Seat::all();
         $districts1 = District::all();
@@ -82,6 +83,8 @@ class ResultController extends BaseController {
             'candidates' => $candidates,
             'year'=>$year,
             'seat'=> $seat,
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
+            'error'=> $error
         );
         return View::make('seatresult',$data);
 }
@@ -89,6 +92,6 @@ class ResultController extends BaseController {
     public function changeSeatResult(){
         $data = Input::all();
         $seatname = Seat::find($data['seat_id'])->name;
-        return $this->showSeatResult($seatname,$data['year']);
+        return Redirect::to("seatresult/".$seatname."/".$data['year_select']);
     }
 }

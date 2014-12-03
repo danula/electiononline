@@ -56,21 +56,13 @@ Route::post('add','ResultController@addSeatResult');
 
 Route::get('plotbyyear/{year}',function($year){
     $districts = District::all();
-    $seats = Seat::all();
-
-    $results = Result::where('year','=',$year)->get();
-    $seatresults = SeatResult::where('year','=',$year)->get();
-    $distresults = DistResult::where('year','=',$year)->get();
+    $candidates = Candidate::where('year','=',$year)->get();
     $resultsd = ResultD::where('year','=',$year)->get();
 
     $data = array(
-        'seats'=>$seats,
         'candidates' => $candidates,
         'districts' => $districts,
         'year'=> $year,
-        'results'=>$results,
-        'seatresults'=>$seatresults,
-        'distresults'=>$distresults,
         'resultsd'=>$resultsd
     );
     return View::make('plotbyyear',$data);

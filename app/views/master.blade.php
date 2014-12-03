@@ -98,7 +98,10 @@
   data-width="450"
   data-show-faces="true">
 </div>
+<div class="col-md-12" align="center"><div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div></div>
 </div>
+
+
 <!-- /#page-wrapper -->
 
 </div>

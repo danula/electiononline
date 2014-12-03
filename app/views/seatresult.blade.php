@@ -2,14 +2,10 @@
 
 @section('scripts')
 <script language=JavaScript>
-    function reloadpage(){
-        var seatid= document.getElementsByName("seat_id")[0].selectedIndex+1;
-        var seatname = seatnames[seatid];
-        $.get("seatresult/"+seatname+"/{{$year}}");
-    }
 
     function reload()
     {
+        console.log('reload')
         var val= document.getElementsByName("district_id")[0].selectedIndex+1;
         var seatdists =[];
         seatnames = [];
@@ -18,17 +14,21 @@
         seatdists['{{$s->id}}'] = '{{$s->district_id}}';
     @endforeach
         var s = document.getElementsByName("seat_id")[0];
+        var selectedSeat = s.value;
         s.options.length = 0;
         for(var i=1;i<=seatdists.length;i++){
             if(seatdists[i]==val){
                 var o = document.createElement("option");
                 o.value = i;
                 o.text = seatnames[i];
+                if(selectedSeat ==i) o.selected = "selected";
                 s.appendChild(o);
             }
         }
 
+
     }
+    window.onload = reload;
 </script>
 
 
@@ -37,37 +37,38 @@
 @section('content')
 <br>
 <div class="row">
-    {{ Form::open(array('url'=>'seatresult','name'=>'changeresult')) }}
-    {{ Form::hidden('year',$year)}}
-    <div class="col-lg-12">
-    <div class="well">
-        <div class="row">
-            <div class="col-lg-4">
-            District {{Form::select('district_id',$districts,$seat->district->id,array('class'=>'form-control','onchange'=>"reload()"))}}
-            <br>
-            </div>
-            <div class="col-lg-4">
-            Seat {{Form::select('seat_id',$seats1,$seat->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
-            <br>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+    {{ Form::open(array('url'=>'seatresult','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
+            Year&nbsp;
+            {{Form::select('year_select',$years,$year,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+            &nbsp;&nbsp; &nbsp;&nbsp;District&nbsp;
+
+             {{Form::select('district_id',$districts,$seat->district->id,array('class'=>'form-control','onchange'=>"reload();this.form.submit()"))}}
+           &nbsp;&nbsp;&nbsp;&nbsp;Seat
+
+            {{Form::select('seat_id',$seats1,$seat->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+
+</div></nav>
+</div>
+@if(!$error)
 <div class="row">
+    <h4>{{{$seat->district->name}}} District - {{{$seat->name}}} Seat - {{{$year}}}</h4><br>
     <div class="progress">
       @foreach($candidates as $c)
+      @if($c->results[0]->number_of_votes/$seatresult->valid_votes>0.1)
 
-      <div class="progress-bar progress-bar-success" style="width: 10%" >
-            {{$c->name}}
+      <div class="progress-bar progress-bar-{{$c->colour}}" style="width:{{$c->results[0]->number_of_votes/$seatresult->valid_votes*100}}%" >
+            {{$c->name}} - {{number_format($c->results[0]->number_of_votes/$seatresult->valid_votes*100,2)}}%
       </div>
+      @endif
       @endforeach
 
     </div>
 </div>
 <div class="row">
- <h4>{{{$seat->district->name}}} District - {{{$seat->name}}} Seat - {{{$year}}}</h4><br>
+
 <table class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -81,14 +82,14 @@
     <tr>
         <td>{{{$c->name}}}</td>
         <td>{{{$c->results[0]->number_of_votes}}}</td>
-        <td></td>
+        <td>{{number_format($c->results[0]->number_of_votes/$seatresult->valid_votes*100,2)}}%</td>
     </tr>
     @endforeach
     <b>
     <tr class="info">
         <td>Polled Votes</td>
         <td>{{{$seatresult->polled_votes}}}</td>
-        <td></td>
+        <td>{{number_format($seatresult->polled_votes/$seatresult->registered_votes*100,2)}}%</td>
     </tr>
     <tr class="info">
         <td>Rejected Votes</td>
@@ -111,4 +112,11 @@
 
 </table>
 </div>
+@else
+<div class="row">
+    <div class="alert alert-danger" role="alert">
+      Seat not applicable for {{$year}} election.
+    </div>
+</div>
+@endif
 @endsection
