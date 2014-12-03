@@ -1,6 +1,8 @@
-{{HTML::script("https://www.google.com/jsapi");}}
+
 @extends('master')
+{{HTML::script("https://www.google.com/jsapi");}}
 @section('content')
+
 <script type="text/javascript">
 jQuery(document).ready(function($) {
       $("tr").click(function() {
@@ -9,7 +11,7 @@ jQuery(document).ready(function($) {
       $("tr").css({"cursor":"pointer"});
 });
 </script>
-        <h1>Summary Results for year: {{$year}}</h1><br>
+        <h1>Summary Results:  {{$year}}</h1><br>
         <img src="" id="candidate_1" class="img-thumbnail" style="width: 140px; float: right; ">
         <img src="" id="candidate_2"  class="img-thumbnail" style="width: 140px; float: left; ">
         <input class="hidden" id="yearHidden" value="{{$year}}" />
@@ -63,8 +65,8 @@ jQuery(document).ready(function($) {
                          ['Ranil Wickramasinghe',      48.43],
                          ['Other',  1.28],
                          ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/MR.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/RW.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/MR.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/RW.jpg";
                         break;
 
                     case "2010" :
@@ -74,8 +76,8 @@ jQuery(document).ready(function($) {
                                                  ['SarathFonseka',      40.15],
                                                  ['Other',  1.97],
                                                  ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/MR.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/SF.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/MR.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/SF.jpg";
                         break;
 
                     case "1999" :
@@ -85,8 +87,8 @@ jQuery(document).ready(function($) {
                                                  ['Ranil Wickremasinghe',      3602748],
                                                  ['Other',  520849],
                                                  ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/CB.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/RW.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/CB.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/RW.jpg";
                         break;
 
                     case "1994" :
@@ -96,8 +98,8 @@ jQuery(document).ready(function($) {
                                                  ['Vajira Srimathi Dissanayake',      2715285],
                                                  ['Other',  137036],
                                                  ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/CB.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/UNP.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/CB.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/UNP.jpg";
                         break;
 
                     case "1988" :
@@ -107,8 +109,8 @@ jQuery(document).ready(function($) {
                                                  ['Ranasinghe Premadasa ',     2569199],
                                                  ['Osvin Abeygunasekara',  235719],
                                                  ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/SB.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/RP.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/SB.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/RP.jpg";
                         break;
 
                     case "1982" :
@@ -118,8 +120,8 @@ jQuery(document).ready(function($) {
                                                  ['J.R. Jayawardene',      3450811],
                                                  ['Other',  522898],
                                                  ]);
-                         document.getElementById("candidate_1").src = "../../resources/candidates/KO.jpg";
-                         document.getElementById("candidate_2").src = "../../resources/candidates/JR.jpg";
+                         document.getElementById("candidate_1").src = "../resources/candidates/KO.jpg";
+                         document.getElementById("candidate_2").src = "../resources/candidates/JR.jpg";
                         break;
 
                     default :
