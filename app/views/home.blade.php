@@ -35,7 +35,7 @@
         <div class="panel panel-default">
         <div class="panel-heading">Total Summary of past years</div>
         <div class="panel-body">
-            <div id="overall_line_chart"></div>
+            <div id="overall_line_chart" style="min-height: 294px"></div>
         </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                     <p>Total Votes: <?php echo $votes?></p>
                 <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-info btn-block">Vote Now</a>
                 </div>
-                </div>
+        </div>
     </div>
 </div>
 <div class="row">
