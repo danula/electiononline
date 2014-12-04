@@ -170,11 +170,12 @@
 
 </script>
 
-    <div id="footer">
+    <footer class="page-footer"><br>
       <div class="col-lg-12">
-        <p class="muted credit" style="text-align: center">Contact developers: electiononlinelk@gmail.com</p>
+      <p style="text-align: center">All material provided on the Site is intended for informational purposes only and should not be used to replace official documents</p>
+        <p class="muted credit" style="text-align: center">Contact developers: <a href="mailto:info@chandaya.info">info@chandaya.info</a></p>
       </div>
-    </div>
+   </footer>
 </body>
 
 </html>
