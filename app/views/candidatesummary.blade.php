@@ -1,7 +1,12 @@
 @extends('master')
 
 @section('scripts')
-
+<script type="text/javascript">
+    function checkimg(){
+        var img = document.getElementsByName('photo');
+        img[0].src = "{{URL::to('/resources/candidates/face.jpg')}}";
+    }
+</script>
 @endsection
 
 @section('content')
@@ -28,12 +33,12 @@
 </div>
 <div class="row">
     <div class="col-lg-3">
-    {{HTML::image('/resources/candidates/MR.jpg','photo',array('height'=>'220px'))}}
+    {{HTML::image('/resources/candidates/'.$candidate[0]->id.'.jpg','photo',array('name'=>'photo','height'=>'220px','onerror'=>'checkimg();'))}}
     </div>
 
     <div class="col-lg-3 col-md-6">
                         
-                        <div class="panel panel-primary">
+                        <div class="panel panel-{{$colour[$candidate[0]->colour]}}">
                             <div class="panel-heading">
                                 <div class="row">
 
@@ -45,7 +50,7 @@
                             </div>
 
                         </div>
-                        <div class="panel panel-primary">
+                        <div class="panel panel-{{$colour[$candidate[0]->colour]}}">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-3">
