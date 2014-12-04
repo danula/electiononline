@@ -35,7 +35,7 @@
         <div class="panel panel-default">
         <div class="panel-heading">Total Summary of past years</div>
         <div class="panel-body">
-            CHART HERE
+            <div id="overall_line_chart"></div>
         </div>
         </div>
     </div>
@@ -83,3 +83,30 @@
              }
            </script>
 @stop
+
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawDistrictChart);
+      function drawDistrictChart() {
+        var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Year');
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addColumn('number', 'Votes');
+                data.addColumn({type: 'string', role: 'annotation'});
+                data.addRows(<?php echo(json_encode($chartData)); ?>);
+
+        var options = {
+          pointSize: 5,
+          colors:['green', 'blue', 'orange'],
+          annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
+          legend:'none'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('overall_line_chart'));
+
+        chart.draw(data, options);
+      }
+</script>
