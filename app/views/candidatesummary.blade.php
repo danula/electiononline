@@ -36,11 +36,9 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-xs-3">
 
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">{{$candidate[0]->number_of_votes}}</div>
+                                    <div class="col-xs-12 text-right">
+                                        <div class="huge">{{number_format($candidate[0]->number_of_votes)}}</div>
                                         <div>Votes</div>
                                     </div>
                                 </div>
@@ -54,7 +52,7 @@
 
                                                             </div>
                                                             <div class="col-xs-9 text-right">
-                                                                <div class="huge">57%</div>
+                                                                <div class="huge">{{number_format($candidate[0]->number_of_votes/$totalvotes[$year]*100,2)}}%</div>
                                                                 <div>of Total Valid Votes</div>
                                                             </div>
                                                         </div>

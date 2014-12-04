@@ -98,17 +98,24 @@ class ResultController extends BaseController {
     public function showCandidateSummary($year,$candidatename)
     {
         $candidate = Candidate::where('name', '=', $candidatename)->where('year','=',$year)->get();
-        $seatresults = SeatResult::where('year', '=', $candidate[0]->year)->get();
-        $districtresults = DistResult::where('year', '=', $candidate[0]->year)->get();
+        $seatresults1 = SeatResult::where('year', '=', $year)->get();
+        foreach($seatresults1 as $s){
+            $seatresults[$s->seat_id] = $s;
+        }
+
+        $districtresults1 = DistResult::where('year', '=', $year)->get();
+        foreach($districtresults1 as $d){
+            $districtresults[$d->district_id] = $d;
+        }
 
         $results = Result::where('candidate_id', '=', $candidate[0]->id)->with('seat')->get();
         $resultsd = ResultD::where('candidate_id', '=', $candidate[0]->id)->with('district')->get();
         foreach ($results as $r){
-            $percentages[$r->seat->id] = $r->number_of_votes / $r->seat->seatresults[0]->polled_votes * 100;
+            $percentages[$r->seat->id] = $r->number_of_votes / $seatresults[$r->seat->id]->valid_votes * 100;
             $seatnames[$r->seat->id] = $r->seat->name;
             }
         foreach ($resultsd as $r){
-            $percentagesd[$r->district->id] = $r->number_of_votes / $r->district->districtresults[0]->polled_votes * 100;
+            $percentagesd[$r->district->id] = $r->number_of_votes / $districtresults[$r->district->id]->valid_votes * 100;
             $districtnames[$r->district->id] = $r->district->name;
         }
         arsort($percentages);
@@ -119,6 +126,8 @@ class ResultController extends BaseController {
         foreach($candidates1 as $c){
             $candidates[$c->id] = $c->name;
         }
+
+
         $data = array(
             'year'=>$year,
             'results'=>$results,
@@ -130,7 +139,8 @@ class ResultController extends BaseController {
             'seatnames'=>$seatnames,
             'percentagesd'=>$percentagesd,
             'districtnames'=>$districtnames,
-            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010')
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
+            'totalvotes'=>array('1982'=>5094778,'1994'=>7561526,'1999'=>8435754,'2005'=>9717039,'2010'=>10393613)
         );
         return View::make('candidatesummary',$data);
 
