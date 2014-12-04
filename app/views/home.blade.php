@@ -29,7 +29,7 @@
 <div class="row">
 <div class="col-lg-12">
 
-<img src="../resources/banner.png" >
+<a href="http://forum.chandaya.info"> <img src="../resources/banner.png" ></a>
 
 </div>
 </div>
