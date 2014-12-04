@@ -104,6 +104,9 @@
                 <li>
                     <a href="{{URL::to('districtplot/Colombo')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Analytics</a>
                 </li>
+                <li>
+                    <a href="{{URL::to('candidate/2010/Mahinda%20Rajapaksha')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Candidates</a>
+                 </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
