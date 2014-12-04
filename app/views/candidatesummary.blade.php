@@ -27,11 +27,44 @@
 <h3 class="page-header">{{$candidate[0]->name}}</h3></div>
 </div>
 <div class="row">
-    <div class="col-lg-4">
-    Photo
+    <div class="col-lg-3">
+    {{HTML::image('/resources/candidates/MR.jpg','photo',array('height'=>'220px'))}}
     </div>
-</div>
 
+    <div class="col-lg-3 col-md-6">
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{$candidate[0]->number_of_votes}}</div>
+                                        <div>Votes</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <div class="row">
+                                                            <div class="col-xs-3">
+
+                                                            </div>
+                                                            <div class="col-xs-9 text-right">
+                                                                <div class="huge">57%</div>
+                                                                <div>of Total Valid Votes</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                    </div>
+
+</div>
+<br>
 <div class="row">
     <div class="col-lg-4">
     <h4>Seats with highest vote percentage</h4>
