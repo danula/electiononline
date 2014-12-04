@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-    <h4>{{$district->name}} District - {{$year}}</h4><br>
+    <h4>{{$district->name}} District - {{$year}} | <a href="{{URL::to('districtplot/'.$district->name)}}">See Yearly Analytics</a></h4><br>
     <div class="progress">
       @foreach($candidates as $c)
       @if($c->resultsd[0]->number_of_votes/$districtresult->valid_votes>0.1)
