@@ -1,12 +1,12 @@
 @extends('master')
 @section('content')
-<div class="row">
+
     <div class="col-lg-12">
+
         <h1 class="page-header">
-            Welcome to Chandaya.info
+          <img src="../resources/logo.png" style="height: 100px">  Online Election Portal
         </h1>
     </div>
-</div>
 <div class="row">
     <div class="col-md-9">
         <div class="panel panel-default">
