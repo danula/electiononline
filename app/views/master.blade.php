@@ -170,11 +170,14 @@
 
 </script>
 
-    <footer class="page-footer"><br>
-      <div class="col-lg-12">
-      <p style="text-align: center">All material provided on the Site is intended for informational purposes only and should not be used to replace official documents</p>
-        <p class="muted credit" style="text-align: center">Contact developers: <a href="mailto:info@chandaya.info">info@chandaya.info</a></p>
-      </div>
+   <footer class="page-footer sticky-footer">
+       <div class="container-fluid">
+           <div class="clearfix">
+               <hr/>
+               <p style="text-align: center; font-style: italic">All material provided on the Site is intended for informational purposes only and should not be used to replace official documents</p>
+   		       <p style="text-align: center; font-style: italic">Contact developers: <a href="mailto:info@chandaya.info">info@chandaya.info</a></p>
+           </div>
+       </div>
    </footer>
 </body>
 
