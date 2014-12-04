@@ -21,7 +21,7 @@
                 <div class="panel-heading">Online election result</div>
                 <div class="panel-body">
                     Body
-                <a href="#" class="btn btn-info btn-block">Vote Now</a>
+                <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-info btn-block">Vote Now</a>
                 </div>
                 </div>
     </div>
@@ -29,7 +29,7 @@
 <div class="row">
 <div class="col-lg-12">
 
-<img src="../resources/banner.png" >
+<a href="http://forum.chandaya.info"> <img src="../resources/banner.png" ></a>
 
 </div>
 </div>
