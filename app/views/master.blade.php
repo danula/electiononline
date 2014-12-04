@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="shortcut icon" href="{{URL::to('resources/favicon.png')}}">
 <head>
 
     <meta charset="utf-8">
