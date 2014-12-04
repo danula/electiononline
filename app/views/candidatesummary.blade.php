@@ -6,6 +6,13 @@
         var img = document.getElementsByName('photo');
         img[0].src = "{{URL::to('/resources/candidates/face.jpg')}}";
     }
+
+    jQuery(document).ready(function($) {
+          $("tr").click(function() {
+                window.location = $(this).attr("href");
+          });
+          $("tr").css({"cursor":"pointer"});
+    });
 </script>
 @endsection
 
@@ -81,7 +88,7 @@
         <tbody>
         @foreach($percentages as $id=>$p)
         @if(!str_contains($seatnames[$id],'Postal'))
-        <tr>
+        <tr href="{{URL::to('seatresult/'.$seatnames[$id].'/'.$year)}}">
             <td>{{$seatnames[$id]}}</td>
             <td>{{number_format($p,2)}}</td>
         </tr>

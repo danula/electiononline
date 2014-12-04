@@ -24,9 +24,11 @@
     {{HTML::script("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js");}}
 
 
-    @yield('scripts')
+
     <!-- jQuery -->
     {{HTML::script("js/jquery.js");}}
+
+    @yield('scripts')
 </head>
 
 <body>
