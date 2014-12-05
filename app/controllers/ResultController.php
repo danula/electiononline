@@ -110,8 +110,12 @@ class ResultController extends BaseController {
 
         $results = Result::where('candidate_id', '=', $candidate[0]->id)->with('seat')->get();
         $resultsd = ResultD::where('candidate_id', '=', $candidate[0]->id)->with('district')->get();
-        foreach ($results as $r){
-            $percentages[$r->seat->id] = $r->number_of_votes / $seatresults[$r->seat->id]->valid_votes * 100;
+        foreach ($results as $r) {
+            if ($seatresults[$r->seat->id]->valid_votes == 0){
+                $percentages[$r->seat->id] = 0;
+            }else {
+                $percentages[$r->seat->id] = $r->number_of_votes / $seatresults[$r->seat->id]->valid_votes * 100;
+            }
             $seatnames[$r->seat->id] = $r->seat->name;
             }
         foreach ($resultsd as $r){
