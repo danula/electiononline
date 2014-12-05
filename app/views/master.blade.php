@@ -77,14 +77,14 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="active" href="{{URL::to('')}}"><i class="fa fa-list-alt fa-fw"></i> Overall Summary</a>
+                        <a class="active" href="{{URL::to('')}}"><i class="fa fa-home fa-fw"></i> Home</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-map-marker fa-fw"></i> Results by Location</a>
+                        <a data-toggle="collapse" href="#collapseTwo"><i class="fa fa-map-marker fa-fw"></i> Results by Location</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
@@ -107,7 +107,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-calendar fa-fw"></i> Results by Year</a>
+                        <a data-toggle="collapse" href="#collapseThree"><i class="fa fa-calendar fa-fw"></i> Results by Year</a>
                     </h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
@@ -189,14 +189,6 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 {{HTML::script("js/plugins/metisMenu/metisMenu.min.js");}}
-
-<!-- Morris Charts JavaScript -->
-{{HTML::script("js/plugins/morris/raphael.min.js");}}
-{{HTML::script("js/plugins/morris/morris.min.js");}}
-{{HTML::script("js/plugins/morris/morris-data.js");}}
-
-
-{{HTML::script("js/sb-admin-2.js");}}
 
 <!-- facebook -->
 <script>
