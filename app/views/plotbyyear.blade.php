@@ -10,6 +10,10 @@ jQuery(document).ready(function($) {
       });
       $("tr").css({"cursor":"pointer"});
 });
+
+window.onload = function() {
+  document.getElementById('collapseThree').className = 'panel-collapse';
+};
 </script>
         <div class="row"><h1>Summary Results:  {{$year}}</h1><br></div>
         <img src="" id="candidate_1" class="img-thumbnail" style="width: 140px; float: right; ">

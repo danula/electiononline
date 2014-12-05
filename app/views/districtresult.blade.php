@@ -8,6 +8,10 @@
           });
           $("tr").css({"cursor":"pointer"});
     });
+
+window.onload = function() {
+  document.getElementById('collapseTwo').className = 'panel-collapse';
+};
 </script>
 
 @endsection
