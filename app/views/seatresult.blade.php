@@ -28,6 +28,12 @@
 
 
     }
+    jQuery(document).ready(function($) {
+              $("tr").click(function() {
+                    window.location = $(this).attr("href");
+              });
+              $("tr").css({"cursor":"pointer"});
+        });
     window.onload = reload;
 </script>
 
@@ -71,7 +77,7 @@
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
-    <tr>
+    <tr href="#">
         <th>Candidate</th>
         <th>Votes</th>
         <th>Percentage</th>
@@ -79,29 +85,29 @@
     </thead>
     <tbody>
     @foreach($candidates as $c)
-    <tr>
+    <tr href="{{URL::to('candidate/'.$year.'/'.$c->name)}}">
         <td>{{{$c->name}}}</td>
         <td>{{{$c->results[0]->number_of_votes}}}</td>
         <td>{{number_format($c->results[0]->number_of_votes/$seatresult->valid_votes*100,2)}}%</td>
     </tr>
     @endforeach
     <b>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Polled Votes</td>
         <td>{{{$seatresult->polled_votes}}}</td>
         <td>{{number_format($seatresult->polled_votes/$seatresult->registered_votes*100,2)}}%</td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Rejected Votes</td>
         <td>{{{$seatresult->rejected_votes}}}</td>
         <td></td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Registered Votes</td>
         <td>{{{$seatresult->registered_votes}}}</td>
         <td></td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Valid Votes</td>
         <td>{{{$seatresult->valid_votes}}}</td>
         <td></td>

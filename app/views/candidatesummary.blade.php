@@ -80,7 +80,7 @@
     <h4>Seats with highest vote percentage</h4>
     <table class="table table-striped table-bordered table-hover">
         <thead>
-        <tr>
+        <tr href="#">
             <th>Seat</th>
             <th>Percentage</th>
         </tr>
@@ -102,7 +102,7 @@
     <h4>Districts with highest vote percentage</h4>
     <table class="table table-striped table-bordered table-hover">
         <thead>
-        <tr>
+        <tr href="#">
             <th>District</th>
             <th>Percentage</th>
         </tr>
@@ -110,7 +110,7 @@
         <tbody>
         @foreach($percentagesd as $id=>$p)
 
-        <tr>
+        <tr href="{{URL::to('districtresult/'.$districtnames[$id].'/'.$year)}}">
             <td>{{$districtnames[$id]}}</td>
             <td>{{number_format($p,2)}}</td>
         </tr>

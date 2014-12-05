@@ -1,5 +1,17 @@
 @extends('master')
 
+@section('scripts')
+<script type="text/javascript">
+ jQuery(document).ready(function($) {
+          $("tr").click(function() {
+                window.location = $(this).attr("href");
+          });
+          $("tr").css({"cursor":"pointer"});
+    });
+</script>
+
+@endsection
+
 @section('content')
 <br>
 <div class="row">
@@ -35,7 +47,7 @@
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
-    <tr>
+    <tr href="#">
         <th>Candidate</th>
         <th>Votes</th>
         <th>Percentage</th>
@@ -43,29 +55,29 @@
     </thead>
     <tbody>
     @foreach($candidates as $c)
-    <tr>
+    <tr href="{{URL::to('candidate/'.$year.'/'.$c->name)}}">
         <td>{{{$c->name}}}</td>
         <td>{{{$c->resultsd[0]->number_of_votes}}}</td>
         <td>{{number_format($c->resultsd[0]->number_of_votes/$districtresult->valid_votes*100,2)}}%</td>
     </tr>
     @endforeach
     <b>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Polled Votes</td>
         <td>{{{$districtresult->polled_votes}}}</td>
         <td>{{number_format($districtresult->polled_votes/$districtresult->registered_votes*100,2)}}%</td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Rejected Votes</td>
         <td>{{{$districtresult->rejected_votes}}}</td>
         <td></td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Registered Votes</td>
         <td>{{{$districtresult->registered_votes}}}</td>
         <td></td>
     </tr>
-    <tr class="info">
+    <tr class="info" href="#">
         <td>Valid Votes</td>
         <td>{{{$districtresult->valid_votes}}}</td>
         <td></td>
