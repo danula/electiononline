@@ -22,7 +22,8 @@
     <div class="container-fluid">
         <div class="row">
             <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img class="img-responsive" src="../resources/maps/371px-{{$district[0]->name}}_district.svg.png">
+                <img src="../district.svg" usemap="#map" id="myImage" name="myImage">
+                <map id="map" name="map">
             </div>
             <div class="col-md-10">
                 <div id="district_summary_line" style="min-height: 400" class="panel-default panel-body"></div>
@@ -58,6 +59,34 @@
         </div>
 
     </div>
+<script src="../js/jquery.maphilight.js" ></script>
+<script>
+      jQuery(function()
+      {
+          $('#map').load('../map.html', function(responseData){
+          //After the map is loaded
+              $("area").each(function(){
+                  //give the href to a district.
+                  this.href=""+this.alt;
+                  //give an always on color to one district.
+                  if(this.alt=="{{$district[0]->name}}"){
+                      $(this).attr("data-maphilight","{\"fillColor\": \"ff0000\", \"alwaysOn\": true}");
+                  }
+              });
+              
+              $('#myImage').maphilight({
+                  fade: false,
+                  groupBy: 'alt',
+                  fillColor: 'aabb00',
+                  alwaysOn: false,
+                  strokeColor: 'ffffff',
+                  strokeWidth: 0
+              });
+          })
+
+          
+        })
+</script>
 @endsection
 
 <script type="text/javascript">
