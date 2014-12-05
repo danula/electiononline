@@ -33,19 +33,19 @@
 <div class="row">
     <div class="col-md-9">
         <div class="panel panel-default">
-        <div class="panel-heading">Total Summary of past years</div>
+        <div class="panel-heading"><a href="{{URL::to('districtplot/Colombo')}}">Total Summary of past years</a></div>
         <div class="panel-body">
             <div id="overall_line_chart" style="min-height: 294px"></div>
         </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
                 <div class="panel-heading">Online election result</div>
                 <div class="panel-body">
-                    <div clas="row"><div id="piechart" class="panel-default panel-body" ></div></div>
+                    <div clas="row"><div id="piechart" ></div></div>
                     <p>Total Votes: <?php echo $votes?></p>
-                <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-info btn-block">Vote Now</a>
+                <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-primary btn-block">Vote Now</a>
                 </div>
         </div>
     </div>
@@ -74,7 +74,9 @@
                 is3D: true,
                 colors: ['blue', 'green'],
                 backgroundColor: 'transparent',
-                legend: {position: 'none'}
+                legend: {position: 'none'},
+                height: 230
+
                };
 
                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
