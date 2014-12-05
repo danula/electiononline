@@ -20,16 +20,24 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row">
-            <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img src="../district.svg" usemap="#map" id="myImage" name="myImage">
+        <table>
+        <tr>
+        <td>
+        <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
+                <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage">
                 <map id="map" name="map">
             </div>
+            </td>
+            <td>
+        <div class="row">
+            
             <div class="col-md-10">
-                <div id="district_summary_line" style="min-height: 400" class="panel-default panel-body"></div>
+                <div id="district_summary_line" style="min-height: 400; min-width:800" class="panel-default panel-body"></div>
             </div>
         </div>
-
+        </td>
+        </tr>
+        </table>
         <div class="row">
             <div class="col-md-12">
 
@@ -59,13 +67,32 @@
         </div>
 
     </div>
+<!--[if lte IE 8]>
+    <script type="text/javascript" src="js/ie8.polyfil.js"></script>
+<![endif]-->
 <script src="../js/jquery.maphilight.js" ></script>
 <script>
       jQuery(function()
       {
           $('#map').load('../map.html', function(responseData){
           //After the map is loaded
-              $("area").each(function(){
+              $("area").each(function(index){
+                  var coords = $(this).attr("coords");
+                  if(index == 0)
+                    alert(coords);
+                  var width = $('#myImage').attr("width");
+                  var height = 792.0*width/612.0;
+                  var res = coords.split(",");
+                  var s = "";
+                  var num;
+                  for(var i = 0; i < res.length; i++ ){
+                    if(i!=0)
+                        s = s +",";
+                    num = parseFloat(res[i])*width/612.0;
+                    s=s+num.toString();
+                    
+                  }
+                  $(this).attr("coords",  s);
                   //give the href to a district.
                   this.href=""+this.alt;
                   //give an always on color to one district.
@@ -82,10 +109,12 @@
                   strokeColor: 'ffffff',
                   strokeWidth: 0
               });
+              
+              
           })
 
           
-        })
+        });
 </script>
 @endsection
 
