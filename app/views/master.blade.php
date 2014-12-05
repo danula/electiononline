@@ -34,6 +34,12 @@
     .table tr{
         padding-left: 10px;
     }
+    .table-hover a:link, .table-hover a:hover{
+        text-decoration: none;
+        display: block;
+        width: 100%;
+    }
+
     </style>
 
     <!-- scripts -->
@@ -74,22 +80,22 @@
     </ul>
     <div class="navbar-default sidebar" role="navigation">
         <div class="panel-group" id="accordion">
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="active" href="{{URL::to('')}}"><i class="fa fa-list-alt fa-fw"></i> Overall Summary</a>
+                        <a class="active" href="{{URL::to('')}}"><i class="fa fa-home fa-fw"></i> Home</a>
                     </h4>
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-map-marker fa-fw"></i> Results by Location</a>
+                        <a data-toggle="collapse" href="#collapseTwo"><i class="fa fa-map-marker fa-fw"></i> Results by Location</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table table-hover">
                             <tr>
                                 <td>
                                     <a href="{{URL::to('districtresult/Colombo/2010')}}">District</a>
@@ -104,15 +110,15 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-calendar fa-fw"></i> Results by Year</a>
+                        <a data-toggle="collapse" href="#collapseThree"><i class="fa fa-calendar fa-fw"></i> Results by Year</a>
                     </h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table table-hover">
                             <tr>
                                 <td>
                                     <a href="{{URL::to('plotbyyear/1982')}}">1982</a>
@@ -147,14 +153,14 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a href="{{URL::to('districtplot/Colombo')}}"><i class="fa fa-area-chart fa-fw"></i> Analytics</a>
                     </h4>
                 </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a href="{{URL::to('candidate/2010/Mahinda%20Rajapaksha')}}"><i class="fa fa-users fa-fw"></i> Candidates</a>
@@ -189,14 +195,6 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 {{HTML::script("js/plugins/metisMenu/metisMenu.min.js");}}
-
-<!-- Morris Charts JavaScript -->
-{{HTML::script("js/plugins/morris/raphael.min.js");}}
-{{HTML::script("js/plugins/morris/morris.min.js");}}
-{{HTML::script("js/plugins/morris/morris-data.js");}}
-
-
-{{HTML::script("js/sb-admin-2.js");}}
 
 <!-- facebook -->
 <script>
