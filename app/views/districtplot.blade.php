@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img class="img-thumbnail" src="../resources/maps/371px-{{$district[0]->name}}_district.svg.png">
+                <img class="img-responsive" src="../resources/maps/371px-{{$district[0]->name}}_district.svg.png">
             </div>
             <div class="col-md-10">
                 <div id="district_summary_line" style="min-height: 400" class="panel-default panel-body"></div>
