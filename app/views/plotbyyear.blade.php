@@ -111,7 +111,7 @@ window.onload = function() {
                                                  ['Party', 'Votes'],
                                                  ['Sirimavo Bandaranaike',      2289960],
                                                  ['Ranasinghe Premadasa ',     2569199],
-                                                 ['Osvin Abeygunasekara',  235719],
+                                                 ['Ahangama Vithan',  235719],
                                                  ]);
                          document.getElementById("candidate_1").src = "../resources/candidates/SB.jpg";
                          document.getElementById("candidate_2").src = "../resources/candidates/RP.jpg";
