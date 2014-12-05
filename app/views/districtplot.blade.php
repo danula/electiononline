@@ -78,8 +78,6 @@
           //After the map is loaded
               $("area").each(function(index){
                   var coords = $(this).attr("coords");
-                  if(index == 0)
-                    alert(coords);
                   var width = $('#myImage').attr("width");
                   var height = 792.0*width/612.0;
                   var res = coords.split(",");
@@ -97,14 +95,14 @@
                   this.href=""+this.alt;
                   //give an always on color to one district.
                   if(this.alt=="{{$district[0]->name}}"){
-                      $(this).attr("data-maphilight","{\"fillColor\": \"ff0000\", \"alwaysOn\": true}");
+                      $(this).attr("data-maphilight","{\"fillColor\": \"cd3700\", \"alwaysOn\": true}");
                   }
               });
               
               $('#myImage').maphilight({
                   fade: false,
                   groupBy: 'alt',
-                  fillColor: 'aabb00',
+                  fillColor: 'cd3700',
                   alwaysOn: false,
                   strokeColor: 'ffffff',
                   strokeWidth: 0
@@ -112,6 +110,9 @@
               
               
           })
+          $("area").hover(function() {
+              alert($(this).alt);
+            });
 
           
         });
