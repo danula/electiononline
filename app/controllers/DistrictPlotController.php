@@ -38,15 +38,29 @@ class DistrictPlotController extends BaseController {
         $distChartData = $this->generateDistrictChartData($years, $result_d);
         $seatresults = $this->getSeatResults($seats, $years, $districtId);
         $seatChartData = $this->generateSeatChartData($years,$seatresults,$seats);
+
+        //data for drop down
+        $districts1 = District::all();
+        foreach ($districts1 as $d) {
+            $districts[$d->id]=$d->name;
+        }
+
         $data = array(
             'district'=>$district,
             'seats'=>$seats,
             'distChartData'=>$distChartData,
-            'seatChartData'=>$seatChartData
+            'seatChartData'=>$seatChartData,
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
+            'districts'=>$districts
         );
         return View::make('districtplot',$data);
     }
 
+    public function changeDistrictResult(){
+        $data = Input::all();
+        $districtname = District::find($data['district_id'])->name;
+        return Redirect::to("districtplot/".$districtname);
+    }
 
     private function getSeatResults($seats, $years, $districtId){
         $seatresults = array();

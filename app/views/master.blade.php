@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta property="og:site_name" content="Chandaya.info | Online Election Portal">
+    <meta property="og:title" content="Chandaya.info | Online Election Portal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://www.chandaya.info">
+    <meta property="fb:app_id" content="358727977621649">
+    <meta property="og:image" content="{{URL::to('resources/ogImage.png')}}">
     <title>Chandaya.info</title>
 
     <!-- styles -->

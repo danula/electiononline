@@ -1,10 +1,24 @@
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 @section('content')
+    <br>
+    <div class="row">
 
+    </div>
+    <nav class="navbar navbar-default">
+          <div class="container-fluid">
+        {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
+
+                District&nbsp;
+
+                 {{Form::select('district_id',$districts,$district[0]->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+
+
+    </div></nav>
     <div class="page-header">
         <h2> {{$district[0]->name}} District</h2>
     </div>
+
     <div class="container-fluid">
         <div class="row">
             <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
