@@ -11,7 +11,7 @@
     <meta property="og:site_name" content="Chandaya.info | Online Election Portal">
     <meta property="og:title" content="Chandaya.info | Online Election Portal">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="www.chandaya.info">
+    <meta property="og:url" content="http://www.chandaya.info">
     <meta property="og:image" content="{{URL::to('resources/ogImage.png')}}">
     <title>Chandaya.info</title>
 
