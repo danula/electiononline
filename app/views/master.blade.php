@@ -17,7 +17,19 @@
     {{HTML::style("css/plugins/timeline.css");}}
     {{HTML::style("css/sb-admin-2.css");}}
     {{HTML::style("css/plugins/morris.css");}}
-    {{HTML::style("font-awesome-4.1.0/css/font-awesome.min.css");}}
+    {{HTML::style("font-awesome-4.2.0/css/font-awesome.min.css");}}
+
+    <style type="text/css">
+    .panel-heading a:link, .panel-heading a:hover{
+        text-decoration: none;
+        display: block;
+        width: 100%;
+    }
+
+    .table tr{
+        padding-left: 10px;
+    }
+    </style>
 
     <!-- scripts -->
     {{HTML::script("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js");}}
@@ -56,56 +68,96 @@
     </li>
     </ul>
     <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li>
-                    <a class="active" href="{{URL::to('')}}"><i class="fa fa-dashboard fa-fw"></i> Overall Summary</a>
-                </li>
-                <li>
-                    <a><i class="fa fa-table fa-fw"></i> Results by Location</a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="{{URL::to('districtresult/Colombo/2010')}}">District</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('seatresult/Colombo%20North/2010')}}">Seat</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a><i class="fa fa-bar-chart-o fa-fw"></i> Summary of Elections</a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="{{URL::to('plotbyyear/1982')}}">1982</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('plotbyyear/1988')}}">1988</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('plotbyyear/1994')}}">1994</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('plotbyyear/1999')}}">1999</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('plotbyyear/2005')}}">2005</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('plotbyyear/2010')}}">2010</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{URL::to('districtplot/Colombo')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Analytics</a>
-                </li>
-                <li>
-                    <a href="{{URL::to('candidate/2010/Mahinda%20Rajapaksha')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Candidates</a>
-                 </li>
-            </ul>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="active" href="{{URL::to('')}}"><i class="fa fa-list-alt fa-fw"></i> Overall Summary</a>
+                    </h4>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-map-marker fa-fw"></i> Results by Location</a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('districtresult/Colombo/2010')}}">District</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('seatresult/Colombo%20North/2010')}}">Seat</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-calendar fa-fw"></i> Results by Year</a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/1982')}}">1982</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/1988')}}">1988</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/1994')}}">1994</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/1999')}}">1999</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/2005')}}">2005</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{URL::to('plotbyyear/2010')}}">2010</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="{{URL::to('districtplot/Colombo')}}"><i class="fa fa-area-chart fa-fw"></i> Analytics</a>
+                    </h4>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="{{URL::to('candidate/2010/Mahinda%20Rajapaksha')}}"><i class="fa fa-users fa-fw"></i> Candidates</a>
+                    </h4>
+                </div>
+            </div>
         </div>
-        <!-- /.sidebar-collapse -->
     </div>
-
 </nav>
 
 <div id="page-wrapper">
