@@ -1,0 +1,54 @@
+  
+  <html>
+  <head>
+  <script src="js/jquery.js" ></script>
+  <script src="js/jquery.maphilight.js" ></script>
+  <script>
+      jQuery(function()
+      {
+          $('#map').load('map.html', function(responseData){
+          //After the map is loaded
+              $("area").each(function(){
+
+                  //give the href to a dist.
+                  this.href=""+this.alt;
+
+                  //give an always on color to one dist.
+                  if(this.alt=="Colombo"){
+                      $(this).attr("data-maphilight","{\"fillColor\": \"ff0000\", \"alwaysOn\": true}");
+                  }
+              });
+
+              $('#myImage').maphilight({
+
+                  fade: false,
+                  groupBy: 'alt',
+                  fillColor: 'aabb00',
+                  alwaysOn: false,
+                  strokeColor: 'ffffff',
+                  strokeWidth: 0
+              });
+          
+          
+          })
+
+
+        }
+
+
+      )</script>
+  <h1>test</h1>
+  </head>
+  <body>
+  <img src="district.svg" usemap="#map" id="myImage" name="myImage">
+  <map id="map" name="map">
+  
+  </map>
+
+
+
+
+</body>
+
+</html>
+
