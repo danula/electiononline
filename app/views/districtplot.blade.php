@@ -20,16 +20,24 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row">
-            <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img src="../district.svg" usemap="#map" id="myImage" name="myImage">
-                <map id="map" name="map"/>
+        <table>
+        <tr>
+        <td>
+        <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
+                <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage">
+                <map id="map" name="map">
             </div>
+            </td>
+            <td>
+        <div class="row">
+            
             <div class="col-md-10">
-                <div id="district_summary_line" style="min-height: 400" class="panel-default panel-body"></div>
+                <div id="district_summary_line" style="min-height: 400; min-width:800" class="panel-default panel-body"></div>
             </div>
         </div>
-
+        </td>
+        </tr>
+        </table>
         <div class="row">
             <div class="col-md-12">
 
@@ -59,33 +67,61 @@
         </div>
 
     </div>
-<script src="../js/jquery.maphilight.js" ></script>
+<!--[if lte IE 8]>
+    <script type="text/javascript" src="js/ie8.polyfil.js"></script>
+<![endif]-->
+<script src="../js/jquery.imagemapster.js" ></script>
 <script>
       jQuery(function()
       {
           $('#map').load('../map.html', function(responseData){
           //After the map is loaded
-              $("area").each(function(){
+              $("area").each(function(index){
+                  var coords = $(this).attr("coords");
+                  var width = $('#myImage').attr("width");
+                  var height = 792.0*width/612.0;
+                  var res = coords.split(",");
+                  var s = "";
+                  var num;
+                  for(var i = 0; i < res.length; i++ ){
+                    if(i!=0)
+                        s = s +",";
+                    num = parseFloat(res[i])*width/612.0;
+                    s=s+num.toString();
+                    
+                  }
+                  $(this).attr("coords",  s);
                   //give the href to a district.
                   this.href=""+this.alt;
-                  //give an always on color to one district.
-                  if(this.alt=="{{$district[0]->name}}"){
-                      $(this).attr("data-maphilight","{\"fillColor\": \"ff0000\", \"alwaysOn\": true}");
-                  }
               });
+              $('#myImage').mapster({
+                    //scaleMap: true,
+                    clickNavigate: true,
+                    isSelectable: false,
+                    mapKey: 'alt',
+                    fillColor: 'CC0099',
+                    fillOpacity: 0.3,
+                    showToolTip:true,
+                    toolTipContainer: '<div> </div>',
+                    areas: [
+                        @foreach($districts as $d)
+                        {
+                            key: '{{$d}}',
+                            toolTip:'<b>{{$d}} District</b><br><p style="font-size: 60%;">Click to navigate</p>'
+                            @if ($d === $district[0]->name)
+                            ,
+                            selected: true,
+                            @endif
+                        },
+                        @endforeach
+                        {}
+                    ]
+              });
+              $('#myImage').mapster('tooltip','alt');
               
-              $('#myImage').maphilight({
-                  fade: false,
-                  groupBy: 'alt',
-                  fillColor: 'aabb00',
-                  alwaysOn: false,
-                  strokeColor: 'ffffff',
-                  strokeWidth: 0
-              });
           })
-
           
-        })
+        });
 </script>
 @endsection
 
@@ -102,16 +138,13 @@
                 data.addColumn('number', 'Votes');
                 data.addColumn({type: 'string', role: 'annotation'});
                 data.addRows(<?php echo(json_encode($distChartData)); ?>);
-
         var options = {
           pointSize: 5,
           colors:['green', 'blue', 'orange'],
           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
           legend:'none'
         };
-
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
-
         chart.draw(data, options);
       }
 </script>
@@ -135,7 +168,6 @@
                       @break
                   @endif
               @endforeach
-
         var options = {
             pointSize: 5,
             colors:['green', 'blue', 'orange'],
@@ -144,10 +176,7 @@
             width: 900,
             height: 300
         };
-
-
         new google.visualization.LineChart(document.getElementById('linechart_{{$seat->id}}')).draw(data, options);
       }
 </script>
 @endforeach
-
