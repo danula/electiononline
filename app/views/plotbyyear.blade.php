@@ -24,7 +24,7 @@ window.onload = function() {
 
         <div class="row">
           <div class="col-md-4">
-            <img src="../district3.png" width=400 usemap="#map" id="myImage" name="myImage"></img>
+            <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
             <map id="map" name="map" ></map>
           </div>
 
@@ -159,6 +159,9 @@ window.onload = function() {
                     fillColor: 'ffffff',
                     fillOpacity: 0.7,
                     showToolTip:true,
+                    strokeColor: 'ffffff',
+                    stroke: true,
+                    strokeWidth:0.8,
                     toolTipContainer: '<div style="background-color:White"> </div>',
                     onClick: function clickHandler(data) {
                         $("table").each(function(index){
