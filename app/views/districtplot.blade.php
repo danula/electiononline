@@ -108,7 +108,7 @@
                         @foreach($districts as $d)
                         {
                             key: '{{$d}}',
-                            toolTip:'{{$d}} District<br>Click to navigate'
+                            toolTip:'<b>{{$d}} District</b><br><p style="font-size: 60%;">Click to navigate</p>'
                             @if ($d === $district[0]->name)
                             ,
                             selected: true,
