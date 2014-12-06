@@ -70,7 +70,7 @@
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/ie8.polyfil.js"></script>
 <![endif]-->
-<script src="../js/jquery.maphilight.js" ></script>
+<script src="../js/jquery.imagemapster.js" ></script>
 <script>
       jQuery(function()
       {
@@ -93,28 +93,34 @@
                   $(this).attr("coords",  s);
                   //give the href to a district.
                   this.href=""+this.alt;
-                  //give an always on color to one district.
-                  if(this.alt=="{{$district[0]->name}}"){
-                      $(this).attr("data-maphilight","{\"fillColor\": \"880000\", \"alwaysOn\": true}");
-                  }
               });
-              
-              $('#myImage').maphilight({
-                  fade: false,
-                  groupBy: 'alt',
-                  fillOpacity:1,
-                  fillColor: '880000',
-                  alwaysOn: false,
-                  strokeColor: 'ffffff',
-                  strokeWidth: 0
+
+              $('#myImage').mapster({
+                    //scaleMap: true,
+                    clickNavigate: true,
+                    isSelectable: false,
+                    mapKey: 'alt',
+                    fillColor: 'CC0099',
+                    fillOpacity: 0.3,
+                    showToolTip:true,
+                    toolTipContainer: '<div> </div>',
+                    areas: [
+                        @foreach($districts as $d)
+                        {
+                            key: '{{$d}}',
+                            toolTip:'{{$d}} District<br>Click to navigate'
+                            @if ($d === $district[0]->name)
+                            ,
+                            selected: true,
+                            @endif
+                        },
+                        @endforeach
+                        {}
+                    ]
               });
-              
+              $('#myImage').mapster('tooltip','alt');
               
           })
-          $("area").hover(function() {
-              alert($(this).alt);
-            });
-
           
         });
 </script>
