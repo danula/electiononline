@@ -123,17 +123,22 @@ window.onload = function() {
                             reset($results[$d->id]);
                             $i = 0;
                             $color = '000000';
+                            $opacity = 0.5;
                             $text = '';
                             foreach($results[$d->id] as $candidate_id => $c) {
                                 $c = $candidatesById[$candidate_id];
                                 //echo $c->name.' ';
                                 $percentage =  ($results[$d->id][$candidate_id]->number_of_votes*100.0/$distResult[$d->id]->polled_votes);
                                 //echo $percentage;
-                                $text = $text.'<li type="square" style="color:#'.$c->flag.'">'.
+                                $text = $text.'<li type="square" style="color:#'.$c->logo.'">'.
                                     $c->party.' - '.round($percentage, 2).'% </li>';
-                                if($i == 0)
-                                    $color = $c->flag;
-                                else if($i == 2)
+                                if($i == 0) {
+                                    $color = $c->logo;
+                                    $opacity = 0.6+ ($percentage-50)/30;
+                                    if($opacity < 0.4)
+                                        $opacity = 0.4;
+                                }
+                                else if($i == 1)
                                     break;
                                 $i = $i+1;
                             }
@@ -147,6 +152,7 @@ window.onload = function() {
                                 key: '{{$d->name}}',
                                 toolTip:'<b>{{$d->name}} District</b><br>{{$text}}',
                                 fillColor:'{{$color}}',
+                                fillOpacity:'{{$opacity}}',
                                 selected: true
                             },
                         <?php
