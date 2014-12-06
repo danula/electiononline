@@ -67,7 +67,7 @@
         </div>
     </div>
 
-<script src="../js/jquery.imagemapster.js" ></script>
+<script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
       jQuery(function()
       {

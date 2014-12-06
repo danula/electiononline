@@ -32,7 +32,7 @@ window.onload = function() {
           <h3 id="distHead">Colombo District Results</h3>
 
            @foreach($districts as $d)
-            <table id="{{$d->name}}" class="table table-striped table-bordered table-hover" 
+            <table id="{{$d->name}}" class="table table-striped table-bordered table-hover table-hide" 
             @if($d->name != 'Colombo')
             style="display:none"
             @endif
@@ -126,7 +126,7 @@ window.onload = function() {
              }
            </script>
 
-<script src="../js/jquery.imagemapster.js" ></script>
+<script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
       jQuery(function()
       {
@@ -164,7 +164,7 @@ window.onload = function() {
                     strokeWidth:0.8,
                     toolTipContainer: '<div style="background-color:White"> </div>',
                     onClick: function clickHandler(data) {
-                        $("table").each(function(index){
+                        $(".table-hide").each(function(index){
                             $(this).attr('style', 'display:none');
                         })
                         $('#distHead').html(data.key + ' District Results');
