@@ -28,9 +28,15 @@ window.onload = function() {
             <map id="map" name="map" ></map>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-8" id="tablesdiv">
+          <h3 id="distHead">Colombo District Results</h3>
+
            @foreach($districts as $d)
-            <table id="{{$d->name}}" class="table table-striped table-bordered table-hover" style="display:none">
+            <table id="{{$d->name}}" class="table table-striped table-bordered table-hover" 
+            @if($d->name != 'Colombo')
+            style="display:none"
+            @endif
+            >
                 <thead>
                 <tr href="#">
                     <th>Candidate</th>
@@ -39,8 +45,12 @@ window.onload = function() {
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($results[$d->id] as $candidate_id=>$r) 
-                <?php 
+                <?php $i = 0; ?>
+                @foreach($results[$d->id] as $candidate_id=>$r)
+                <?php
+                    $i = $i + 1;
+                    if ($i == 6)
+                        break;
                     $c = $candidatesById[$candidate_id];
                 ?>
                 <tr href="{{URL::to('candidate/'.$year.'/'.$c->name)}}">
@@ -76,6 +86,8 @@ window.onload = function() {
 
             </table>
             @endforeach
+            
+          <a id="distLink" href="../districtresult/Colombo/{{$year}}">Click here for full results</a>
             </div>
             </div>
        <div class="container">
@@ -152,6 +164,8 @@ window.onload = function() {
                         $("table").each(function(index){
                             $(this).attr('style', 'display:none');
                         })
+                        $('#distHead').html(data.key + ' District Results');
+                        $('#distLink').attr('href', '../districtresult/'+(data.key)+'/{{$year}}');
                         $('#'+data.key).attr('style', 'display:block');
                     },
                     areas: [
