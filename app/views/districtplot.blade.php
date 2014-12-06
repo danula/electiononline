@@ -24,8 +24,8 @@
         <tr>
         <td>
         <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage">
-                <map id="map" name="map">
+                <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
+                <map id="map" name="map"></map>
             </div>
             </td>
             <td>
@@ -67,9 +67,7 @@
         </div>
 
     </div>
-<!--[if lte IE 8]>
-    <script type="text/javascript" src="js/ie8.polyfil.js"></script>
-<![endif]-->
+
 <script src="../js/jquery.imagemapster.js" ></script>
 <script>
       jQuery(function()
