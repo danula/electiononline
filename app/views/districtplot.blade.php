@@ -95,14 +95,15 @@
                   this.href=""+this.alt;
                   //give an always on color to one district.
                   if(this.alt=="{{$district[0]->name}}"){
-                      $(this).attr("data-maphilight","{\"fillColor\": \"cd3700\", \"alwaysOn\": true}");
+                      $(this).attr("data-maphilight","{\"fillColor\": \"880000\", \"alwaysOn\": true}");
                   }
               });
               
               $('#myImage').maphilight({
                   fade: false,
                   groupBy: 'alt',
-                  fillColor: 'cd3700',
+                  fillOpacity:1,
+                  fillColor: '880000',
                   alwaysOn: false,
                   strokeColor: 'ffffff',
                   strokeWidth: 0
