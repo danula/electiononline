@@ -20,32 +20,59 @@ window.onload = function() {
         <img src="" id="candidate_2"  class="img-thumbnail" style="width: 140px; float: left; ">
         <input class="hidden" id="yearHidden" value="{{$year}}" />
        <div clas="row"><div id="piechart" class="panel-default panel-body" style="width: 100%; height: 62%;"></div></div>
-<img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
+<img src="../district3.png" width=400 usemap="#map" id="myImage" name="myImage"></img>
                 <map id="map" name="map" ></map>
+            @foreach($districts as $d)
+            <table id="{{$d->name}}" class="table table-striped table-bordered table-hover" style="display:none">
+                <thead>
+                <tr href="#">
+                    <th>Candidate</th>
+                    <th>Votes</th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($results[$d->id] as $candidate_id=>$r) 
+                <?php 
+                    $c = $candidatesById[$candidate_id];
+                ?>
+                <tr href="{{URL::to('candidate/'.$year.'/'.$c->name)}}">
+                    <td>{{{$c->name}}}</td>
+                    <td>{{{$r->number_of_votes}}}</td>
+                    <td>{{number_format($r->number_of_votes/$distResult[$d->id]->polled_votes*100,2)}}%</td>
+                </tr>
+                @endforeach
+                <b>
+                <tr class="info" href="#">
+                    <td>Polled Votes</td>
+                    <td>{{{$distResult[$d->id]->polled_votes}}}</td>
+                    <td>{{number_format($distResult[$d->id]->polled_votes/$distResult[$d->id]->registered_votes*100,2)}}%</td>
+                </tr>
+                <tr class="info" href="#">
+                    <td>Rejected Votes</td>
+                    <td>{{{$distResult[$d->id]->rejected_votes}}}</td>
+                    <td></td>
+                </tr>
+                <tr class="info" href="#">
+                    <td>Registered Votes</td>
+                    <td>{{{$distResult[$d->id]->registered_votes}}}</td>
+                    <td></td>
+                </tr>
+                <tr class="info" href="#">
+                    <td>Valid Votes</td>
+                    <td>{{{$distResult[$d->id]->valid_votes}}}</td>
+                    <td></td>
+                </tr>
 
+                </b>
+                </tbody>
+
+            </table>
+            @endforeach
        <div class="container">
         <p>Select district for detailed summary</p>
         <br>
-            <table class="table table-hover">
-
-                <tr>
-                    <th>District</th>
-                     @foreach($candidates as $d)
-
-                       <th>{{substr($d->name, 0, 18)}}</th>
-                     @endforeach
-                </tr>
-                @foreach($districts as $d)
-
-                    <tr href='{{url("/districtresult/".$d->name."/".$year,"")}}'> <th scope="row" >{{$d->name}}</th>
-                    @foreach($candidates as $cd)
-                             <td>{{$results[$d->id][$cd->id]->number_of_votes}}</td>
-                    @endforeach
-
-                    </tr>
-
-                @endforeach
-            </table>
+            
            </div>
 
         <script type="text/javascript">
@@ -100,7 +127,7 @@ window.onload = function() {
                   }
                   $(this).attr("coords",  s);
                   //give the href to a district.
-                  this.href=""+this.alt;
+                  this.href="#";
               });
 
               $('#myImage').mapster({
@@ -112,11 +139,14 @@ window.onload = function() {
                     fillOpacity: 0.7,
                     showToolTip:true,
                     toolTipContainer: '<div style="background-color:White"> </div>',
+                    onClick: function clickHandler(data) {
+                        $("table").each(function(index){
+                            $(this).attr('style', 'display:none');
+                        })
+                        $('#'+data.key).attr('style', 'display:block');
+                    },
                     areas: [
                         <?php
-                        $UNP = array(1982=>70, 1988=> 60, 1994=> 53, 1999=>88, 2005=>10, 2010=>20);
-                        $SLFP = array(1982=>71, 1988=> 61, 1994=> 51, 1999=>85, 2005=>9, 2010=>21);
-                       
                         
                         foreach($districts as $d){
                             $total = 0;
@@ -128,13 +158,13 @@ window.onload = function() {
                             foreach($results[$d->id] as $candidate_id => $c) {
                                 $c = $candidatesById[$candidate_id];
                                 //echo $c->name.' ';
-                                $percentage =  ($results[$d->id][$candidate_id]->number_of_votes*100.0/$distResult[$d->id]->polled_votes);
+                                $percentage =  ($results[$d->id][$candidate_id]->number_of_votes*100.0/$distResult[$d->id]->valid_votes);
                                 //echo $percentage;
                                 $text = $text.'<li type="square" style="color:#'.$c->logo.'">'.
                                     $c->party.' - '.round($percentage, 2).'% </li>';
                                 if($i == 0) {
                                     $color = $c->logo;
-                                    $opacity = 0.6+ ($percentage-50)/30;
+                                    $opacity = 0.5+ ($percentage-50)/30;
                                     if($opacity < 0.4)
                                         $opacity = 0.4;
                                 }
