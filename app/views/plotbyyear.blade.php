@@ -115,7 +115,7 @@ window.onload = function() {
                     
                var options = {
                 is3D: true,
-                colors: ['blue', 'green', 'orange', '#f3b49f', '#f6c7b6'],
+                colors: ['#{{$candidates[0]->logo}}', '#{{$candidates[1]->logo}}', '#c4c4c4', '#f3b49f', '#f6c7b6'],
                 backgroundColor: 'transparent',
                 legend: { position: 'labeled' }
                };
@@ -156,7 +156,7 @@ window.onload = function() {
                     clickNavigate: true,
                     isSelectable: false,
                     mapKey: 'alt',
-                    fillColor: 'CC0099',
+                    fillColor: 'ffffff',
                     fillOpacity: 0.7,
                     showToolTip:true,
                     toolTipContainer: '<div style="background-color:White"> </div>',
@@ -175,7 +175,7 @@ window.onload = function() {
                             $total = 0;
                             reset($results[$d->id]);
                             $i = 0;
-                            $color = '000000';
+                            $color = 'ffffff';
                             $opacity = 0.5;
                             $text = '';
                             foreach($results[$d->id] as $candidate_id => $c) {
