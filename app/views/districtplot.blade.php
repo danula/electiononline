@@ -25,13 +25,13 @@
         <td>
         <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
                 <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage">
-                <map id="map" name="map">
+                <map id="map" name="map"/>
             </div>
             </td>
             <td>
         <div class="row">
             
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div id="district_summary_line" style="min-height: 400; min-width:800" class="panel-default panel-body"></div>
             </div>
         </div>
@@ -41,14 +41,14 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
                 <h4>Seat Statistics</h4>
                 @foreach($seats as $seat)
 
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne_{{$seat->id}}">
                       <h4 class="panel-title">
-                        <a style="display: block; width: 100%" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
+                        <a style="display: block; width: 100%" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
                           {{$seat->name}} <i class="fa fa-bar-chart-o fa-fw pull-right"></i>
                         </a>
                       </h4>
@@ -65,7 +65,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/ie8.polyfil.js"></script>
@@ -142,7 +141,8 @@
           pointSize: 5,
           colors:['green', 'blue', 'orange'],
           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
-          legend:'none'
+          legend:'none',
+          width: '900'
         };
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
         chart.draw(data, options);
