@@ -20,9 +20,16 @@ window.onload = function() {
         <img src="" id="candidate_2"  class="img-thumbnail" style="width: 140px; float: left; ">
         <input class="hidden" id="yearHidden" value="{{$year}}" />
        <div clas="row"><div id="piechart" class="panel-default panel-body" style="width: 100%; height: 62%;"></div></div>
-<img src="../district3.png" width=400 usemap="#map" id="myImage" name="myImage"></img>
-                <map id="map" name="map" ></map>
-            @foreach($districts as $d)
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <img src="../district3.png" width=400 usemap="#map" id="myImage" name="myImage"></img>
+            <map id="map" name="map" ></map>
+          </div>
+
+          <div class="col-md-8">
+           @foreach($districts as $d)
             <table id="{{$d->name}}" class="table table-striped table-bordered table-hover" style="display:none">
                 <thead>
                 <tr href="#">
@@ -69,6 +76,8 @@ window.onload = function() {
 
             </table>
             @endforeach
+            </div>
+            </div>
        <div class="container">
         <p>Select district for detailed summary</p>
         <br>
