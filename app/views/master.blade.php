@@ -49,7 +49,7 @@
 
 
     <!-- jQuery -->
-    {{HTML::script("js/jquery.js");}}
+    {{HTML::script("js/jquery.min.js");}}
 
     @yield('scripts')
 </head>
