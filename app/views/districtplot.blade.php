@@ -160,12 +160,8 @@
               data.addColumn({type: 'string', role: 'annotation'});
               data.addColumn('number', 'Votes');
               data.addColumn({type: 'string', role: 'annotation'});
-              @foreach($seatChartData as $data)
-                  @if($data['seat'] == $seat->id)
-                      data.addRows(<?php echo(json_encode($data['arr'])); ?>);
-                      @break
-                  @endif
-              @endforeach
+              data.addRows(<?php echo(json_encode($seatChartData[$seat->id])); ?>);
+
         var options = {
             pointSize: 5,
             colors:['green', 'blue', 'orange'],

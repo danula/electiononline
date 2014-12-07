@@ -197,7 +197,7 @@ jQuery(function()
                 strokeColor: 'ffffff',
                 stroke: true,
                 strokeWidth:0.8,
-                toolTipContainer: '<div style="background-color:White"> </div>',
+                toolTipContainer: '<div style="background-color:White; left-padding:5; "> </div>',
                 onClick: function clickHandler(data) {
                     updateTable(data.key, {{$year}});
                 },
@@ -216,7 +216,7 @@ jQuery(function()
                             $percentage =  ($results[$year][$d->id][$candidate_id]->number_of_votes*100.0/
                                                 $distResult[$year][$d->id]->valid_votes);
                             $text = $text.'<li type="square" style="color:#'.$c->logo.'">'.
-                                $c->party.' - '.round($percentage, 2).'% </li>';
+                                $c->party.' - '.round($percentage, 2).'%</li>';
                             if($i == 0) {
                                 $color = $c->logo;
                                 $opacity = 0.5+ ($percentage-50)/30;
@@ -231,7 +231,7 @@ jQuery(function()
                     ?>
                         {
                             key: '{{$d->name}}',
-                            toolTip:'<b>{{$d->name}} District</b><br>{{$text}}',
+                            toolTip:'<b>&nbsp;&nbsp;{{$d->name}} District&nbsp;&nbsp;</b><br/>{{$text}}',
                             fillColor:'{{$color}}',
                             fillOpacity:'{{$opacity}}',
                             selected: true
