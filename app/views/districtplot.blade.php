@@ -1,43 +1,35 @@
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 @section('content')
-    <br>
-    <div class="row">
-
-    </div>
-    <nav class="navbar navbar-default">
-          <div class="container-fluid">
-        {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
-
-                District&nbsp;
-
-                 {{Form::select('district_id',$districts,$district[0]->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
-
-
-    </div></nav>
-    <div class="page-header">
-        <h2> {{$district[0]->name}} District</h2>
-    </div>
 
     <div class="container-fluid">
-        <table>
-        <tr>
-        <td>
-        <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
-                <map id="map" name="map"></map>
+        <nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
+              <div class="row">
+                    {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
+
+                    District&nbsp;
+
+                    {{Form::select('district_id',$districts,$district[0]->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
             </div>
-            </td>
-            <td>
-        <div class="row">
-            
-            <div class="col-md-12">
-                <div id="district_summary_line" style="min-height: 400; min-width:800" class="panel-default panel-body"></div>
-            </div>
+        </nav>
+        <div class="page-header">
+            <h2> {{$district[0]->name}} District</h2>
         </div>
-        </td>
-        </tr>
-        </table>
+        <div class="row-fluid">
+            <table class="table-responsive">
+                <tr>
+                    <td>
+                        <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
+                            <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
+                            <map id="map" name="map"></map>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="district_summary_line" style="min-width: 900; min-height: 400; width: 100%; height: 100%" class="panel-default panel-body"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="row">
             <div class="col-md-12">
 
@@ -125,6 +117,9 @@
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawDistrictChart);
+      $(window).on("throttledresize", function (event) {
+          drawDistrictChart();
+      });
       function drawDistrictChart() {
         var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
@@ -139,8 +134,7 @@
           pointSize: 5,
           colors:['green', 'blue', 'orange'],
           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
-          legend:'none',
-          width: '900'
+          legend:'none'
         };
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
         chart.draw(data, options);
@@ -167,8 +161,7 @@
             colors:['green', 'blue', 'orange'],
             annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
             legend:'none',
-            width: 900,
-            height: 300
+            width: '900'
         };
         new google.visualization.LineChart(document.getElementById('linechart_{{$seat->id}}')).draw(data, options);
       }
