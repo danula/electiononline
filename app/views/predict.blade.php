@@ -67,8 +67,8 @@ window.onload = function() {
 
           <div class="col-md-8" id="tablesdiv">
           @for($i=0; $i<22; $i++)
-        {{$districts[$i]->name}}
-        <input class = "slider slider-polled" id="slider{{$i}}" data-slider-max="100" data-slider-min="0" data-slider-value="50"
+        {{$districts[$i]->name}}{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}
+        <input class = "slider slider-polled" id="slider{{$i}}" data-slider-max="100" data-slider-min="0"
             data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}" type="text">
         Polled percentage
         <input class = "slider slider-polled" id="sliderPolled{{$i}}" registered="{{$distResult[$i]->registered_votes}}"
