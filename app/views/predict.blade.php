@@ -2,7 +2,10 @@
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 @section('content')
-
+<link href="../css/slider.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
+<script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
+<script href="js/bootstrap-slider.js" type="text/javascript"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
       $("tr").click(function() {
@@ -65,11 +68,11 @@ window.onload = function() {
           <div class="col-md-8" id="tablesdiv">
           @for($i=0; $i<22; $i++)
         {{$districts[$i]->name}}
-        <input class = "slider slider-district" id="slider{{$i}}"  
-            value="{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}"></input>
+        <input class = "slider slider-polled" id="slider{{$i}}" data-slider-max="100" data-slider-min="0" data-slider-value="50"
+            data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}" type="text">
         Polled percentage
         <input class = "slider slider-polled" id="sliderPolled{{$i}}" registered="{{$distResult[$i]->registered_votes}}"
-            value="{{round(100*$distResult[$i]->polled_votes/$distResult[$i]->registered_votes,2)}}"></input><br/>
+            value="{{round(100*$distResult[$i]->polled_votes/$distResult[$i]->registered_votes,2)}}"><br/>
     @endfor
             </div>
             </div>
@@ -182,5 +185,10 @@ window.onload = function() {
                 };
           
         });
+</script>
+<script>
+$( document ).ready(function() {
+  $('.slider').slider();
+});
 </script>
 @stop
