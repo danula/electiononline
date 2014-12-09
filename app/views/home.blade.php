@@ -33,35 +33,36 @@
 <div class="row">
     <div class="col-md-9">
         <div class="panel panel-default">
-        <div class="panel-heading"><a href="{{URL::to('districtplot/Colombo')}}">Total Summary of past years</a></div>
-        <div class="panel-body">
-            <div id="overall_line_chart" style="min-height: 294px"></div>
-        </div>
+            <div class="panel-heading">
+                <a href="{{URL::to('districtplot/Colombo')}}">Total Summary of Past Years</a>
+            </div>
+            <div class="panel-body">
+                <div id="overall_line_chart" style="min-height: 294px"></div>
+            </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="panel panel-primary">
-                <div class="panel-heading">Online election result</div>
-                <div class="panel-body">
-                    <div clas="row"><div id="piechart" ></div></div>
-                    <p>Total Votes: <?php echo $votes?></p>
+            <div class="panel-heading">Online election result</div>
+            <div class="panel-body">
+                <div clas="row"><div id="piechart"></div></div>
+                <p>Total Votes: <?php echo $votes?></p>
                 <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-primary btn-block">Vote Now</a>
-                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="row">
-<div class="col-lg-12">
-
-<a href="http://forum.chandaya.info"> <img src="../resources/banner.png" ></a>
-
-</div>
+    <div class="col-lg-12">
+        <a href="http://forum.chandaya.info"> <img class="img-responsive" src="../resources/banner.png" ></a>
+    </div>
 </div>
 <script type="text/javascript">
     var MR = document.getElementById("mahinda");
     var MY3= document.getElementById("my3");
     google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawChart);
+
     function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
@@ -70,20 +71,20 @@
                          ['Mithreepala Sirisena',     parseFloat(MY3.value)]
         ]);
 
-               var options = {
-                is3D: true,
-                colors: ['blue', 'green'],
-                backgroundColor: 'transparent',
-                legend: {position: 'none'},
-                height: 230
+        var options = {
+            is3D: true,
+            colors: ['blue', 'green'],
+            backgroundColor: 'transparent',
+            legend: {position: 'none'},
+            height: 230
 
-               };
+        };
 
-               var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-               chart.draw(data, options);
-             }
-           </script>
+        chart.draw(data, options);
+    }
+</script>
 @stop
 
 <script type="text/javascript">

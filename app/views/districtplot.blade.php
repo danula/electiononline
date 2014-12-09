@@ -2,7 +2,7 @@
 @extends('master')
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container">
         <nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
               <div class="row">
                     {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
@@ -15,23 +15,20 @@
         <div class="page-header">
             <h2> {{$district[0]->name}} District</h2>
         </div>
-        <div class="row-fluid">
-            <table class="table-responsive">
-                <tr>
-                    <td>
-                        <div style="margin-top: 6.5%; padding-right: 0;"class="col-md-2">
-                            <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
-                            <map id="map" name="map"></map>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="district_summary_line" style="min-width: 900; min-height: 400; width: 100%; height: 100%" class="panel-default panel-body"></div>
-                    </td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div style="margin-top: 6.5%; padding-right: 0;">
+                    <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
+                    <map id="map" name="map"></map>
+                </div>
+
+            </div>
+            <div style="height: 50%" class="col-md-9 col-sm-12 col-xs-12">
+                <div id="district_summary_line" style="width: 100%; height: 100%" class="panel-default panel-body"></div>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
 
                 <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
                 <h4>Seat Statistics</h4>
@@ -47,7 +44,7 @@
                     </div>
                     <div id="collapseOne_{{$seat->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}">
                       <div class="panel-body">
-                        <div align="center" id="linechart_{{$seat->id}}"></div>
+                        <div style="width:100%" align="center" id="linechart_{{$seat->id}}"></div>
                       </div>
                     </div>
                   </div>
@@ -135,27 +132,18 @@
           colors:['green', 'blue', 'orange'],
           annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
           legend:'none'
+          //chartArea: {width: '80%', height: '30%'}
         };
         var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
         chart.draw(data, options);
       }
 </script>
 
-@foreach($seats as $seat)
+
 <script type="text/javascript">
       //google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawSeatCharts);
       function drawSeatCharts() {
-        var data = new google.visualization.DataTable();
-              data.addColumn('string', 'Year');
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addRows(<?php echo(json_encode($seatChartData[$seat->id])); ?>);
-
         var options = {
             pointSize: 5,
             colors:['green', 'blue', 'orange'],
@@ -163,7 +151,19 @@
             legend:'none',
             width: '900'
         };
-        new google.visualization.LineChart(document.getElementById('linechart_{{$seat->id}}')).draw(data, options);
+        var seatChartData = JSON.parse('{{json_encode($seatChartData)}}');
+        for (var key in seatChartData) {
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Year');
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addRows(seatChartData[key]);
+
+              new google.visualization.LineChart(document.getElementById('linechart_'+key)).draw(data, options);
+        }
       }
 </script>
-@endforeach
