@@ -6,11 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
 <script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
-<script type="text/javascript">
-window.onload = function() {
-  document.getElementById('collapseThree').className = 'panel-collapse';
-};
-</script>
+
 <div class="row"><h1>My Predictions for 2015</h1><br></div>
     <div class="row">
 
@@ -55,13 +51,14 @@ window.onload = function() {
                     </ul>
                     <div id="myTabContent" class="tab-content">
                       <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
+                        <br>
                         <table>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
-                               <tr>
+                               <tr style="padding-top:10px; padding-bottom: 10px; padding-right: 15px;">
                                @endif
                                 <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                <td><input class = "slider slider-polled"
+                                <td><input class = "slider slider-colord"
                                    id="slider{{$i}}"
                                    data-slider-step="0.01"
                                    data-slider-max="100" data-slider-min="0"
@@ -69,7 +66,7 @@ window.onload = function() {
                                    value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
                                    type="text"
                                    onchange="updateVal()">
-                                </td>
+                                </td><td> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                                @if($i%2==1)
                                </tr>
                                @endif
@@ -79,13 +76,14 @@ window.onload = function() {
                         </table>
                       </div>
                       <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
-                        <table>                         
+                        <table>
+                        <br>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
-                               <tr>
+                               <tr style="padding-top:10px; padding-bottom: 10px; padding-right: 15px;">
                                @endif
                                     <td>  {{$districts[$i]->name}}</td>
-                                    <td><input class = "slider slider-polled"
+                                    <td><input class = "slider slider-polled slider-nocolor"
                                         id="sliderPolled{{$i}}"
                                         data-slider-step="0.01"
                                         data-slider-max="100"
@@ -106,11 +104,6 @@ window.onload = function() {
                   </div>
                 </div>
                 </div>
-       <div class="container">
-        <p>Select district for detailed summary</p>
-        <br>
-
-           </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
       jQuery(function()
