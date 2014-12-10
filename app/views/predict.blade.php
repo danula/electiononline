@@ -104,6 +104,12 @@
                   </div>
                 </div>
                 </div>
+                <div class="row">
+                <form id="addPredictionForm">
+                        <input id="predictionName" type="text" autocomplete="off">
+                        {{Form::submit('Save')}}
+                        </form>
+                </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
       jQuery(function()
@@ -212,5 +218,36 @@
 $( document ).ready(function() {
   $('.slider').slider();
 });
+
+$('#addPredictionForm').submit(function(){
+    var list = [];
+    @for($i=0; $i<22; $i++)
+    var item = {
+    id : {{$i}},
+    UPFA_percentage : $("#slider{{$i}}").val(),
+    polled_percentage : $("#sliderPolled{{$i}}").val(),
+    }
+    list.push(item);
+    @endfor
+
+    var data = JSON.stringify(list);
+
+    var response = $.ajax({
+                type: 'POST',
+                url: '.',
+                data: { name: $('#predictionName').val(),
+                        data: data}
+    });
+
+    response.done(
+        function(r){
+        console.log(r);
+
+        }
+    );
+});
+
+
+
 </script>
 @stop
