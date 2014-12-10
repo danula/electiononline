@@ -1,11 +1,9 @@
 
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
+
 @section('content')
-<link href="../css/slider.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
-<script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
-<script href="js/bootstrap-slider.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function($) {
       $("tr").click(function() {
@@ -14,9 +12,6 @@ jQuery(document).ready(function($) {
       $("tr").css({"cursor":"pointer"});
 });
 
-window.onload = function() {
-  document.getElementById('collapseThree').className = 'panel-collapse';
-};
 </script>
 <div class="row"><h1>My Predictions for 2015</h1><br></div>
     <div class="row">
@@ -29,30 +24,19 @@ window.onload = function() {
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <div id="totalUPFA"  class="huge">1231231</div>
-                            <div id="percentageUPFA" >65% Votes</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div id="totalNDF" class="huge">1231231 </div>
-                            <div id="percentageNDF">75% Votes</div>
-                        </div>
-                    </div>
+            <div class="small-box bg-blue-gradient">
+                <div class="inner">
+                    <h3 id="totalUPFA" style="text-align: right">1231231</h3>
+                    <p id="percentageUPFA" style="text-align: right">Votes</p>
                 </div>
             </div>
+            <div class="small-box bg-green-gradient">
+                <div class="inner">
+                    <h3 id="totalNDF" style="text-align: right">1231231</h3>
+                    <p id="percentageNDF" style="text-align: right">Votes</p>
+                </div>
+            </div>
+
         </div>
         <div class="col-lg-3">
 
@@ -64,20 +48,22 @@ window.onload = function() {
             <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
             <map id="map" name="map" ></map>
           </div>
-
           <div class="col-md-8" id="tablesdiv">
           @for($i=0; $i<22; $i++)
         {{$districts[$i]->name}}
-        <input class = "slider slider-polled"
+
+        <input class = "knob"
+            fgColor="green"
             id="slider{{$i}}"
             data-slider-step="0.01"
+            data-width="75"
             data-slider-max="100" data-slider-min="0"
             data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
             value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
             type="text"
             onchange="updateVal()">
         Polled percentage
-        <input class = "slider slider-polled"
+        <input class = "knob"
             id="sliderPolled{{$i}}"
             data-slider-step="0.01"
             data-slider-max="100"
@@ -94,9 +80,15 @@ window.onload = function() {
 
            </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
+<script src="../js/jquery.knob.js"></script>
+
 <script>
 
-
+$(function() {
+        $(".knob").knob({
+                            'bgColor':'green'
+                        });
+    });
       jQuery(function()
       {
          $('.slider').on('slideStop', function (ev) {
