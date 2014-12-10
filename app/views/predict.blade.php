@@ -67,12 +67,24 @@ window.onload = function() {
 
           <div class="col-md-8" id="tablesdiv">
           @for($i=0; $i<22; $i++)
-        {{$districts[$i]->name}}{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}
-        <input class = "slider slider-polled" id="slider{{$i}}" data-slider-max="100" data-slider-min="0"
-            data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/$distResult[$i]->polled_votes,2)}}" type="text">
+        {{$districts[$i]->name}}
+        <input class = "slider slider-polled"
+            id="slider{{$i}}"
+            data-slider-step="0.01"
+            data-slider-max="100" data-slider-min="0"
+            data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
+            value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
+            type="text"
+            onchange="updateVal()">
         Polled percentage
-        <input class = "slider slider-polled" id="sliderPolled{{$i}}" registered="{{$distResult[$i]->registered_votes}}"
-            value="{{round(100*$distResult[$i]->polled_votes/$distResult[$i]->registered_votes,2)}}"><br/>
+        <input class = "slider slider-polled"
+            id="sliderPolled{{$i}}"
+            data-slider-step="0.01"
+            data-slider-max="100"
+            data-slider-min="0"
+            registered="{{$distResult[$i]->registered_votes}}"
+            data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
+            value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"><br/>
     @endfor
             </div>
             </div>
@@ -83,8 +95,14 @@ window.onload = function() {
            </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
+
+
       jQuery(function()
       {
+         $('.slider').on('slideStop', function (ev) {
+                updateAll();
+         });
+
           $('#map').load('../map.html', function(responseData){
           //After the map is loaded
 
@@ -120,7 +138,7 @@ window.onload = function() {
     
                 for (var i=0; i<22;i++){
                     var text = '';
-                    var percentage = $('#slider'+i).val();
+                    var percentage = document.getElementById('slider'+i).value;
                     var opacity = percentage/100.0;
                     var colour = '3333FF';
                     if (percentage <50) {
@@ -159,18 +177,15 @@ window.onload = function() {
                     areas: areas
               });
               $('#myImage').mapster('tooltip','alt');
-            }  
-                $('.slider-district').change(function(){
-                    updateAll();
-                });
+            }
                 function updateAll(){
                     var sumNDF = 0, sumUPFA = 0;
                     var count = 0;
                     var registered, polled, prefer;         
                     for(var i = 0; i< 22;i++){
-                        registered = $('#sliderPolled'+i).attr("registered");
-                        polled = $('#sliderPolled'+i).val();
-                        prefer = $('#slider'+i).val();
+                        registered = document.getElementById('sliderPolled'+i).getAttribute("registered");
+                        polled = document.getElementById('sliderPolled'+i).value;
+                        prefer = document.getElementById('slider'+i).value;
                         sumUPFA += registered*polled*prefer/10000.0;
                         sumNDF += registered*polled*(100-prefer)/10000.0;
                     }
