@@ -55,10 +55,12 @@ window.onload = function() {
                     </ul>
                     <div id="myTabContent" class="tab-content">
                       <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
+                        <table>
                         @for($i=0; $i<22; $i++)
-                               <table>
+                               @if($i%2==0)
                                <tr>
-                                <td style="padding-bottom: 10px">{{$districts[$i]->name}}</td>
+                               @endif
+                                <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
                                 <td><input class = "slider slider-polled"
                                    id="slider{{$i}}"
                                    data-slider-step="0.01"
@@ -66,18 +68,23 @@ window.onload = function() {
                                    data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
                                    value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
                                    type="text"
-                                   onchange="updateVal()"></td>
+                                   onchange="updateVal()">
+                                </td>
+                               @if($i%2==1)
                                </tr>
+                               @endif
+                               
 
-                               </table>
-
-                                   @endfor
+                        @endfor
+                        </table>
                       </div>
-                      <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledBy="profile-tab">
-                         @for($i=0; $i<22; $i++)
-                               <table>
-                                <tr>
-                                    <td>{{$districts[$i]->name}}</td>
+                      <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
+                        <table>                         
+                        @for($i=0; $i<22; $i++)
+                               @if($i%2==0)
+                               <tr>
+                               @endif
+                                    <td>  {{$districts[$i]->name}}</td>
                                     <td><input class = "slider slider-polled"
                                         id="sliderPolled{{$i}}"
                                         data-slider-step="0.01"
@@ -85,12 +92,15 @@ window.onload = function() {
                                         data-slider-min="0"
                                         registered="{{$distResult[$i]->registered_votes}}"
                                         data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
-                                        value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}">
+                                        value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
+                                        type="text">
                                     </td>
-                                </tr>
-                               </table>
+                               @if($i%2==1)
+                               </tr>
+                               @endif
+                          @endfor
+                        </table>
 
-                                 @endfor
                       </div>
                     </div>
                   </div>
@@ -139,15 +149,19 @@ window.onload = function() {
 
                 for (var i=0; i<22;i++){
                     var text = '';
-                    var percentage = document.getElementById('slider'+i).value;
-                    var opacity = percentage/100.0;
+                    var percentage = Math.round(100*document.getElementById('slider'+i).value)/100;
+                    var percentage2 = Math.round(10000-100*percentage)/100;
+                    var opacity = percentage;
                     var colour = '3333FF';
                     if (percentage <50) {
                         colour = '339933';
-                        opacity = 1 - opacity;
+                        opacity = 100 - opacity;
                     }
+                    opacity = 0.5 + (opacity-50)/30;
+                    if (opacity < 0.4)
+                        opacity = 0.4;
                     text = text+'<li type="square" style="color:#3333FF"> UPFA - '+percentage+'% </li>';
-                    text = text+'<li type="square" style="color:#339933"> NDF - '+(100-percentage)+'% </li>';
+                    text = text+'<li type="square" style="color:#339933"> NDF - '+percentage2+'% </li>';
                     areas.push({key: districts[i]["name"],
                                 toolTip:'<b> '+districts[i]["name"]+'District</b>'+text+'<br>',
                                 fillColor:colour,
