@@ -114,9 +114,7 @@
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawDistrictChart);
-      $(window).on("throttledresize", function (event) {
-          drawDistrictChart();
-      });
+
       function drawDistrictChart() {
         var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Year');
