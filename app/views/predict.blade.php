@@ -91,7 +91,11 @@ window.onload = function() {
        <div class="container">
         <p>Select district for detailed summary</p>
         <br>
-
+        <form id="addPredictionForm">
+        <input id="predictionName" type="text" autocomplete="off">
+        <input id="predictionData" type="hidden" value="Dummy data">
+        {{Form::submit('Save')}}
+        </form>
            </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
@@ -205,5 +209,22 @@ window.onload = function() {
 $( document ).ready(function() {
   $('.slider').slider();
 });
+
+$('#addPredictionForm').submit(function(){
+    var response = $.ajax({
+                type: 'POST',
+                url: '.',
+                data: { name: $('#predictionName').val(),
+                        data: $('#predictionData').val()}
+    });
+
+    response.done(
+        function(r){
+        console.log(r);
+
+        }
+    );
+});
+
 </script>
 @stop

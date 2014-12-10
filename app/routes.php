@@ -73,3 +73,4 @@ Route::get('districtresult/{districtname}/{year}','ResultController@showDistrict
 Route::post('districtresult','ResultController@changeDistrictResult');
 
 Route::get('predict/{id}','PredictController@showPredict');
+Route::post('predict','PredictController@savePrediction');

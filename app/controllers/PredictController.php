@@ -13,4 +13,23 @@ class PredictController extends BaseController {
         );
         return View::make('predict',$data);
     }
+
+    public function savePrediction(){
+        $data = Input::all();
+
+            $prediction = new Prediction;
+            $prediction->name = $data['name'];
+            $prediction->data = $data['data'];
+
+        try{
+            $prediction->save();
+            return Response::json($data);
+        }catch(Exception $e){
+           // return Response::json($e);
+        }
+
+
+
+
+    }
 }
