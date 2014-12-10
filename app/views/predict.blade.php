@@ -55,10 +55,10 @@
                         <table>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
-                               <tr style="padding-top:10px; padding-bottom: 10px; padding-right: 15px;">
+                               <tr>
                                @endif
                                 <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                <td><input class = "slider slider-colord"
+                                <td style="padding-right: 50px"><input class = "slider slider-colord"
                                    id="slider{{$i}}"
                                    data-slider-step="0.01"
                                    data-slider-max="100" data-slider-min="0"
@@ -66,7 +66,10 @@
                                    value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
                                    type="text"
                                    onchange="updateVal()">
-                                </td><td> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                </td>
+                                <td>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
                                @if($i%2==1)
                                </tr>
                                @endif
@@ -80,10 +83,10 @@
                         <br>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
-                               <tr style="padding-top:10px; padding-bottom: 10px; padding-right: 15px;">
+                               <tr>
                                @endif
-                                    <td>  {{$districts[$i]->name}}</td>
-                                    <td><input class = "slider slider-polled slider-nocolor"
+                                    <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                    <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
                                         id="sliderPolled{{$i}}"
                                         data-slider-step="0.01"
                                         data-slider-max="100"
