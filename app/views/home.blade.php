@@ -60,27 +60,59 @@
 <!-- Morris.js charts -->
 {{HTML::script("//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js");}}
 {{HTML::script("../../js/plugins/morris/morris.min.js");}}
+
+<style type="text/css">
+.morris-hover {
+	position: absolute;
+	z-index: 1000;
+	border-radius: 2px;
+	padding: 3px 6px 6px;
+	color: #666;
+	background: #FFF;
+	border: 1px solid #CCC;
+	font-family: sans-serif;
+	font-size: 12px;
+}
+
+.morris-hover .hover-title {
+	font-weight: bold;
+	margin: 0.25em 0;
+}
+
+.morris-hover span {
+	text-transform: lowercase;
+}
+
+.morris-hover b {
+	font-size: 13px;
+}
+</style>
 <script type="text/javascript">
 
     var MR = document.getElementById("mahinda");
     var MY3= document.getElementById("my3");
+
+
     $(function() {
         "use strict";
+
         new Morris.Line({
             element: 'overall_line_chart',
             resize: true,
             data: [
-                {"year":"1982","win":3450813,"winP":"UNP","sec":2546438,"secP":"SLFP","oth":522675},
-                {"year":"1988","win":2569199,"winP":"UNP","sec":2289857,"secP":"SLFP","oth":235701},
-                {"year":"1994","win":2715283,"winP":"UNP","sec":4709205,"secP":"PA","oth":137039},
-                {"year":"1999","win":3602748,"winP":"UNP","sec":4312157,"secP":"PA","oth":520849},
-                {"year":"2005","win":4706366,"winP":"UNP","sec":4887152,"secP":"UPFA","oth":124241},
-                {"year":"2010","win":4173185,"winP":"NDF","sec":6015934,"secP":"UPFA","oth":204494}
+                @foreach($chartData as $row)
+                    {{$row}},
+                @endforeach
             ],
             xkey: 'year',
             ykeys: ['win','sec','oth'],
             lineColors: ['#53A336','#0070D1', '#FF8000'],
-            hideHover: 'false'
+            hideHover: 'auto',
+            parseTime: false,
+            hoverCallback: function (index, options, content) {
+                var row = options.data[index];
+                return '<div class="hover-title">' + row.year + '</div><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + " </b><span>" + options.labels[0] + "</span>";
+            }
         });
 
         new Morris.Donut({
@@ -91,7 +123,7 @@
                 {label: "Mahinda Rajapaksha", value: parseFloat(MR.value)},
                 {label: "Maithripala Sirisena", value: parseFloat(MY3.value)}
             ],
-            hideHover: 'false'
+            hideHover: 'auto'
         });
     });
 </script>
