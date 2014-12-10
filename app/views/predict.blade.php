@@ -20,15 +20,15 @@ window.onload = function() {
 </script>
 <div class="row"><h1>My Predictions for 2015</h1><br></div>
     <div class="row">
-    
+
     </div>
     <div class="row">
         <div class="col-lg-3">
 
         {{HTML::image('/resources/candidates/MR.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
         </div>
-        
-        <div class="col-lg-3 col-md-6">  
+
+        <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
@@ -91,7 +91,7 @@ window.onload = function() {
        <div class="container">
         <p>Select district for detailed summary</p>
         <br>
-            
+
            </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
@@ -119,7 +119,7 @@ window.onload = function() {
                         s = s +",";
                     num = parseFloat(res[i])*width/612.0;
                     s=s+num.toString();
-                    
+
                   }
 
                   $(this).attr("coords",  s);
@@ -128,14 +128,14 @@ window.onload = function() {
               });
               updateAll();
             });
-            
-        
+
+
         function drawMap() {
-                var districts = {{json_encode($districts)}}; 
-            
+                var districts = {{json_encode($districts)}};
+
                 var areas = [];
 
-    
+
                 for (var i=0; i<22;i++){
                     var text = '';
                     var percentage = document.getElementById('slider'+i).value;
@@ -181,7 +181,7 @@ window.onload = function() {
                 function updateAll(){
                     var sumNDF = 0, sumUPFA = 0;
                     var count = 0;
-                    var registered, polled, prefer;         
+                    var registered, polled, prefer;
                     for(var i = 0; i< 22;i++){
                         registered = document.getElementById('sliderPolled'+i).getAttribute("registered");
                         polled = document.getElementById('sliderPolled'+i).value;
@@ -198,7 +198,7 @@ window.onload = function() {
                     $('#percentageNDF').html((Math.round(10000*sumNDF/sum)/100)+" Votes");
                     drawMap();
                 };
-          
+
         });
 </script>
 <script>
