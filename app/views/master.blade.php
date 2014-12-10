@@ -119,20 +119,28 @@
                 <div class="container">
                 <!-- Main content -->
                 @yield('content')
-
+                    <footer class="page-footer sticky-footer">
+                       <div class="container-fluid">
+                           <div class="clearfix">
+                               <hr/>
+                               <div class="col-md-12">
+                                   <p>All material provided on the Site is intended for informational purposes only and should not be used to replace official documents</p>
+                                   <div class="pull-right">
+                                      <div id="fb-root"></div>
+                                      <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+                                   </div>
+                                   <p>Contact developers: <a href="mailto:info@chandaya.info">info@chandaya.info</a></p>
+                               </div>
+                           </div>
+                       </div>
+                   </footer>
                 </div>
                 <!-- /. Main content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
 
-        <div id="fb-root"></div>
-        <div
-          class="fb-like"
-          data-share="true"
-          data-width="450"
-          data-show-faces="true">
-        </div>
+
 
 
 
