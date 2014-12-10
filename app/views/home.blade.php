@@ -61,70 +61,43 @@
 {{HTML::script("//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js");}}
 {{HTML::script("../../js/plugins/morris/morris.min.js");}}
 
-<style type="text/css">
-.morris-hover {
-	position: absolute;
-	z-index: 1000;
-	border-radius: 2px;
-	padding: 3px 6px 6px;
-	color: #666;
-	background: #FFF;
-	border: 1px solid #CCC;
-	font-family: sans-serif;
-	font-size: 12px;
-}
-
-.morris-hover .hover-title {
-	font-weight: bold;
-	margin: 0.25em 0;
-}
-
-.morris-hover span {
-	text-transform: lowercase;
-}
-
-.morris-hover b {
-	font-size: 13px;
-}
-</style>
 <script type="text/javascript">
 
     var MR = document.getElementById("mahinda");
     var MY3= document.getElementById("my3");
 
 
-    $(function() {
-        "use strict";
-
-        new Morris.Line({
-            element: 'overall_line_chart',
-            resize: true,
-            data: [
-                @foreach($chartData as $row)
-                    {{$row}},
-                @endforeach
-            ],
-            xkey: 'year',
-            ykeys: ['win','sec','oth'],
-            lineColors: ['#53A336','#0070D1', '#FF8000'],
-            hideHover: 'auto',
-            parseTime: false,
-            hoverCallback: function (index, options, content) {
-                var row = options.data[index];
-                return '<div class="hover-title">' + row.year + '</div><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + " </b><span>" + options.labels[0] + "</span>";
-            }
-        });
-
-        new Morris.Donut({
-            element: 'online_election_piechart',
-            resize: true,
-            colors: ["#0070D1", "#53A336"],
-            data: [
-                {label: "Mahinda Rajapaksha", value: parseFloat(MR.value)},
-                {label: "Maithripala Sirisena", value: parseFloat(MY3.value)}
-            ],
-            hideHover: 'auto'
-        });
+    Morris.Line({
+        element: 'overall_line_chart',
+        resize: true,
+        data: [
+            @foreach($chartData as $row)
+                {{$row}},
+            @endforeach
+        ],
+        xkey: 'year',
+        ykeys: ['win','sec','oth'],
+        lineColors: ['#53A336','#0070D1', '#FF8000'],
+        hideHover: 'auto',
+        parseTime: false,
+        labels: ['Series A', 'Series B','Series C'],
+        hoverCallback: function (index, options, content) {
+            var row = options.data[index];
+            return '<div class="hover-title">' + row.year + '</div>'+
+                   '<span>' + row.winP + ': </span><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + '</b><br/>'+
+                   '<span>' + row.secP + ': </span><b style="color: ' + options.lineColors[1] + '">' + row.sec.toLocaleString() + '</b><br/>'+
+                   '<span> Others: </span><b style="color: ' + options.lineColors[2] + '">' + row.oth.toLocaleString() + '</b>';
+        }
+    });
+    Morris.Donut({
+        element: 'online_election_piechart',
+        resize: true,
+        colors: ["#0070D1", "#53A336"],
+        data: [
+            {label: "Mahinda Rajapaksha", value: parseFloat(MR.value)},
+            {label: "Maithripala Sirisena", value: parseFloat(MY3.value)}
+        ],
+        hideHover: 'auto'
     });
 </script>
 
