@@ -72,4 +72,4 @@ Route::post('candidate','ResultController@changeCandidateSummary');
 Route::get('districtresult/{districtname}/{year}','ResultController@showDistrictResult');
 Route::post('districtresult','ResultController@changeDistrictResult');
 
-Route::get('predict','PredictController@showPredict');
+Route::get('predict/{id}','PredictController@showPredict');
