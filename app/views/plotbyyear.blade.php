@@ -15,7 +15,6 @@ window.onload = function() {
   document.getElementById('collapseThree').className = 'panel-collapse';
 };
 </script>
-<div class="container">
         <div class="row"><h1>Summary Results:  {{$year}}</h1><br></div>
         <img src="" id="candidate_1" class="img-thumbnail" style="width: 140px; float: right; ">
         <img src="" id="candidate_2"  class="img-thumbnail" style="width: 140px; float: left; ">
@@ -95,7 +94,6 @@ window.onload = function() {
         <p>Select district for detailed summary</p>
         <br>
             
-           </div>
            </div>
 
         <script type="text/javascript">

@@ -18,6 +18,7 @@
 
 @section('content')
 <br>
+
 <div class="row">
     <nav class="navbar navbar-default">
       <div class="container-fluid">

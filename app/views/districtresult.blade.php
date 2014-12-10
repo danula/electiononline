@@ -17,7 +17,6 @@ window.onload = function() {
 @endsection
 
 @section('content')
-<div class="container">
     <div class="row">
         <nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
                 {{ Form::open(array('url'=>'districtresult','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
@@ -91,6 +90,6 @@ window.onload = function() {
 
     </table>
     </div>
-</div>
+
 
 @endsection

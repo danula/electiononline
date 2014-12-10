@@ -2,59 +2,59 @@
 @extends('master')
 @section('content')
 
-    <div class="container">
-        <nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
-              <div class="row">
-                    {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
-                    District&nbsp;
+<nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
+      <div class="row">
+            {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
-                    {{Form::select('district_id',$districts,$district[0]->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
-            </div>
-        </nav>
-        <div class="page-header">
-            <h2> {{$district[0]->name}} District</h2>
+            District&nbsp;
+
+            {{Form::select('district_id',$districts,$district[0]->id,array('class'=>'form-control','onchange'=>"this.form.submit()"))}}
+    </div>
+</nav>
+<div class="page-header">
+    <h2> {{$district[0]->name}} District</h2>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12">
+        <div style="margin-top: 6.5%; padding-right: 0;">
+            <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
+            <map id="map" name="map"></map>
         </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-12 col-xs-12">
-                <div style="margin-top: 6.5%; padding-right: 0;">
-                    <img src="../district2.png" width=230 usemap="#map" id="myImage" name="myImage"></img>
-                    <map id="map" name="map"></map>
-                </div>
 
+    </div>
+    <div style="height: 50%" class="col-md-9 col-sm-12 col-xs-12">
+        <div id="district_summary_line" style="width: 100%; height: 100%" class="panel-default panel-body"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+        <h4>Seat Statistics</h4>
+        @foreach($seats as $seat)
+
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne_{{$seat->id}}">
+              <h4 class="panel-title">
+                <a style="display: block; width: 100%" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
+                  {{$seat->name}} <i class="fa fa-bar-chart-o fa-fw pull-right"></i>
+                </a>
+              </h4>
             </div>
-            <div style="height: 50%" class="col-md-9 col-sm-12 col-xs-12">
-                <div id="district_summary_line" style="width: 100%; height: 100%" class="panel-default panel-body"></div>
+            <div id="collapseOne_{{$seat->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}">
+              <div class="panel-body">
+                <div style="width:100%" align="center" id="linechart_{{$seat->id}}"></div>
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+          </div>
 
-                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-                <h4>Seat Statistics</h4>
-                @foreach($seats as $seat)
+          @endforeach
 
-                  <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne_{{$seat->id}}">
-                      <h4 class="panel-title">
-                        <a style="display: block; width: 100%" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne_{{$seat->id}}" aria-expanded="false" aria-controls="collapseOne_{{$seat->id}}">
-                          {{$seat->name}} <i class="fa fa-bar-chart-o fa-fw pull-right"></i>
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseOne_{{$seat->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}">
-                      <div class="panel-body">
-                        <div style="width:100%" align="center" id="linechart_{{$seat->id}}"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  @endforeach
-
-                </div>
-            </div>
         </div>
     </div>
+</div>
+
 
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
