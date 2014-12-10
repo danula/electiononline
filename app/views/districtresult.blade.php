@@ -18,7 +18,7 @@ window.onload = function() {
 
 @section('content')
     <div class="row">
-        <nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
+        <nav style="margin-top: 20px; padding-left: 30px; background-color: transparent" class="navbar navbar-default">
                 {{ Form::open(array('url'=>'districtresult','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
                 Year&nbsp;

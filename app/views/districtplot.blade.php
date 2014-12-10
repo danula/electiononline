@@ -3,7 +3,7 @@
 @section('content')
 
 
-<nav style="margin-top: 20px; padding-left: 30px" class="navbar navbar-default">
+<nav style="margin-top: 20px; padding-left: 30px; background-color: transparent" class="navbar navbar-default" >
       <div class="row">
             {{ Form::open(array('url'=>'districtplot','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 

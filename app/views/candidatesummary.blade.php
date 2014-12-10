@@ -20,7 +20,7 @@
 <br>
 
 <div class="row">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background-color: transparent">
       <div class="container-fluid">
     {{ Form::open(array('url'=>'candidate','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
@@ -45,34 +45,19 @@
     </div>
 
     <div class="col-lg-3 col-md-6">
-                        
-                        <div class="panel panel-{{$colour[$candidate[0]->colour]}}">
-                            <div class="panel-heading">
-                                <div class="row">
-
-                                    <div class="col-xs-12 text-right">
-                                        <div class="huge">{{number_format($candidate[0]->number_of_votes)}}</div>
-                                        <div>Votes</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="panel panel-{{$colour[$candidate[0]->colour]}}">
-                                                    <div class="panel-heading">
-                                                        <div class="row">
-                                                            <div class="col-xs-3">
-
-                                                            </div>
-                                                            <div class="col-xs-9 text-right">
-                                                                <div class="huge">{{number_format($candidate[0]->number_of_votes/$totalvotes[$year]*100,2)}}%</div>
-                                                                <div>of Total Valid Votes</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                    </div>
+        <div class="small-box bg-{{$colour[$candidate[0]->colour]}}">
+            <div class="inner">
+                <h3 style="text-align: right">{{number_format($candidate[0]->number_of_votes)}}</h3>
+                <p style="text-align: right">Votes</p>
+            </div>
+        </div>
+        <div class="small-box bg-{{$colour[$candidate[0]->colour]}}">
+            <div class="inner">
+                <h3 style="text-align: right">{{number_format($candidate[0]->number_of_votes/$totalvotes[$year]*100,2)}}%</h3>
+                <p style="text-align: right">of total valid votes</p>
+            </div>
+        </div>
+    </div>
 
 </div>
 <br>

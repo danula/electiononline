@@ -115,7 +115,7 @@
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-                <div class="container">
+                <div class="container-fluid">
                 <!-- Main content -->
                 @yield('content')
 

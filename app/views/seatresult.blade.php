@@ -43,7 +43,7 @@
 @section('content')
 <br>
 <div class="row">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background-color: transparent">
       <div class="container-fluid">
     {{ Form::open(array('url'=>'seatresult','name'=>'changeresult','class'=>'navbar-form navbar-left')) }}
 
