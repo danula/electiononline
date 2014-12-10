@@ -7,12 +7,6 @@
 <script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
 <script type="text/javascript">
-jQuery(document).ready(function($) {
-      $("tr").click(function() {
-            window.location = $(this).attr("href");
-      });
-      $("tr").css({"cursor":"pointer"});
-});
 window.onload = function() {
   document.getElementById('collapseThree').className = 'panel-collapse';
 };
@@ -52,13 +46,9 @@ window.onload = function() {
             <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
             <map id="map" name="map" ></map>
           </div>
+
           <div class="col-md-8" id="tablesdiv">
-
-
-
-
-            </div>
-<div class="bs-example bs-example-tabs" role="tabpanel">
+                <div class="bs-example bs-example-tabs" role="tabpanel">
                     <ul id="myTab" class="nav nav-tabs" role="tablist">
                       <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
                       <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
@@ -66,32 +56,45 @@ window.onload = function() {
                     <div id="myTabContent" class="tab-content">
                       <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
                         @for($i=0; $i<22; $i++)
-                               {{$districts[$i]->name}}
-                               <input class = "slider slider-polled"
+                               <table>
+                               <tr>
+                                <td style="padding-bottom: 10px">{{$districts[$i]->name}}</td>
+                                <td><input class = "slider slider-polled"
                                    id="slider{{$i}}"
                                    data-slider-step="0.01"
                                    data-slider-max="100" data-slider-min="0"
                                    data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
                                    value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
                                    type="text"
-                                   onchange="updateVal()">
+                                   onchange="updateVal()"></td>
+                               </tr>
+
+                               </table>
+
                                    @endfor
                       </div>
                       <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledBy="profile-tab">
                          @for($i=0; $i<22; $i++)
-                                <input class = "slider slider-polled"
-                                    id="sliderPolled{{$i}}"
-                                    data-slider-step="0.01"
-                                    data-slider-max="100"
-                                    data-slider-min="0"
-                                    registered="{{$distResult[$i]->registered_votes}}"
-                                    data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
-                                    value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"><br/>
-                            @endfor
-                      </div>
+                               <table>
+                                <tr>
+                                    <td>{{$districts[$i]->name}}</td>
+                                    <td><input class = "slider slider-polled"
+                                        id="sliderPolled{{$i}}"
+                                        data-slider-step="0.01"
+                                        data-slider-max="100"
+                                        data-slider-min="0"
+                                        registered="{{$distResult[$i]->registered_votes}}"
+                                        data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
+                                        value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}">
+                                    </td>
+                                </tr>
+                               </table>
 
+                                 @endfor
+                      </div>
                     </div>
                   </div>
+                </div>
                 </div>
        <div class="container">
         <p>Select district for detailed summary</p>
