@@ -65,8 +65,8 @@ window.onload = function() {
                                    id="slider{{$i}}"
                                    data-slider-step="0.01"
                                    data-slider-max="100" data-slider-min="0"
-                                   data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
-                                   value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
+                                   data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                   value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
                                    type="text"
                                    onchange="updateVal()">
                                 </td>
@@ -90,9 +90,9 @@ window.onload = function() {
                                         data-slider-step="0.01"
                                         data-slider-max="100"
                                         data-slider-min="0"
-                                        registered="{{$distResult[$i]->registered_votes}}"
-                                        data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
-                                        value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
+                                        registered="{{$distResult[$i]['registered_votes']}}"
+                                        data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                        value="{{round($distResult[$i]['polled_percentage'],2)}}"
                                         type="text">
                                     </td>
                                @if($i%2==1)
