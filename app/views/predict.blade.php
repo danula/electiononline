@@ -1,9 +1,11 @@
 
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
-
 @section('content')
-
+<link href="../css/slider.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
+<script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
+<script href="js/bootstrap-slider.js" type="text/javascript"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
       $("tr").click(function() {
@@ -11,7 +13,9 @@ jQuery(document).ready(function($) {
       });
       $("tr").css({"cursor":"pointer"});
 });
-
+window.onload = function() {
+  document.getElementById('collapseThree').className = 'panel-collapse';
+};
 </script>
 <div class="row"><h1>My Predictions for 2015</h1><br></div>
     <div class="row">
@@ -24,20 +28,20 @@ jQuery(document).ready(function($) {
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="small-box bg-blue-gradient">
-                <div class="inner">
-                    <h3 id="totalUPFA" style="text-align: right">1231231</h3>
-                    <p id="percentageUPFA" style="text-align: right">Votes</p>
-                </div>
-            </div>
-            <div class="small-box bg-green-gradient">
-                <div class="inner">
-                    <h3 id="totalNDF" style="text-align: right">1231231</h3>
-                    <p id="percentageNDF" style="text-align: right">Votes</p>
-                </div>
-            </div>
+                    <div class="small-box bg-blue-gradient">
+                        <div class="inner">
+                            <h3 id="totalUPFA" style="text-align: right">1231231</h3>
+                            <p id="percentageUPFA" style="text-align: right">Votes</p>
+                        </div>
+                    </div>
+                    <div class="small-box bg-green-gradient">
+                        <div class="inner">
+                            <h3 id="totalNDF" style="text-align: right">1231231</h3>
+                            <p id="percentageNDF" style="text-align: right">Votes</p>
+                        </div>
+                    </div>
 
-        </div>
+                </div>
         <div class="col-lg-3">
 
         {{HTML::image('/resources/candidates/SF.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
@@ -49,61 +53,61 @@ jQuery(document).ready(function($) {
             <map id="map" name="map" ></map>
           </div>
           <div class="col-md-8" id="tablesdiv">
-          @for($i=0; $i<22; $i++)
-        {{$districts[$i]->name}}
 
-        <input class = "knob"
-            fgColor="green"
-            id="slider{{$i}}"
-            data-slider-step="0.01"
-            data-width="75"
-            data-slider-max="100" data-slider-min="0"
-            data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
-            value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
-            type="text"
-            onchange="updateVal()">
-        Polled percentage
-        <input class = "knob"
-            id="sliderPolled{{$i}}"
-            data-slider-step="0.01"
-            data-slider-max="100"
-            data-slider-min="0"
-            registered="{{$distResult[$i]->registered_votes}}"
-            data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
-            value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"><br/>
-    @endfor
+
+
+
             </div>
-            </div>
+<div class="bs-example bs-example-tabs" role="tabpanel">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
+                      <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                      <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
+                        @for($i=0; $i<22; $i++)
+                               {{$districts[$i]->name}}
+                               <input class = "slider slider-polled"
+                                   id="slider{{$i}}"
+                                   data-slider-step="0.01"
+                                   data-slider-max="100" data-slider-min="0"
+                                   data-slider-value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
+                                   value="{{round(100*$resultsUPFA[$i]['number_of_votes']/($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes']),2)}}"
+                                   type="text"
+                                   onchange="updateVal()">
+                                   @endfor
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledBy="profile-tab">
+                         @for($i=0; $i<22; $i++)
+                                <input class = "slider slider-polled"
+                                    id="sliderPolled{{$i}}"
+                                    data-slider-step="0.01"
+                                    data-slider-max="100"
+                                    data-slider-min="0"
+                                    registered="{{$distResult[$i]->registered_votes}}"
+                                    data-slider-value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"
+                                    value="{{round(100*($resultsUPFA[$i]['number_of_votes']+$resultsNDF[$i]['number_of_votes'])/$distResult[$i]->registered_votes,2)}}"><br/>
+                            @endfor
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
        <div class="container">
         <p>Select district for detailed summary</p>
         <br>
-        <form id="addPredictionForm">
-        <input id="predictionName" type="text" autocomplete="off">
-        <input id="predictionData" type="hidden" value="Dummy data">
-        {{Form::submit('Save')}}
-        </form>
+
            </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
-<script src="../js/jquery.knob.js"></script>
-
 <script>
-
-$(function() {
-        $(".knob").knob({
-                            'bgColor':'green'
-                        });
-    });
       jQuery(function()
       {
          $('.slider').on('slideStop', function (ev) {
                 updateAll();
          });
-
           $('#map').load('../map.html', function(responseData){
           //After the map is loaded
-
               $("area").each(function(index){
-
                   var coords = $(this).attr("coords");
                   var width = $('#myImage').attr("width");
                   var height = 792.0*width/612.0;
@@ -117,7 +121,6 @@ $(function() {
                     s=s+num.toString();
 
                   }
-
                   $(this).attr("coords",  s);
                   //give the href to a district.
                   this.href="#";
@@ -131,7 +134,6 @@ $(function() {
 
                 var areas = [];
 
-
                 for (var i=0; i<22;i++){
                     var text = '';
                     var percentage = document.getElementById('slider'+i).value;
@@ -141,7 +143,6 @@ $(function() {
                         colour = '339933';
                         opacity = 1 - opacity;
                     }
-
                     text = text+'<li type="square" style="color:#3333FF"> UPFA - '+percentage+'% </li>';
                     text = text+'<li type="square" style="color:#339933"> NDF - '+(100-percentage)+'% </li>';
                     areas.push({key: districts[i]["name"],
@@ -201,22 +202,5 @@ $(function() {
 $( document ).ready(function() {
   $('.slider').slider();
 });
-
-$('#addPredictionForm').submit(function(){
-    var response = $.ajax({
-                type: 'POST',
-                url: '.',
-                data: { name: $('#predictionName').val(),
-                        data: $('#predictionData').val()}
-    });
-
-    response.done(
-        function(r){
-        console.log(r);
-
-        }
-    );
-});
-
 </script>
 @stop
