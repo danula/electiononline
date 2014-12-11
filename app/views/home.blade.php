@@ -54,7 +54,9 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <a href="http://forum.chandaya.info"> <img class="img-responsive" src="../resources/banner.png" ></a>
+    <div class="box box-primary" align="center">
+        <a href="http://forum.chandaya.info"><img class="img-responsive" src="../resources/banner.png" ></a>
+        </div>
     </div>
 </div>
 <!-- Morris.js charts -->
