@@ -297,7 +297,7 @@ $('#addPredictionForm').submit(function(){
                     "&picture="+encodeURIComponent("http://chandaya.info/resources/"+win+"Victory.png")+
                     "&name="+encodeURIComponent("I'm predicting that "+name+" will win the Presidential Election 2015 with "+
                         votes+" number of votes ("+percentage+"%)"
-                    )
+                    )+
                     "&description="+encodeURIComponent("Click here for my detailed prediction or make a prediction yourself.")+
                     "&redirect_uri="+encodeURIComponent("https://facebook.com");
             }
