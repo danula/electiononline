@@ -174,7 +174,7 @@
                     <button class="btn btn-info btn-flat" type="submit">Go!</button>
                 </span>
             </div>
-            <a style="margin-top: 3%" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
+            <a style="margin-top: 3%; display:none" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
                 <i class="fa fa-facebook"></i> Share in Facebook
             </a>
         </form>
@@ -338,6 +338,7 @@ $('#addPredictionForm').submit(function(){
                     name = 'Maithripala Sirisena'
                 }
                 var percentage = Math.round(10000.0*votes/(tNDF+tUPFA))/100.0;
+                document.getElementById('fblink').style.display='block';
                 document.getElementById('fblink').href=
                     "https://www.facebook.com/dialog/feed?app_id="+
                     "358727977621649&link="+
