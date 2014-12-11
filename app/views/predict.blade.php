@@ -164,6 +164,7 @@
             </div>
             <div class="alert alert-success" id="alert_success" style="display:none">
                 <h4>Successfuly Saved</h4>
+                <a id="sitelink" href=""></a>
             </div>
             <div class="input-group input-group-sm">
                 <input type="hidden" id="tUPFA" />
@@ -345,6 +346,7 @@ $('#addPredictionForm').submit(function(){
                     "&description="+encodeURIComponent("Click here for my detailed prediction for districts or make a prediction yourself.")+
                     "&redirect_uri="+encodeURIComponent("https://facebook.com");
                 document.getElementById('sitelink').href="http://chandaya.info/predict/"+r.name;
+                document.getElementById('sitelink').innerHTML="Permanent Link : http://chandaya.info/predict/"+r.name;
             }
         }
     );
