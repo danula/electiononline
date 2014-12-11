@@ -115,11 +115,11 @@
                         <h3 class="box-header">Save and Share</h3>
                     </div>
                         <form id="addPredictionForm">
-                            <div class="callout callout-warning" id="alert_warning" style="display:none">
+                            <div class="alert alert-danger" id="alert_warning" style="display:none">
                                 <h4>Name already exists</h4>
                                 <p>please use another name</p>
                             </div>
-                            <div class="callout callout-success" id="alert_success" style="display:none">
+                            <div class="alert alert-success" id="alert_success" style="display:none">
                                 <h4>Successfuly Saved</h4>
                             </div>
                             <div class="input-group input-group-sm">
@@ -264,7 +264,7 @@ $('#addPredictionForm').submit(function(){
 
     var response = $.ajax({
                 type: 'POST',
-                url: '.',
+                url: '{{URL::to('/predict')}}',
                 data: { name: $('#predictionName').val(),
                         data: data}
     });
