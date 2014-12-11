@@ -34,7 +34,7 @@
                 </div>
         <div class="col-lg-3">
 
-        {{HTML::image('/resources/candidates/SF.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
+        {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
         </div>
      </div>
         <div class="row">
@@ -53,6 +53,7 @@
                       <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
                         <br>
                         <table>
+                        <p>Percentage votes for each candidate/party. Change the default values from 2010 election to your prediction.</p>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
                                <tr>
@@ -81,6 +82,7 @@
                       <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
                         <table>
                         <br>
+                        <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
                         @for($i=0; $i<22; $i++)
                                @if($i%2==0)
                                <tr>
