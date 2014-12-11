@@ -7,10 +7,19 @@
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
 <div class="page-header">
     <h1>My Predictions for 2015</h1>
-    @if($urlId==1)    
-    <p>This is a sample page for you to edit with 2010's percentages as default values. You can change the vote percentages for each candidate for each district, save it on our website and share with others.</p>
-    @endif
+    
 </div>
+@if($urlId==1)    
+<div class="box box-primary" align="center">    
+<h4  style="text-align: left; padding-bottom: 10px;padding-left: 10px;">This is a sample page for you to edit. You can change the vote percentages for each candidate for each district, save it on our website and share with others. Click <a href="{{URL::to("predict/2010")}}">2010</a>, <a href="{{URL::to("predict/2005")}}">2005</a>, <a href="{{URL::to("predict/1999")}}">1999</a>, <a href="{{URL::to("predict/1994")}}">1994</a>, <a href="{{URL::to("predict/1988")}}">1988</a> and <a href="{{URL::to("predict/1982")}}">1982</a>  to start with each year's percentages</h4>
+</div>
+@endif
+
+@if($urlId==1982 || $urlId==1988 || $urlId==1994 || $urlId==1999 || $urlId==2005 || $urlId==2010)    
+<div class="box box-primary" align="center">    
+<h4  style="text-align: left; padding-bottom: 10px;padding-left: 10px;">This is a sample page for you to edit. Default percentages given are from Presidential Election of {{$urlId}}. You can change the vote percentages for each candidate for each district, save it on our website and share with others.</h4>
+</div>
+@endif
 <div class="box box-primary" align="center">
     <div class="box-header">
         <br>
