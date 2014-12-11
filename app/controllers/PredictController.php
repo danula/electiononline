@@ -50,7 +50,8 @@ class PredictController extends BaseController {
             $prediction->save();
             return Response::json($res);
         }catch(Exception $e){
-           // return Response::json($e);
+            $s = array('name'=>-1);
+            return Response::json($s);
         }
 
 
