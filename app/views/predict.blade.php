@@ -189,28 +189,6 @@
          $('.slider').on('slideStop', function (ev) {
                 updateAll();
          });
-          $('#map').load('../map.html', function(responseData){
-          //After the map is loaded
-              $("area").each(function(index){
-                  var coords = $(this).attr("coords");
-                  var width = $('#myImage').attr("width");
-                  var height = 792.0*width/612.0;
-                  var res = coords.split(",");
-                  var s = "";
-                  var num;
-                  for(var i = 0; i < res.length; i++ ){
-                    if(i!=0)
-                        s = s +",";
-                    num = parseFloat(res[i])*width/612.0;
-                    s=s+num.toString();
-
-                  }
-                  $(this).attr("coords",  s);
-                  //give the href to a district.
-                  this.href="#";
-              });
-              updateAll();
-            });
 
         function formatNumber (num) {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
@@ -287,6 +265,29 @@
                     $('#percentageNDF').html((Math.round(10000*sumNDF/sum)/100)+" %");
                     drawMap();
                 };
+          $('#map').load('../map.html', function(responseData){
+          //After the map is loaded
+              $("area").each(function(index){
+                  var coords = $(this).attr("coords");
+                  var width = $('#myImage').attr("width");
+                  var height = 792.0*width/612.0;
+                  var res = coords.split(",");
+                  var s = "";
+                  var num;
+                  for(var i = 0; i < res.length; i++ ){
+                    if(i!=0)
+                        s = s +",";
+                    num = parseFloat(res[i])*width/612.0;
+                    s=s+num.toString();
+
+                  }
+                  $(this).attr("coords",  s);
+                  //give the href to a district.
+                  this.href="#";
+              });
+              updateAll();
+            });
+
 
         });
 </script>
