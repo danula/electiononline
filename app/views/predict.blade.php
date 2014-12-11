@@ -122,7 +122,6 @@
                             <div class="callout callout-success" id="alert_success" style="display:none">
                                 <h4>Successfuly Saved</h4>
                             </div>
-                            <div class="col-md-4 col-md-offset-4">
                             <div class="input-group input-group-sm">
                                 <input type="hidden" id="tUPFA" />
                                 <input type="hidden" id="tNDF" />
@@ -131,12 +130,9 @@
                                     <button class="btn btn-info btn-flat" type="submit">Go!</button>
                                 </span>
                             </div>
-                            </div>
-                            <div class="col-md-4 col-md-offset-4">
                             <a class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
                                 <i class="fa fa-facebook"></i> Share in Facebook
                             </a>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -301,7 +297,7 @@ $('#addPredictionForm').submit(function(){
                     "&picture="+encodeURIComponent("http://chandaya.info/resources/"+win+"Victory.png")+
                     "&name="+encodeURIComponent("I'm predicting that "+name+" will win the Presidential Election 2015.")+
                     "&description="+encodeURIComponent("Click here for my detailed prediction or make a prediction yourself.")+
-                    "&redirect_uri="+encodeURIComponent("https://facebook.com);
+                    "&redirect_uri="+encodeURIComponent("https://facebook.com");
             }
         }
     );
