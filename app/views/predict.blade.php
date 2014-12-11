@@ -119,6 +119,7 @@
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
             Share Prediction
         </button>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
 <!-- Modal -->
