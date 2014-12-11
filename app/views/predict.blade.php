@@ -278,8 +278,8 @@ $('#addPredictionForm').submit(function(){
             else{
                 document.getElementById('alert_warning').style.display='none';
                 document.getElementById('alert_success').style.display='block';
-                var tUPFA = document.getElementById('tUPFA').value;
-                var tNDF = document.getElementById('tNDF').value;
+                var tUPFA = parseFloat(document.getElementById('tUPFA').value);
+                var tNDF = parseFloat(document.getElementById('tNDF').value);
                 var win = 'MR';
                 var name = 'Mahinda Rajapaksa';
                 var votes = tUPFA;
@@ -288,8 +288,7 @@ $('#addPredictionForm').submit(function(){
                     votes = tNDF;
                     name = 'Maithripala Sirisena'
                 }
-                var percentage = Math.round(10000*votes/(tNDF+tUPFA))/100;
-
+                var percentage = Math.round(10000.0*votes/(tNDF+tUPFA))/100.0;
                 document.getElementById('fblink').href=
                     "https://www.facebook.com/dialog/feed?app_id="+
                     "358727977621649&link="+
@@ -298,7 +297,7 @@ $('#addPredictionForm').submit(function(){
                     "&name="+encodeURIComponent("I'm predicting that "+name+" will win the Presidential Election 2015 with "+
                         votes+" number of votes ("+percentage+"%)"
                     )+
-                    "&description="+encodeURIComponent("Click here for my detailed prediction or make a prediction yourself.")+
+                    "&description="+encodeURIComponent("Click here for my detailed prediction for districts or make a prediction yourself.")+
                     "&redirect_uri="+encodeURIComponent("https://facebook.com");
             }
         }
