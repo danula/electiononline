@@ -109,6 +109,12 @@
                                 <i class="fa fa-users fa-fw"></i> <span>Candidates</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{URL::to('predict/1')}}">
+                                <i class="fa fa-gear fa-fw"></i> <span>Predict 2015</span>
+                                <small class="badge pull-right bg-red">new</small>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
