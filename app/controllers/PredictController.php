@@ -52,7 +52,8 @@ class PredictController extends BaseController {
         }
         $data = array(
             'districts' => $districts,
-            'distResult'=>$distResult
+            'distResult'=>$distResult,
+            'urlId'=>$id
         );
         return View::make('predict',$data);
     }

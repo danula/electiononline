@@ -7,6 +7,9 @@
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
 <div class="page-header">
     <h1>My Predictions for 2015</h1>
+    @if($urlId==1)    
+    <p>This is a sample page for you to edit with 2010's percentages as default values. You can change the vote percentages for each candidate for each district, save it on our website and share with others.</p>
+    @endif
 </div>
 <div class="box box-primary" align="center">
     <div class="box-header">
