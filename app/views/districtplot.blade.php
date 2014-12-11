@@ -1,4 +1,3 @@
-{{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 @section('content')
 
@@ -23,8 +22,13 @@
         </div>
 
     </div>
-    <div style="height: 50%" class="col-md-9 col-sm-12 col-xs-12">
-        <div id="district_summary_line" style="width: 100%; height: 100%" class="panel-default panel-body"></div>
+    <div class="col-md-9 col-sm-12 col-xs-12">
+        <div class="box box-primary">
+            <div class="box-body chart-responsive">
+                <div class="chart" id="district_summary_line" style="height: 325px"></div>
+            </div>
+        </div>
+
     </div>
 </div>
 <div class="row">
@@ -43,8 +47,8 @@
               </h4>
             </div>
             <div id="collapseOne_{{$seat->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_{{$seat->id}}">
-              <div class="panel-body">
-                <div style="width:100%" align="center" id="linechart_{{$seat->id}}"></div>
+              <div class="box-body chart-responsive">
+                <div class="chart" id="linechart_{{$seat->id}}"></div>
               </div>
             </div>
           </div>
@@ -55,8 +59,7 @@
     </div>
 </div>
 
-
-<script src="../js/jquery.imagemapster.min.js" ></script>
+{{HTML::script("../js/jquery.imagemapster.min.js");}}
 <script>
       jQuery(function()
       {
@@ -109,37 +112,41 @@
           
         });
 </script>
-@endsection
+
+<!-- Morris.js charts -->
+{{HTML::script("//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js");}}
+{{HTML::script("../../js/plugins/morris/morris.min.js");}}
+
 
 <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawDistrictChart);
 
-      function drawDistrictChart() {
-        var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Year');
-                data.addColumn('number', 'Votes');
-                data.addColumn({type: 'string', role: 'annotation'});
-                data.addColumn('number', 'Votes');
-                data.addColumn({type: 'string', role: 'annotation'});
-                data.addColumn('number', 'Votes');
-                data.addColumn({type: 'string', role: 'annotation'});
-                data.addRows(<?php echo(json_encode($distChartData)); ?>);
-        var options = {
-          pointSize: 5,
-          colors:['green', 'blue', 'orange'],
-          annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
-          legend:'none'
-          //chartArea: {width: '80%', height: '30%'}
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('district_summary_line'));
-        chart.draw(data, options);
-      }
+    Morris.Line({
+        element: 'district_summary_line',
+        resize: true,
+        data: [
+            @foreach($distChartData as $row)
+                {{$row}},
+            @endforeach
+        ],
+        xkey: 'year',
+        ykeys: ['win','sec','oth'],
+        lineColors: ['#53A336','#0070D1', '#FF8000'],
+        parseTime: false,
+        labels: ['Series A', 'Series B','Series C'],
+        hoverCallback: function (index, options, content) {
+            var row = options.data[index];
+            return '<div class="hover-title">' + row.year + '</div>'+
+                   '<span>' + row.winP + ': </span><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + '</b><br/>'+
+                   '<span>' + row.secP + ': </span><b style="color: ' + options.lineColors[1] + '">' + row.sec.toLocaleString() + '</b><br/>'+
+                   '<span> Others: </span><b style="color: ' + options.lineColors[2] + '">' + row.oth.toLocaleString() + '</b>';
+        }
+    });
+
 </script>
 
-
+{{HTML::script("https://www.google.com/jsapi");}}
 <script type="text/javascript">
-      //google.load("visualization", "1", {packages:["corechart"]});
+      google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawSeatCharts);
       function drawSeatCharts() {
         var options = {
@@ -160,8 +167,8 @@
               data.addColumn('number', 'Votes');
               data.addColumn({type: 'string', role: 'annotation'});
               data.addRows(seatChartData[key]);
-
               new google.visualization.LineChart(document.getElementById('linechart_'+key)).draw(data, options);
         }
       }
 </script>
+@endsection

@@ -21,6 +21,7 @@
         {{HTML::style("//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css");}}
         {{HTML::style("font-awesome-4.2.0/css/font-awesome.min.css");}}
         {{HTML::style("//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css");}}
+        {{HTML::style("../../css/morris/morris.css");}}
         {{HTML::style("../../css/theme.css");}}
 
         <!--[if lt IE 9]>
@@ -118,20 +119,28 @@
                 <div class="container">
                 <!-- Main content -->
                 @yield('content')
-
+                    <footer class="page-footer sticky-footer">
+                       <div class="container-fluid">
+                           <div class="clearfix">
+                               <hr/>
+                               <div class="col-md-12">
+                                   <p>All material provided on the Site is intended for informational purposes only and should not be used to replace official documents</p>
+                                   <div class="pull-right">
+                                      <div id="fb-root"></div>
+                                      <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+                                   </div>
+                                   <p>Contact developers: <a href="mailto:info@chandaya.info">info@chandaya.info</a></p>
+                               </div>
+                           </div>
+                       </div>
+                   </footer>
                 </div>
                 <!-- /. Main content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
 
-        <div id="fb-root"></div>
-        <div
-          class="fb-like"
-          data-share="true"
-          data-width="450"
-          data-show-faces="true">
-        </div>
+
 
 
 
