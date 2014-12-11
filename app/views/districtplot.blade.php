@@ -143,4 +143,32 @@
     });
 
 </script>
+
+{{HTML::script("https://www.google.com/jsapi");}}
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawSeatCharts);
+      function drawSeatCharts() {
+        var options = {
+            pointSize: 5,
+            colors:['green', 'blue', 'orange'],
+            annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
+            legend:'none',
+            width: '900'
+        };
+        var seatChartData = JSON.parse('{{json_encode($seatChartData)}}');
+        for (var key in seatChartData) {
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Year');
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addColumn('number', 'Votes');
+              data.addColumn({type: 'string', role: 'annotation'});
+              data.addRows(seatChartData[key]);
+              new google.visualization.LineChart(document.getElementById('linechart_'+key)).draw(data, options);
+        }
+      }
+</script>
 @endsection
