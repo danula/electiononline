@@ -11,7 +11,11 @@
     <div class="row">
 
     </div>
-    <div class="row">
+    <div class="box box-primary" align="center">
+    <div class="box-header">
+        <br>
+    </div>
+    <div class="row" align="center" style="align-content: center">
         <div class="col-lg-3">
 
         {{HTML::image('/resources/candidates/MR.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
@@ -36,6 +40,7 @@
 
         {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
         </div>
+     </div>
      </div>
         <div class="row">
           <div class="col-md-4">
