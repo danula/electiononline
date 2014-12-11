@@ -13,7 +13,7 @@ class PredictController extends BaseController {
     }
     public function showPredict($id) {
         $districts = District::all();
-        if($id == 1) {
+        if($id == 1 || $id == 2015) {
             //$results1 = ResultD::where('year', '=', '2010')->where('candidate_id', '=', '20')->orderBy('district_id', 'asc')->get();
             //$results2 = ResultD::where('year', '=', '2010')->where('candidate_id', '=', '21')->orderBy('district_id', 'asc')->get();
         }
@@ -31,7 +31,7 @@ class PredictController extends BaseController {
         $distResult = array();
         $i=0;
         foreach($distResult_ as $d){
-            if($id == 1) {
+            if($id == 1 || $id  == 2015) {
                 $polled = 50.0;
                 $percentage = 50.0;
             }else if($id == 1982 || $id == 1982 || $id == 1982 || $id == 1982 || $id == 2005 || $id == 2010){
