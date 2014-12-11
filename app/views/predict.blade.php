@@ -7,10 +7,9 @@
 <script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
 
-<div class="row"><h1>My Predictions for 2015</h1><br></div>
-    <div class="row">
-
-    </div>
+<div class="page-header">
+    <h1>My Predictions for 2015</h1>
+</div>
     <div class="box box-primary" align="center">
     <div class="box-header">
         <br>
@@ -21,31 +20,35 @@
         {{HTML::image('/resources/candidates/MR.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
         </div>
 
-        <div class="col-lg-3 col-md-6">
-                    <div class="small-box bg-blue-gradient">
-                        <div class="inner">
-                            <h3 id="totalUPFA" style="text-align: right">1231231</h3>
-                            <p id="percentageUPFA" style="text-align: right">Votes</p>
-                        </div>
-                    </div>
-                    <div class="small-box bg-green-gradient">
-                        <div class="inner">
-                            <h3 id="totalNDF" style="text-align: right">1231231</h3>
-                            <p id="percentageNDF" style="text-align: right">Votes</p>
-                        </div>
-                    </div>
 
+                    <div class="col-lg-6 col-md-6">
+                        <div class="small-box bg-blue-gradient">
+                            <div class="inner">
+                                <h3 id="totalUPFA" style="text-align: left">1231231</h3>
+                                <h4 id="percentageUPFA" style="text-align: left">Votes</h4>
+                            </div>
+                        </div>
+                        <div class="small-box bg-green-gradient">
+                            <div class="inner">
+                                <h3 id="totalNDF" style="text-align: right">1231231</h3>
+                                <h4 id="percentageNDF" style="text-align: right">Votes</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+
+                    {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
+                    </div>
                 </div>
-        <div class="col-lg-3">
-
-        {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
-        </div>
-     </div>
      </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4" align="center" >
+
             <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
             <map id="map" name="map" ></map>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Share Prediction
+            </button>
           </div>
 
           <div class="col-md-8" id="tablesdiv">
@@ -108,43 +111,76 @@
                                @endif
                           @endfor
                         </table>
+                              </div>
+                              <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
+                                <table>
+                                <br>
+                                <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
+                                @for($i=0; $i<22; $i++)
+                                       @if($i%2==0)
+                                       <tr>
+                                       @endif
+                                            <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                            <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
+                                                id="sliderPolled{{$i}}"
+                                                data-slider-step="0.01"
+                                                data-slider-max="100"
+                                                data-slider-min="0"
+                                                registered="{{$distResult[$i]['registered_votes']}}"
+                                                data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                                value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                                type="text">
+                                            </td>
+                                       @if($i%2==1)
+                                       </tr>
+                                       @endif
+                                  @endfor
+                                </table>
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                <div class="box box-primary">
-                    <div class="box-body">
-                    <div class="page-header">
-                        <h3 class="box-header">Save and Share</h3>
-                    </div>
-                        <form id="addPredictionForm">
-                            <div class="alert alert-danger" id="alert_warning" style="display:none">
-                                <h4>Name already exists</h4>
-                                <p>please use another name</p>
+                              </div>
                             </div>
-                            <div class="alert alert-success" id="alert_success" style="display:none">
-                                <h4>Successfuly Saved</h4>
-                            </div>
-                            <div class="input-group input-group-sm">
-                                <input type="hidden" id="tUPFA" />
-                                <input type="hidden" id="tNDF" />
-                                <input id="predictionName" type="text" class="form-control">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info btn-flat" type="submit">Go!</button>
-                                </span>
-                            </div>
-                            <a class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
-                                <i class="fa fa-facebook"></i> Share in Facebook
-                            </a>
-                        </form>
-                    </div>
-                </div>
-                </div>
-                </div>
+                          </div>
+                        </div>
+        <!--div class="col-md-2 col-md-offset-5">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Share Prediction
+            </button>
+        </div-->
+     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Save and Share</h4>
+      </div>
+      <div class="modal-body">
+        <form id="addPredictionForm">
+            <div class="alert alert-danger" id="alert_warning" style="display:none">
+                <h4>Name already exists</h4>
+                <p>please use another name</p>
+            </div>
+            <div class="alert alert-success" id="alert_success" style="display:none">
+                <h4>Successfuly Saved</h4>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="hidden" id="tUPFA" />
+                <input type="hidden" id="tNDF" />
+                <input id="predictionName" type="text" class="form-control" required="required" placeholder="Enter Name...">
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-flat" type="submit">Go!</button>
+                </span>
+            </div>
+            <a style="margin-top: 3%" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
+                <i class="fa fa-facebook"></i> Share in Facebook
+            </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
       jQuery(function()
@@ -175,7 +211,9 @@
               updateAll();
             });
 
-
+        function formatNumber (num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
         function drawMap() {
                 var districts = {{json_encode($districts)}};
 
@@ -240,12 +278,12 @@
                     sumNDF = Math.round(sumNDF);
                     sumUPFA = Math.round(sumUPFA);
                     var sum = sumNDF+sumUPFA;
-                    $('#totalUPFA').html(sumUPFA);
-                    $('#totalNDF').html(sumNDF);
+                    $('#totalUPFA').html(formatNumber(sumUPFA) + " Votes");
+                    $('#totalNDF').html(formatNumber(sumNDF) + " Votes");
                     $('#tUPFA').val(sumUPFA);
                     $('#tNDF').val(sumNDF);
-                    $('#percentageUPFA').html((Math.round(10000*sumUPFA/sum)/100) + " Votes");
-                    $('#percentageNDF').html((Math.round(10000*sumNDF/sum)/100)+" Votes");
+                    $('#percentageUPFA').html((Math.round(10000*sumUPFA/sum)/100) + " %");
+                    $('#percentageNDF').html((Math.round(10000*sumNDF/sum)/100)+" %");
                     drawMap();
                 };
 
@@ -302,10 +340,11 @@ $('#addPredictionForm').submit(function(){
                     encodeURIComponent("http://chandaya.info/predict/"+r.name)+
                     "&picture="+encodeURIComponent("http://chandaya.info/resources/"+win+"Victory.png")+
                     "&name="+encodeURIComponent("I'm predicting that "+name+" will win the Presidential Election 2015 with "+
-                        votes+" number of votes ("+percentage+"%)"
+                        formatNumber(votes)+" number of votes ("+percentage+"%)"
                     )+
                     "&description="+encodeURIComponent("Click here for my detailed prediction for districts or make a prediction yourself.")+
                     "&redirect_uri="+encodeURIComponent("https://facebook.com");
+                document.getElementById('sitelink').href="http://chandaya.info/predict/"+r.name;
             }
         }
     );
@@ -315,4 +354,4 @@ $('#addPredictionForm').submit(function(){
 
 
 </script>
-@stop
+@endsection
