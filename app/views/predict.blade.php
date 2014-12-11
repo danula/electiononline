@@ -125,8 +125,8 @@
                     </div>
                     <div class="alert alert-success" id="alert_success" style="display:none">
                         <h4>Successfuly Saved</h4>
-                        <a id="sitelink" href=""></a>
-                        <<a style="margin-top: 3%" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
+                        <label>Permanent Link : </label><a id="sitelink" href=""></a>
+                        <a style="margin-top: 3%" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
                             <i class="fa fa-facebook"></i> Share in Facebook
                         </a>
                     </div>
@@ -139,7 +139,11 @@
                     </div>
                 </form>
             </div>
-        </div>
+            <a style="margin-top: 3%; display:none" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
+                <i class="fa fa-facebook"></i> Share in Facebook
+            </a>
+        </form>
+      </div>
     </div>
 </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
@@ -310,7 +314,7 @@
                         "&description="+encodeURIComponent("Click here for my detailed prediction for districts or make a prediction yourself.")+
                         "&redirect_uri="+encodeURIComponent("https://facebook.com");
                     document.getElementById('sitelink').href="http://chandaya.info/predict/"+r.name;
-                    document.getElementById('sitelink').innerHTML="Permanent Link : http://chandaya.info/predict/"+r.name;
+                    document.getElementById('sitelink').innerHTML="http://chandaya.info/predict/"+r.name;
                 }
             }
         );
