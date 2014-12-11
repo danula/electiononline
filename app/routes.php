@@ -74,3 +74,8 @@ Route::post('districtresult','ResultController@changeDistrictResult');
 
 Route::get('predict/{id}','PredictController@showPredict');
 Route::post('predict','PredictController@savePrediction');
+
+
+Route::get('predict',function(){
+    return Redirect::to('/predict/1');
+});

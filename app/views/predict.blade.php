@@ -32,7 +32,8 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        {{HTML::image('/resources/candidates/SF.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
+
+                    {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
                     </div>
                 </div>
      </div>
@@ -45,41 +46,66 @@
             </button>
         </div>
 
-        <div class="col-md-8" id="tablesdiv">
-                        <div class="bs-example bs-example-tabs" role="tabpanel">
-                            <ul id="myTab" class="nav nav-tabs" role="tablist">
-                              <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
-                              <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content">
-                              <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
-                                <br>
-                                <table>
-                                <p>Percentage votes for each candidate/party. Change the default values from 2010 election to your prediction.</p>
-                                @for($i=0; $i<22; $i++)
-                                       @if($i%2==0)
-                                       <tr>
-                                       @endif
-                                        <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                        <td style="padding-right: 50px"><input class = "slider slider-colord"
-                                           id="slider{{$i}}"
-                                           data-slider-step="0.01"
-                                           data-slider-max="100" data-slider-min="0"
-                                           data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                           value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                           type="text"
-                                           onchange="updateVal()">
-                                        </td>
-                                        <td>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                       @if($i%2==1)
-                                       </tr>
-                                       @endif
+          <div class="col-md-8" id="tablesdiv">
+                <div class="bs-example bs-example-tabs" role="tabpanel">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
+                      <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                      <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
+                        <br>
+                        <table>
+                        <p>Percentage votes for each candidate/party. Change the default values from 2010 election to your prediction.</p>
+                        @for($i=0; $i<22; $i++)
+                               @if($i%2==0)
+                               <tr>
+                               @endif
+                                <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                <td style="padding-right: 50px"><input class = "slider slider-colord"
+                                   id="slider{{$i}}"
+                                   data-slider-step="0.01"
+                                   data-slider-max="100" data-slider-min="0"
+                                   data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                   value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                   type="text"
+                                   onchange="updateVal()">
+                                </td>
+                                <td>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
+                               @if($i%2==1)
+                               </tr>
+                               @endif
+                               
 
-
-                                @endfor
-                                </table>
+                        @endfor
+                        </table>
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
+                        <table>
+                        <br>
+                        <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
+                        @for($i=0; $i<22; $i++)
+                               @if($i%2==0)
+                               <tr>
+                               @endif
+                                    <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                    <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
+                                        id="sliderPolled{{$i}}"
+                                        data-slider-step="0.01"
+                                        data-slider-max="100"
+                                        data-slider-min="0"
+                                        registered="{{$distResult[$i]['registered_votes']}}"
+                                        data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                        value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                        type="text">
+                                    </td>
+                               @if($i%2==1)
+                               </tr>
+                               @endif
+                          @endfor
+                        </table>
                               </div>
                               <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
                                 <table>
