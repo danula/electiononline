@@ -31,14 +31,14 @@
         <div class="col-lg-6 col-md-6">
             <div class="small-box bg-blue-gradient">
                 <div class="inner">
-                    <h3 id="totalUPFA" style="text-align: left">1231231</h3>
-                    <h4 id="percentageUPFA" style="text-align: left">Votes</h4>
+                    <h3 id="totalUPFA" style="text-align: left"></h3>
+                    <h4 id="percentageUPFA" style="text-align: left"></h4>
                 </div>
             </div>
             <div class="small-box bg-green-gradient">
                 <div class="inner">
-                    <h3 id="totalNDF" style="text-align: right">1231231</h3>
-                    <h4 id="percentageNDF" style="text-align: right">Votes</h4>
+                    <h3 id="totalNDF" style="text-align: right"></h3>
+                    <h4 id="percentageNDF" style="text-align: right"></h4>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
                         <br/>
-                        <p>Percentage votes for each candidate/party. Change the default values from 2010 election to your prediction.</p>
+                        <p>Percentage votes for each candidate/party. Change the values according to your prediction.</p>
                         <hr/>
                         <table class="table table-responsive">
                             @for($i=0; $i<22; $i++)
