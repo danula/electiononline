@@ -55,8 +55,16 @@ class HomeController extends BaseController {
                 }
             }
 
+            $obj = array('year'=>$year,
+                         'win'=>intval($first),
+                         'winP'=> $firstParty,
+                         'sec'=>intval($second),
+                         'secP'=>$secondParty,
+                         'oth'=>intval($others)
+                        );
+
             if($f && $s){
-                array_push($data,array($year,intval($first), $firstParty, intval($second), $secondParty, intval($others), 'Others'));
+                array_push($data,json_encode($obj));
                 continue;
             }
         }
