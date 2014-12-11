@@ -245,9 +245,9 @@ $('#addPredictionForm').submit(function(){
     response.done(
         function(r){
         console.log(r);
-
         }
     );
+    return false;
 });
 
 
