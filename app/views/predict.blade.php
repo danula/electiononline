@@ -294,7 +294,9 @@
 $( document ).ready(function() {
   $('.slider').slider();
 });
-
+function formatNumber (num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
 $('#addPredictionForm').submit(function(){
     var list = [];
     for(var i=0; i<22; i++) {
