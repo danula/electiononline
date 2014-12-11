@@ -108,10 +108,39 @@
                 </div>
                 </div>
                 <div class="row">
-                <form id="addPredictionForm">
-                        <input id="predictionName" type="text" autocomplete="off">
-                        {{Form::submit('Save')}}
+                <div class="col-md-6 col-md-offset-3">
+                <div class="box box-primary">
+                    <div class="box-body">
+                    <div class="page-header">
+                        <h3 class="box-header">Save and Share</h3>
+                    </div>
+                        <form id="addPredictionForm">
+                            <div class="callout callout-warning" id="alert_warning" style="display:none">
+                                <h4>Name already exists</h4>
+                                <p>please use another name</p>
+                            </div>
+                            <div class="callout callout-success" id="alert_success" style="display:none">
+                                <h4>Successfuly Saved</h4>
+                            </div>
+                            <div class="col-md-4 col-md-offset-4">
+                            <div class="input-group input-group-sm">
+                                <input type="hidden" id="tUPFA" />
+                                <input type="hidden" id="tNDF" />
+                                <input id="predictionName" type="text" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-flat" type="submit">Go!</button>
+                                </span>
+                            </div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-4">
+                            <a class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
+                                <i class="fa fa-facebook"></i> Share in Facebook
+                            </a>
+                            </div>
                         </form>
+                    </div>
+                </div>
+                </div>
                 </div>
 <script src="../js/jquery.imagemapster.min.js" ></script>
 <script>
@@ -210,6 +239,8 @@
                     var sum = sumNDF+sumUPFA;
                     $('#totalUPFA').html(sumUPFA);
                     $('#totalNDF').html(sumNDF);
+                    $('#tUPFA').val(sumUPFA);
+                    $('#tNDF').val(sumNDF);
                     $('#percentageUPFA').html((Math.round(10000*sumUPFA/sum)/100) + " Votes");
                     $('#percentageNDF').html((Math.round(10000*sumNDF/sum)/100)+" Votes");
                     drawMap();
@@ -224,14 +255,14 @@ $( document ).ready(function() {
 
 $('#addPredictionForm').submit(function(){
     var list = [];
-    @for($i=0; $i<22; $i++)
-    var item = {
-    id : {{$i}},
-    UPFA_percentage : $("#slider{{$i}}").val(),
-    polled_percentage : $("#sliderPolled{{$i}}").val(),
+    for(var i=0; i<22; i++) {
+        var item = {
+        id : i,
+        UPFA_percentage : $("#slider"+i).val(),
+        polled_percentage : $("#sliderPolled"+i).val(),
+        }
+        list.push(item);
     }
-    list.push(item);
-    @endfor
 
     var data = JSON.stringify(list);
 
@@ -244,7 +275,34 @@ $('#addPredictionForm').submit(function(){
 
     response.done(
         function(r){
-        console.log(r);
+            if(r.name==-1){
+                document.getElementById('alert_warning').style.display='block';
+                document.getElementById('alert_success').style.display='none';
+            }
+            else{
+                document.getElementById('alert_warning').style.display='none';
+                document.getElementById('alert_success').style.display='block';
+                var tUPFA = document.getElementById('tUPFA').value;
+                var tNDF = document.getElementById('tNDF').value;
+                var win = 'MR';
+                var name = 'Mahinda Rajapaksa';
+                var votes = tUPFA;
+                if(tNDF>tUPFA){
+                    win = 'MS';
+                    votes = tNDF;
+                    name = 'Maithripala Sirisena'
+                }
+                var percentage = Math.round(10000*votes/(tNDF+tUPFA))/100;
+
+                document.getElementById('fblink').href=
+                    "https://www.facebook.com/dialog/feed?app_id="+
+                    "358727977621649&link="+
+                    encodeURIComponent("http://chandaya.info/predict/"+r.name)+
+                    "&picture="+encodeURIComponent("http://chandaya.info/resources/"+win+"Victory.png")+
+                    "&name="+encodeURIComponent("I'm predicting that "+name+" will win the Presidential Election 2015.")+
+                    "&description="+encodeURIComponent("Click here for my detailed prediction or make a prediction yourself.")+
+                    "&redirect_uri="+encodeURIComponent("https://facebook.com);
+            }
         }
     );
     return false;

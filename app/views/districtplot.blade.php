@@ -142,33 +142,22 @@
         }
     });
 
+    Morris.Line({
+      element: 'linechart_1',
+      data: [
+        { y: '2006', a: 100, b: 90 },
+        { y: '2007', a: 75,  b: 65 },
+        { y: '2008', a: 50,  b: 40 },
+        { y: '2009', a: 75,  b: 65 },
+        { y: '2010', a: 50,  b: 40 },
+        { y: '2011', a: 75,  b: 65 },
+        { y: '2012', a: 100, b: 90 }
+      ],
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['Series A', 'Series B']
+    });
+
 </script>
 
-{{HTML::script("https://www.google.com/jsapi");}}
-<script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawSeatCharts);
-      function drawSeatCharts() {
-        var options = {
-            pointSize: 5,
-            colors:['green', 'blue', 'orange'],
-            annotation: {3: {style: 'line'}, 5: {style: 'line'}, 7: {style: 'line'}},
-            legend:'none',
-            width: '900'
-        };
-        var seatChartData = JSON.parse('{{json_encode($seatChartData)}}');
-        for (var key in seatChartData) {
-              var data = new google.visualization.DataTable();
-              data.addColumn('string', 'Year');
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addColumn('number', 'Votes');
-              data.addColumn({type: 'string', role: 'annotation'});
-              data.addRows(seatChartData[key]);
-              new google.visualization.LineChart(document.getElementById('linechart_'+key)).draw(data, options);
-        }
-      }
-</script>
 @endsection
