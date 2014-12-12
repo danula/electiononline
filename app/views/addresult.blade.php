@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('meta')
+<title>Add result to database | Chandaya | Online Portal</title>
+@endsection
+
 @section('scripts')
 <script language=JavaScript>
 function reload()

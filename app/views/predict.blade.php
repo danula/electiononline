@@ -1,5 +1,12 @@
 {{HTML::script("https://www.google.com/jsapi");}}
+
 @extends('master')
+
+@section('meta')
+<title>Predict the outcome of the Presidential Election 2015 | Chandaya.info</title>
+<meta name="description" content="Predict the outcome of Presidential Election 2015 of Sri Lanka with the tools provided including the interactive map and the sliders, and share the results. Chandaya.info is your guide to the Presidential Elections of Sri Lanka.">
+@endsection
+
 @section('content')
 <link href="../css/slider.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
