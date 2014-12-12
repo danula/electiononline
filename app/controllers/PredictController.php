@@ -20,7 +20,7 @@ class PredictController extends BaseController {
             $results2 = ResultD::where('year', '=', '2010')->where('candidate_id', '=', '21')->orderBy('district_id', 'asc')->get();
             $distYear = DistResult::where('year','=','2010')->orderBy('district_id', 'asc')->get();
         }
-        else if($id == 1982 || $id == 1982 || $id == 1982 || $id == 1982 || $id == 2005 || $id == 2010){
+        else if($id == 1982 || $id == 1988 || $id == 1994 || $id == 1999 || $id == 2005 || $id == 2010){
             $results1 = ResultD::where('year', '=', ''.$id)
                             ->where('candidate_id', '=', ''.$this->winUNP[''.$id])
                             ->orderBy('district_id', 'asc')->get();
@@ -39,7 +39,7 @@ class PredictController extends BaseController {
             if($id == 1 || $id  == 2015) {
                 $polled = $polled = 100.0 * ($results1[$i]->number_of_votes + $results2[$i]->number_of_votes) / $distYear[$i]->registered_votes;
                 $percentage = 50.0;
-            }else if($id == 1982 || $id == 1982 || $id == 1982 || $id == 1982 || $id == 2005 || $id == 2010){
+            }else if($id == 1982 || $id == 1988 || $id == 1994 || $id == 1999 || $id == 2005 || $id == 2010){
                 $polled = 100.0 * ($results1[$i]->number_of_votes + $results2[$i]->number_of_votes) / $distYear[$i]->registered_votes;
                 $percentage = 100.0 * $results2[$i]->number_of_votes / ($results1[$i]->number_of_votes + $results2[$i]->number_of_votes);
             }
