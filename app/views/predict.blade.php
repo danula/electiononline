@@ -49,12 +49,19 @@
 </div>
 <div class="row">
     <div class="col-md-4" align="center" >
-        <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
-        <map id="map" name="map" ></map>
+        <div class="box box-primary">
+            <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
+            <map id="map" name="map" ></map>
+            <br/>
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
+            Share Prediction
+            </button>
+            <br/>
+        </div>
     </div>
     <div class="col-md-8" id="tablesdiv">
         <div class="box box-primary" role="tabpanel">
-            <div class="box-body" style="max-height: 600px">
+            <div class="box-body">
                 <ul id="myTab" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
                     <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
@@ -64,61 +71,63 @@
                         <br/>
                         <p>Percentage votes for each candidate/party. Change the values according to your prediction.</p>
                         <hr/>
-                        <table class="table table-responsive">
-                            @for($i=0; $i<22; $i++)
-                            @if($i%2==0)
-                            <tr>
-                                @endif
-                                <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                <td style="padding-right: 50px"><input class = "slider slider-colord"
-                                    id="slider{{$i}}"
-                                    data-slider-step="0.01"
-                                    data-slider-max="100" data-slider-min="0"
-                                    data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                    value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                    type="text"
-                                    onchange="updateVal()">
-                                </td>
-                                @if($i%2==1)
-                            </tr>
-                            @endif
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            @for($j=0; $j<22; $j+=11)
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <table class="table table-responsive">
+                                    @for($i=$j; $i<$j+11; $i++)
+                                    <tr>
+                                        <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                        <td style="padding-right: 50px"><input class = "slider slider-colord"
+                                            id="slider{{$i}}"
+                                            data-slider-step="0.01"
+                                            data-slider-max="100" data-slider-min="0"
+                                            data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                            value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                            type="text"
+                                            onchange="updateVal()">
+                                        </td>
+                                    </tr>
+                                    @endfor
+                                    </table>
+                                </div>
                             @endfor
-                        </table>
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
                         <br/>
                         <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
                         <hr/>
-                        <table class="table table-responsive">
-                            @for($i=0; $i<22; $i++)
-                            @if($i%2==0)
-                            <tr>
-                                @endif
-                                <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
-                                    id="sliderPolled{{$i}}"
-                                    data-slider-step="0.01"
-                                    data-slider-max="100"
-                                    data-slider-min="0"
-                                    registered="{{$distResult[$i]['registered_votes']}}"
-                                    data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
-                                    value="{{round($distResult[$i]['polled_percentage'],2)}}"
-                                    type="text">
-                                </td>
-                                @if($i%2==1)
-                            </tr>
-                            @endif
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            @for($j=0; $j<22; $j+=11)
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <table class="table table-responsive">
+                                    @for($i=$j; $i<$j+11; $i++)
+                                    <tr>
+                                        <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                        <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
+                                            id="sliderPolled{{$i}}"
+                                            data-slider-step="0.01"
+                                            data-slider-max="100"
+                                            data-slider-min="0"
+                                            registered="{{$distResult[$i]['registered_votes']}}"
+                                            data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                            value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                            type="text">
+                                        </td>
+                                    </tr>
+                                    @endfor
+                                    </table>
+                                </div>
                             @endfor
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-2 col-md-offset-5">
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Share Prediction
-        </button>
+
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
