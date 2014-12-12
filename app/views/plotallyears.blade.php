@@ -2,6 +2,11 @@
 {{HTML::script("https://www.google.com/jsapi");}}
 @extends('master')
 
+@section('meta')
+<title>District results of all Presidential Elections of Sri Lanka | Interactive Map | Chandaya.info</title>
+<meta name="description" content="Use the interactive map to get a brief summary of district results of all Presidential Elections of Sri Lanka by clicking on the districts of Sri Lanka. Chandaya.info is your guide to the Presidential Elections of Sri Lanka.">
+@endsection
+
 @section('scripts')
 <script src="../js/jquery-ui.min.js"></script>
 <script src="../js/jquery-ui-slider-pips.min.js"></script>

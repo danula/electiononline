@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://www.chandaya.info/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/2010</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/seatresult/Colombo%20North/2010</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/1982</loc>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/1988</loc>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/1994</loc>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/1999</loc>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/2005</loc>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/plotbyyear/2010</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtplot/Colombo</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/2010/Mahinda%20Rajapaksha</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/2005/Mahinda%20Rajapaksha</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/2010/Sarath%20Fonseka</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/2005/Ranil%20Wickramasinghe</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/1999/Chandrika%20Kumarathunga</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/1999/Chandrika%20Kumarathunga</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/candidate/1999/Ranil%20Wikremasinghe</loc>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/1</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/1982</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/1988</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/1994</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/1999</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/districtresult/Colombo/2005</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/2010</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/2005</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/1999</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/1994</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/1988</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://www.chandaya.info/predict/1982</loc>
+  <priority>0.64</priority>
+</url>
+</urlset>

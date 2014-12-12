@@ -1,4 +1,10 @@
 @extends('master')
+
+@section('meta')
+<title>Results of {{$district[0]->name}} District across all Presidential Elections | Chandaya.info</title>
+<meta name="description" content="Results of {{$district[0]->name}} District along with the {{count($seats)}} seats, showing the growth and decline of the voter base of the two major parties across all Presidential Elections. Chandaya.info is your guide to the Presidential Elections of Sri Lanka. ">
+@endsection
+
 @section('content')
 <nav style="margin-top: 20px; padding-left: 30px; background-color: transparent" class="navbar navbar-default" >
     <div class="row">
