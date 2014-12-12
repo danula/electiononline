@@ -109,6 +109,9 @@
     '<div class=\"box box-default\">'+
         '<div class=\"box-header\">'+
             '<h3 class=\"box-title\">{{$seat->name}}</h3>'+
+            '<div class=\"box-tools pull-right\">'+
+                '<button class=\"btn btn-default btn-sm\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"Collapse\"><i class=\"fa fa-minus\"></i></button>'+
+            '</div>'+
         '</div>'+
         '<div class=\"box-body chart-responsive\">' +
         '<div class=\"chart\" id=\"seat_line_chart_{{$seat->id}}\" style=\"height: 200px\"></div>'+
@@ -119,6 +122,9 @@
     '<div class=\"box box-default\">'+
         '<div class=\"box-header\">'+
             '<h3 class=\"box-title\">{{$seat->name}}</h3>'+
+            '<div class=\"box-tools pull-right\">'+
+                '<button class=\"btn btn-default btn-sm\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"Collapse\"><i class=\"fa fa-minus\"></i></button>'+
+            '</div>'+
         '</div>'+
         '<div class=\"box-body chart-responsive\">' +
         '<div class=\"chart\" id=\"seat_line_chart_{{$seat->id}}\" style=\"height: 200px\"></div>'+
