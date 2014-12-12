@@ -84,39 +84,16 @@
 <!-- Morris.js charts -->
 {{HTML::script("//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js");}}
 {{HTML::script("/js/plugins/morris/morris.min.js");}}
-<script type="text/javascript">
-    Morris.Line({
-        element: 'district_summary_line',
-        resize: true,
-        data: [
-            @foreach($distChartData as $row)
-                {{$row}},
-            @endforeach
-        ],
-        xkey: 'year',
-        ykeys: ['win','sec','oth'],
-        lineColors: ['#53A336','#0070D1', '#FF8000'],
-        parseTime: false,
-        labels: ['Series A', 'Series B','Series C'],
-        hoverCallback: function (index, options, content) {
-            var row = options.data[index];
-            return '<div class="hover-title">' + row.year + '</div>'+
-                   '<span>' + row.winP + ': </span><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + '</b><br/>'+
-                   '<span>' + row.secP + ': </span><b style="color: ' + options.lineColors[1] + '">' + row.sec.toLocaleString() + '</b><br/>'+
-                   '<span> Others: </span><b style="color: ' + options.lineColors[2] + '">' + row.oth.toLocaleString() + '</b>';
-        }
-    });
-</script>
-
 
 <!-- Jquery UI -->
 {{HTML::script("//code.jquery.com/ui/1.11.1/jquery-ui.min.js");}}
 <!-- AdminLTE dashboard demo -->
 {{HTML::script("/js/AdminLTE/dashboard.js");}}
 
+
+<h2 class="page-header">Seat Statistics</h2>
 <!-- Seat Statistics -->
 <div class="row">
-    <h2 class="page-header">Seat Statistics</h2>
     <!-- Left col -->
     <section class="col-lg-6 col-md-6 col-sm-12 connectedSortable" id="leftColumn"></section>
     <!-- right col -->
@@ -149,5 +126,54 @@
     '</div>';
     @endif
 @endforeach
+</script>
+
+<script type="text/javascript">
+    Morris.Line({
+        element: 'district_summary_line',
+        resize: true,
+        data: [
+            @foreach($distChartData as $row)
+                {{$row}},
+            @endforeach
+        ],
+        xkey: 'year',
+        ykeys: ['win','sec','oth'],
+        lineColors: ['#53A336','#0070D1', '#FF8000'],
+        parseTime: false,
+        labels: ['Series A', 'Series B','Series C'],
+        hideHover: 'auto',
+        hoverCallback: function (index, options, content) {
+            var row = options.data[index];
+            return '<div class="hover-title">' + row.year + '</div>'+
+                   '<span>' + row.winP + ': </span><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + '</b><br/>'+
+                   '<span>' + row.secP + ': </span><b style="color: ' + options.lineColors[1] + '">' + row.sec.toLocaleString() + '</b><br/>'+
+                   '<span> Others: </span><b style="color: ' + options.lineColors[2] + '">' + row.oth.toLocaleString() + '</b>';
+        }
+    });
+
+    var seatData = JSON.stringify({{json_encode($seatChartData)}});
+    seatData = JSON.parse(seatData);
+
+    for(key in seatData){
+        Morris.Line({
+            element: 'seat_line_chart_'+key,
+            resize: true,
+            data: seatData[key],
+            xkey: 'year',
+            ykeys: ['win','sec','oth'],
+            lineColors: ['#53A336','#0070D1', '#FF8000'],
+            parseTime: false,
+            labels: ['Series A', 'Series B','Series C'],
+            hideHover: 'auto',
+            hoverCallback: function (index, options, content) {
+                var row = options.data[index];
+                return '<div class="hover-title">' + row.year + '</div>'+
+                       '<span>' + row.winP + ': </span><b style="color: ' + options.lineColors[0] + '">' + row.win.toLocaleString() + '</b><br/>'+
+                       '<span>' + row.secP + ': </span><b style="color: ' + options.lineColors[1] + '">' + row.sec.toLocaleString() + '</b><br/>'+
+                       '<span> Others: </span><b style="color: ' + options.lineColors[2] + '">' + row.oth.toLocaleString() + '</b>';
+            }
+        });
+    }
 </script>
 @endsection
