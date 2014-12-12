@@ -111,34 +111,43 @@
 
 <!-- Jquery UI -->
 {{HTML::script("//code.jquery.com/ui/1.11.1/jquery-ui.min.js");}}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- AdminLTE dashboard demo -->
 {{HTML::script("/js/AdminLTE/dashboard.js");}}
 
 <!-- Seat Statistics -->
 <div class="row">
+    <h2 class="page-header">Seat Statistics</h2>
     <!-- Left col -->
-    <section class="col-lg-6 col-md-6 col-sm-12 connectedSortable">
-        <!-- Seat box -->
-        <div class="box box-default">
-            <div class="box-header">
-                <h3 class="box-title">Colombo North</h3>
-            </div>
-            <div class="box-body">
-
-            </div><!-- /.seat body -->
-        </div><!-- /.box (seat box) -->
-    </section><!-- /.Left col -->
+    <section class="col-lg-6 col-md-6 col-sm-12 connectedSortable" id="leftColumn"></section>
     <!-- right col -->
-    <section class="col-lg-6 col-md-6 col-sm-12 connectedSortable">
-        <!-- Seat box -->
-        <div class="box box-default">
-            <div class="box-header">
-                <h3 class="box-title">Colombo South</h3>
-            </div>
-            <div class="box-body">
-
-            </div><!-- /.seat body -->
-        </div><!-- /.box (seat box) -->
-    </section><!-- right col -->
+    <section class="col-lg-6 col-md-6 col-sm-12 connectedSortable" id="rightColumn"></section>
 </div>
+
+<script type="text/javascript">
+@foreach($seats as $seat)
+    var left = document.getElementById("leftColumn").innerHTML;
+    var right = document.getElementById("rightColumn").innerHTML;
+    @if(intval($seat->id) % 2 != 0)
+    document.getElementById("leftColumn").innerHTML = left +
+    '<div class=\"box box-default\">'+
+        '<div class=\"box-header\">'+
+            '<h3 class=\"box-title\">{{$seat->name}}</h3>'+
+        '</div>'+
+        '<div class=\"box-body chart-responsive\">' +
+        '<div class=\"chart\" id=\"seat_line_chart_{{$seat->id}}\" style=\"height: 200px\"></div>'+
+        '</div>'+
+    '</div>';
+    @else
+    document.getElementById("rightColumn").innerHTML = right +
+    '<div class=\"box box-default\">'+
+        '<div class=\"box-header\">'+
+            '<h3 class=\"box-title\">{{$seat->name}}</h3>'+
+        '</div>'+
+        '<div class=\"box-body chart-responsive\">' +
+        '<div class=\"chart\" id=\"seat_line_chart_{{$seat->id}}\" style=\"height: 200px\"></div>'+
+        '</div>'+
+    '</div>';
+    @endif
+@endforeach
+</script>
 @endsection
