@@ -49,98 +49,94 @@
 </div>
 <div class="row">
     <div class="col-md-4" align="center" >
-        <div class="box box-primary">
-            <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white"></img>
+            <img src="../district4.png" width=400 usemap="#map" id="myImage" name="myImage" style="color: white">
             <map id="map" name="map" ></map>
-            <br/>
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
-            Share Prediction
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+                Share Prediction
             </button>
-            <br/>
-        </div>
     </div>
     <div class="col-md-8" id="tablesdiv">
-        <div class="box box-primary" role="tabpanel">
-            <div class="box-body">
-                <ul id="myTab" class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
-                    <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
-                </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
-                        <br/>
-                        <p>Percentage votes for each candidate/party. Change the values according to your prediction.</p>
-                        <hr/>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            @for($j=0; $j<22; $j+=11)
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <table class="table table-responsive">
-                                    @for($i=$j; $i<$j+11; $i++)
-                                    <tr>
-                                        <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                        <td style="padding-right: 50px"><input class = "slider slider-colord"
-                                            id="slider{{$i}}"
-                                            data-slider-step="0.01"
-                                            data-slider-max="100" data-slider-min="0"
-                                            data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                            value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
-                                            type="text"
-                                            onchange="updateVal()">
-                                        </td>
-                                    </tr>
-                                    @endfor
-                                    </table>
-                                </div>
-                            @endfor
-                        </div>
+        <div role="tabpanel">
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Percentage</a></li>
+                <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Polled Percentage</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledBy="home-tab">
+                    <br/>
+                    <p>Percentage votes for each candidate/party. Change the values according to your prediction.</p>
+                    <hr/>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        @for($j=0; $j<22; $j+=11)
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <table class="table table-responsive">
+                                @for($i=$j; $i<$j+11; $i++)
+                                <tr>
+                                    <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                    <td style="padding-right: 50px"><input class = "slider slider-colord"
+                                        id="slider{{$i}}"
+                                        data-slider-step="0.01"
+                                        data-slider-max="100" data-slider-min="0"
+                                        data-slider-value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                        value="{{round($distResult[$i]['UPFA_percentage'],2)}}"
+                                        type="text"
+                                        onchange="updateVal()">
+                                    </td>
+                                </tr>
+                                @endfor
+                                </table>
+                            </div>
+                        @endfor
                     </div>
-                    <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
-                        <br/>
-                        <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
-                        <hr/>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            @for($j=0; $j<22; $j+=11)
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <table class="table table-responsive">
-                                    @for($i=$j; $i<$j+11; $i++)
-                                    <tr>
-                                        <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
-                                        <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
-                                            id="sliderPolled{{$i}}"
-                                            data-slider-step="0.01"
-                                            data-slider-max="100"
-                                            data-slider-min="0"
-                                            registered="{{$distResult[$i]['registered_votes']}}"
-                                            data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
-                                            value="{{round($distResult[$i]['polled_percentage'],2)}}"
-                                            type="text">
-                                        </td>
-                                    </tr>
-                                    @endfor
-                                    </table>
-                                </div>
-                            @endfor
-                        </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade active" id="profile" aria-labelledBy="profile-tab">
+                    <br/>
+                    <p>Percentage of valid votes from total registered votes. Change the default values from 2010 election to your prediction.</p>
+                    <hr/>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        @for($j=0; $j<22; $j+=11)
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <table class="table table-responsive">
+                                @for($i=$j; $i<$j+11; $i++)
+                                <tr>
+                                    <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                    <td style="padding-right: 50px"><input class = "slider slider-polled slider-nocolor"
+                                        id="sliderPolled{{$i}}"
+                                        data-slider-step="0.01"
+                                        data-slider-max="100"
+                                        data-slider-min="0"
+                                        registered="{{$distResult[$i]['registered_votes']}}"
+                                        data-slider-value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                        value="{{round($distResult[$i]['polled_percentage'],2)}}"
+                                        type="text">
+                                    </td>
+                                </tr>
+                                @endfor
+                                </table>
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-2 col-md-offset-5">
-
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="box box-info">
+            <div class="box-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Save and Share</h4>
+                <h4 class="box-title" id="myModalLabel">Save and Share</h4>
             </div>
-            <div class="modal-body">
+            <div class="box-body">
                 <form id="addPredictionForm">
+                    <div align="center" id="save-form">
+                        <input type="hidden" id="tUPFA" />
+                        <input type="hidden" id="tNDF" />
+                        <input id="predictionName" type="text" class="form-control" required="required" placeholder="Enter Name...">
+                        <button style="margin-top: 3%" class="btn btn-info" type="submit">Save</button>
+                    </div>
                     <div class="alert alert-danger" id="alert_warning" style="display:none">
                         <h4>Name already exists</h4>
                         <p>please use another name</p>
@@ -151,13 +147,6 @@
                         <a style="margin-top: 3%" class="btn btn-block btn-social btn-facebook" href="" id="fblink" target="_blank">
                             <i class="fa fa-facebook"></i> Share in Facebook
                         </a>
-                    </div>
-                    <div class="form-box" id="save-form">
-                        <input type="hidden" id="tUPFA" />
-                        <input type="hidden" id="tNDF" />
-                        <input id="predictionName" type="text" class="form-control" required="required" placeholder="Enter Name...">
-                        <br/>
-                        <button class="btn btn-info" type="submit">Go!</button>
                     </div>
                 </form>
             </div>
