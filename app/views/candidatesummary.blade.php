@@ -1,5 +1,10 @@
 @extends('master')
 
+@section('meta')
+<title>Results of {{$candidate[0]->name}} in the Presidential Election {{$year}} | Chandaya.info</title>
+<meta name="description" content="Overall results of {{$candidate[0]->name}} in the Presidential Election {{$year}} with seats and district arranged according to the vote percentage. Chandaya.info is your guide to the Presidential Elections of Sri Lanka. ">
+@endsection
+
 @section('scripts')
 <script type="text/javascript">
     function checkimg(){

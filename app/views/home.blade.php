@@ -1,4 +1,10 @@
 @extends('master')
+
+@section('meta')
+<title>Chandaya.info | Online Portal</title>
+<meta name="description" content="Chandaya.info is your guide to the Presidential Elections of Sri Lanka. Detailed results from seat to seat of each year, analytics across the years, a forum to discuss the Presidential Election 2015 and an easy to use interface to predict and share the results of Presidential Elections of 2015 can be found here.">
+@endsection
+
 @section('content')
 <?php
 

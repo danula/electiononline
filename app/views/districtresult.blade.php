@@ -1,5 +1,10 @@
 @extends('master')
 
+@section('meta')
+<title>Results of {{$district->name}} District at the Presidential Election of {{$year}} | Chandaya.info</title>
+<meta name="description" content="Full results of {{$district->name}} District at the Presidential Election of {{$year}} including the number of registered voters, polled results and valid results. Chandaya.info is your guide to the Presidential Elections of Sri Lanka. ">
+@endsection
+
 @section('scripts')
 <script type="text/javascript">
  jQuery(document).ready(function($) {
