@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="keywords" content="Presidential Election 2015, Mahinda Rajapaksha, Mithreepala Sirisena, Chandaya, Janadhipathiwaranaya, Sri Lanka election">
         <meta property="og:site_name" content="Chandaya.info | Online Election Portal">
         <meta property="og:title" content="Chandaya.info | Online Election Portal">
         <meta property="og:type" content="website">
