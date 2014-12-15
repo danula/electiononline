@@ -31,6 +31,7 @@ class PredictController extends BaseController {
         }
         else{
             $prediction = Prediction::where('name','=',$id)->first();
+            $prediction->increment('views');
             $savedData = json_decode($prediction->data);
         }
 
