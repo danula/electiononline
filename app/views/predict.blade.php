@@ -12,18 +12,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
 <script src="https://strukturedkaos.github.io/kickdrop-drops/drops/sliders/js/plugin.js"></script>
 <script href="js/bootstrap-slider.js" type="text/javascript"></script>
+
 <div class="page-header">
-    <h1>My Predictions for 2015</h1>
+    @if($urlId==1 || $urlId==1982 || $urlId==1988 || $urlId==1994 || $urlId==1999 || $urlId==2005 || $urlId==2010)
+        <h1>My Predictions for 2015</h1>
+    @else
+        <h1>Predictions for 2015 - {{$urlId}}</h1>
+    @endif
     
 </div>
-@if($urlId==1)    
-<div class="box box-primary" align="center">    
+
+<div class="row">
+<div class="col-lg-8">
+
+@if($urlId==1)
+<div class="box box-primary" align="center">
 <h4  style="text-align: left; padding-bottom: 10px;padding-left: 10px;">This is a sample page for you to edit. You can change the vote percentages for each candidate for each district, save it on our website and share with others. Click <a href="{{URL::to("predict/2010")}}">2010</a>, <a href="{{URL::to("predict/2005")}}">2005</a>, <a href="{{URL::to("predict/1999")}}">1999</a>, <a href="{{URL::to("predict/1994")}}">1994</a>, <a href="{{URL::to("predict/1988")}}">1988</a> and <a href="{{URL::to("predict/1982")}}">1982</a>  to start with each year's percentages</h4>
 </div>
 @endif
 
-@if($urlId==1982 || $urlId==1988 || $urlId==1994 || $urlId==1999 || $urlId==2005 || $urlId==2010)    
-<div class="box box-primary" align="center">    
+@if($urlId==1982 || $urlId==1988 || $urlId==1994 || $urlId==1999 || $urlId==2005 || $urlId==2010)
+
+<div class="box box-primary" align="center">
 <h4  style="text-align: left; padding-bottom: 10px;padding-left: 10px;">This is a sample page for you to edit. Default percentages given are from Presidential Election of {{$urlId}}. You can change the vote percentages for each candidate for each district, save it on our website and share with others.</h4>
 </div>
 @endif
@@ -33,7 +43,7 @@
     </div>
     <div class="row" align="center" style="align-content: center">
         <div class="col-lg-3">
-            {{HTML::image('/resources/candidates/MR.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
+            {{HTML::image('/resources/candidates/MR.jpg','photo',array('name'=>'photo'))}}
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="small-box bg-blue-gradient">
@@ -50,9 +60,32 @@
             </div>
         </div>
         <div class="col-lg-3">
-            {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo','height'=>'220px'))}}
+            {{HTML::image('/resources/candidates/MS.jpg','photo',array('name'=>'photo'))}}
         </div>
     </div>
+</div>
+
+</div>
+<div class="col-lg-4">
+<div class="box box-primary" align="center">
+     <div class="box-header">
+       <h4> Most viewed predictions</h4>
+    </div>
+    <table class="table table-striped table-responsive">
+        <thead><th scope="column">Name</th>
+            <th>Views</th>
+        </thead>
+        <tbody>
+        @foreach($topPredictions as $pr)
+            <tr>
+            <td><a href="{{URL::to("predict/".$pr->name)}}" style="display: block; width: 100%">{{$pr->name}}</a></td>
+            <td>{{$pr->views}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+</div>
 </div>
 <div class="row">
     <div class="col-md-4" align="center" >
@@ -79,7 +112,7 @@
                                 <table class="table table-responsive">
                                 @for($i=$j; $i<$j+11; $i++)
                                 <tr>
-                                    <td style="padding-bottom: 10px">  {{$districts[$i]->name}}</td>
+                                    <td style="padding-bottom: 20px">  {{$districts[$i]->name}}</td>
                                     <td style="padding-right: 50px"><input class = "slider slider-colord"
                                         id="slider{{$i}}"
                                         data-slider-step="0.01"

@@ -41,28 +41,50 @@
                 <a class="box-title" href="{{URL::to('districtplot/Colombo')}}">Total Summary of Past Years</a>
             </div>
             <div class="box-body chart-responsive">
-                <div class="chart" id="overall_line_chart" style="height: 325px"></div>
+                <div class="chart" id="overall_line_chart" style="height: 306px"></div>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="box box-primary">
-            <div class="box-header">
-                <h3 class="box-title">Online Election Result</h3>
+        <div class="box box-danger" align="center">
+                 <div class="box-header">
+                   <h4> Most viewed predictions</h4>
+                </div>
+                <table class="table table-striped table-responsive">
+                    <thead><th scope="column">Name</th>
+                        <th>Views</th>
+                    </thead>
+                    <tbody>
+                    @foreach($topPredictions as $pr)
+                        <tr>
+                        <td><a href="{{URL::to("predict/".$pr->name)}}" style="display: block; width: 100%">{{$pr->name}}</a></td>
+                        <td>{{$pr->views}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-            <div class="box-body chart-responsive">
-                <div class="chart" style="height: 258px" id="online_election_piechart"></div>
-                <h4>Total Votes: <?php echo $votes?></h4>
-                <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-danger btn-block">Vote Now</a>
-            </div>
-        </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-9">
     <div class="box box-primary" align="center">
         <a href="http://forum.chandaya.info"><img class="img-responsive" src="../resources/banner.png" ></a>
         </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Online Election Result</h3>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" style="height: 200px" id="online_election_piechart"></div>
+                    <h4>Total Votes: <?php echo $votes?></h4>
+                    <a href="http://forum.chandaya.info/discussion/2/online-election-2015" class="btn btn-danger btn-block">Vote Now</a>
+                </div>
+            </div>
+
+            </div>
     </div>
 </div>
 <!-- Morris.js charts -->

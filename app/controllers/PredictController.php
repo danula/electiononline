@@ -34,7 +34,7 @@ class PredictController extends BaseController {
             $prediction->increment('views');
             $savedData = json_decode($prediction->data);
         }
-
+        $count = 8;
         $distResult = array();
         for($i = 0; $i <22; $i++){
             if($id == 1 || $id  == 2015) {
@@ -47,6 +47,7 @@ class PredictController extends BaseController {
             else {
                 $polled = $savedData[$i]->polled_percentage;
                 $percentage = $savedData[$i]->UPFA_percentage;
+                $count = 5;
             }
             array_push($distResult,
                 array(
@@ -55,9 +56,11 @@ class PredictController extends BaseController {
                     'UPFA_percentage' => $percentage
                 ));
         }
+        $topPredictions = Prediction::where('views','>','2')->orderBy('views', 'desc')->take($count)->get();
         $data = array(
             'districts' => $districts,
             'distResult'=>$distResult,
+            'topPredictions'=>$topPredictions,
             'urlId'=>$id
         );
         return View::make('predict',$data);

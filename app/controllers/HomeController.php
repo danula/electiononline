@@ -18,9 +18,10 @@ class HomeController extends BaseController {
 	public function showWelcome() {
 
         $chartData = $this->generateChartData();
-
+        $topPredictions = Prediction::where('views','>','2')->orderBy('views', 'desc')->take(8)->get();
         $data = array(
-            'chartData'=>$chartData
+            'chartData'=>$chartData,
+            'topPredictions' => $topPredictions
         );
 
 		return View::make('home',$data);
