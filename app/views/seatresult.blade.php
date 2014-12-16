@@ -95,7 +95,11 @@
     <tr class="info" href="#">
         <td>Polled Votes</td>
         <td>{{{$seatresult->polled_votes}}}</td>
+        @if($seatresult->registered_votes != 0)
         <td>{{number_format($seatresult->polled_votes/$seatresult->registered_votes*100,2)}}%</td>
+        @else
+        <td></td>
+        @endif
     </tr>
     <tr class="info" href="#">
         <td>Rejected Votes</td>
