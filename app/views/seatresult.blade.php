@@ -125,7 +125,7 @@
 @else
 <div class="row">
     <div class="alert alert-danger" role="alert">
-      Seat not applicable for {{$year}} election.
+      Seat result not released for {{$year}} election.
     </div>
 </div>
 @endif
