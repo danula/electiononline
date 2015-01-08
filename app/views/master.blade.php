@@ -111,6 +111,11 @@
                         <li>
                             <a href="{{URL::to('predict/1')}}">
                                 <i class="fa fa-gear fa-fw"></i> <span>Predict 2015</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{URL::to('seatresult/Ratnapura-Postal/2015')}}">
+                                <i class="fa fa-gear fa-fw"></i> <span>2015 Seat Result</span>
                                 <small class="badge pull-right bg-red">new</small>
                             </a>
                         </li>
