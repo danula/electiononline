@@ -20,6 +20,10 @@ class ResultController extends BaseController {
             $result->seat_id = $data['seat_id'];
             $result->number_of_votes = $data[$c->id.'number_of_votes'];
             $result->save();
+
+	$candidate = Candidate::where('id','=',$c->id)->first();
+	$candidate->number_of_votes = $candidate->number_of_votes + $data[$c->id.'number_of_votes'];
+	$candidate->save();
         }
 
         $seatresult = new SeatResult;
