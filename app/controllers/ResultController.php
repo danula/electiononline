@@ -87,7 +87,7 @@ class ResultController extends BaseController {
             'candidates' => $candidates,
             'year'=>$year,
             'seat'=> $seat,
-            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
+            'years'=>array('1982'=>'1982','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010', '2015'=>'2015'),
             'error'=> $error
         );
         return View::make('seatresult',$data);
