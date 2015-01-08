@@ -148,7 +148,7 @@ class ResultController extends BaseController {
             'seatnames'=>$seatnames,
             'percentagesd'=>$percentagesd,
             'districtnames'=>$districtnames,
-            'years'=>array('1982'=>'1982','1988'=>'1988','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010'),
+            'years'=>array('1982'=>'1982','1988'=>'1988','1994'=>'1994','1999'=>'1999','2005'=>'2005','2010'=>'2010', '2015'=>'2015'),
             'totalvotes'=>array('1982'=>6522147,'1988'=>5094778,'1994'=>7561526,'1999'=>8435754,'2005'=>9717039,'2010'=>10393613),
             'colour'=>array('active'=>'primary','success'=>'green','warning'=>'yellow','danger'=>'red','info'=>'info')
         );
